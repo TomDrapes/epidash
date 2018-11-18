@@ -1,0 +1,53 @@
+
+.price-compare-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    align-self: center;
+    margin: 20px;
+    width: 400px;
+    height: 30px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+.comparison-table {
+    width: 100%;
+    
+}
+
+.comparison-table th {
+    padding: 10px;
+    background: rgb(243, 195, 92);
+    color: white;
+}
+
+.comparison-table th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.comparison-table th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.comparison-table tr {
+    background: white;
+    
+}
+
+.comparison-table tr:last-of-type {
+    border-bottom-right-radius: 10px;
+}
+
+.comparison-table td {
+    text-align: center;
+    padding: 5px;
+}
+
+.comparison-table tr:nth-child(even) {
+    background: #dddddd;
+}

@@ -20,11 +20,14 @@
 
 .menu-items li:hover {
     cursor: pointer;
-    background: rgb(155, 196, 34)
+    background: rgb(155, 196, 0)
 }
 
 .selected {
-    background: rgb(155, 196, 34)
+    background: rgb(155, 196, 0);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: -2px 1px 10px 0 rgb(77, 97, 16);
 }
 
 .logo {
