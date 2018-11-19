@@ -5,19 +5,19 @@ export default class PriceCompare extends Component {
 
     constructor(props){
         super(props)
-        
+
         this.state = {}
     }
 
     emptyCells = () => (
                 <tr>
-                    <td>none</td>
-                    <td>none</td>
-                    <td>none</td>
-                    <td>none</td>
-                    <td>none</td>
-                    <td>none</td>
-                    <td>none</td>
+                    <td>{" "}</td>
+                    <td>{" "}</td>
+                    <td>{" "}</td>
+                    <td>{" "}</td>
+                    <td>{" "}</td>
+                    <td>{" "}</td>
+                    <td>{" "}</td>
                 </tr>
     )
 

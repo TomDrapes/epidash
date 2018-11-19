@@ -17,7 +17,7 @@
 
 .comparison-table {
     width: 100%;
-    
+
 }
 
 .comparison-table th {
@@ -36,11 +36,16 @@
 
 .comparison-table tr {
     background: white;
-    
+    height: 24px;
+
 }
 
-.comparison-table tr:last-of-type {
-    border-bottom-right-radius: 10px;
+.comparison-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.comparison-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
 }
 
 .comparison-table td {
