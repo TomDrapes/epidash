@@ -5,53 +5,68 @@
     flex-direction: column;
 }
 
-.comparison-table {
-    width: 100%;
+.heading-selected {
+    background: rgb(243, 172, 19);
+    color: rgb(48, 48, 48);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    box-shadow: -2px -2px 2px 0px rgba(0, 0, 0, 0.4);
 }
 
-.comparison-table th {
-    padding: 10px;
-    background: rgb(243, 195, 92);
+.source-headings {
+    width: 50%;
+    display: flex;
     color: white;
     font-weight: bold;
     text-align: center;
-}
-
-.comparison-table th:first-child {
+    background: rgb(243, 195, 92);
+    border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
 
-.comparison-table th:last-child {
-    border-top-right-radius: 10px;
+.source-headings li {
+    padding: 10px;
+    flex-grow: 1
 }
+
+.source-headings li:hover {
+    color: rgb(48, 48, 48);
+    cursor: pointer;
+}
+
+.comparison-table {
+    width: 100%;
+    box-shadow: -2px -2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.comparison-table th {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background: rgb(243, 172, 19);
+    padding: 5px;
+}
+
+
 
 .comparison-table tr {
     background: white;
-    height: 24px;
-    border-bottom: 1px solid #efefef;
-
-}
-
-.comparison-table tr:last-child td:first-child {
-    border-bottom-left-radius: 10px;
-}
-
-.comparison-table tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
 }
 
 .comparison-table td {
-    text-align: center;
     vertical-align: middle;
+    border-bottom: 1px solid #efefef;
+    font-size: 16px;
     padding: 5px;
 }
 
 .comparison-table tr:nth-child(even) {
-    /*background: #efefef;*/
     background: white;
-
 }
 
+.compare-btn-cell {
+    text-align: center;
+}
 .compare-btn {
   padding-left: 10px;
   padding-right: 10px;
@@ -59,8 +74,9 @@
   padding-bottom: 5px;
   background: rgb(240, 204, 127);
   border-radius: 5px;
-  box-shadow: -2px 1px 10px 0 rgb(172, 138, 64);
-  font-size: 12px;
+  box-shadow: -1px 0px 5px 0 rgb(172, 138, 64);
+  font-size: 16px;
+  justify-self: center;
 }
 
 .compare-btn:hover {
@@ -78,3 +94,32 @@
     width: 40%;
     margin-bottom: 10px;
 }
+
+.item-description {
+    text-align: left;
+    display: flex;
+}
+
+.item-img {
+    width: 100px;
+    height: 100px;
+}
+
+.item-details {
+    padding: 10px;
+}
+
+.item-details p {
+    margin: 8px;
+}
+
+.item-lot-size {
+    font-size: 14px;
+    color: #a8a8a8;
+}
+
+.item-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+

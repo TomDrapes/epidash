@@ -9,22 +9,43 @@ export default class PriceCompare extends Component {
 
         this.state = {
             searchParam: '',
-            productsList: []
+            productsList: [],
+            sourceHeadings: [
+                {alibaba: true},
+                {amazon: false},
+                {ebay: false},
+                {gumtree: false}
+            ]
         }
+    }
+
+    updateSelected(source){
+        let updatedHeadings = this.state.sourceHeadings.map(sourceHeading => {
+            if (source in sourceHeading){
+                return { [Object.keys(sourceHeading)[0]] : true }
+            }
+            return { [Object.keys(sourceHeading)[0]]: false}
+        })
+        this.setState({ sourceHeadings: updatedHeadings })        
     }
 
     searchResults = () => {
         let results = this.state.productsList.map(item => {
             return (
-                <tr>
-                        <td><img src={item.imageUrl} width='100' height='100' /></td>
-                        <td><button className='compare-btn'>Compare</button></td>
-                        <td><button className='compare-btn'>Compare</button></td>
-                        <td><button className='compare-btn'>Compare</button></td>
-                        <td>~200</td>
-                        <td>Moderate</td>
-                        <td className="margin">+$3.40</td>
+                <tr key={item.id}>
+                        <td className="item-description">
+                            <img className='item-img' src={item.imageUrl} alt={item.title}/>
+                            <div className='item-details'>
+                                <p className='item-title'>{item.title}</p>
+                                <p className='item-lot-size'>lot size: {item.lotSize}</p>
+                                <p className='item-price'>{item.price.currency} ${parseFloat(item.price.value).toFixed(2)}</p>
+                            </div>    
+                        </td>                        
+                        <td className="compare-btn-cell"><button className='compare-btn'>Compare</button></td>
+                        <td className="compare-btn-cell"><button className='compare-btn'>Compare</button></td>
+                        <td className="compare-btn-cell"><button className='compare-btn'>Compare</button></td>
                 </tr>
+
             )
         })
         return results
@@ -57,6 +78,12 @@ export default class PriceCompare extends Component {
     
 
     render() {
+
+        let alibaba = this.state.sourceHeadings[0].alibaba ? "heading-selected" : undefined
+        let amazon = this.state.sourceHeadings[1].amazon ? "heading-selected" : undefined
+        let ebay = this.state.sourceHeadings[2].ebay ? "heading-selected" : undefined
+        let gumtree = this.state.sourceHeadings[3].gumtree ? "heading-selected" : undefined
+        
         return (
             <div className="price-compare-container">
 
@@ -72,20 +99,26 @@ export default class PriceCompare extends Component {
                     </form>
                 </div>
                 
-                <table className="comparison-table">
-                    <tbody>
-                        <tr>
-                            <th>Alibaba</th>
-                            <th>Amazon</th>
-                            <th>Gumtree</th>
-                            <th>Ebay</th>
-                            <th>Listings</th>
-                            <th>Competition</th>
-                            <th>Margin</th>
-                        </tr>
-                        {this.searchResults()}
-                    </tbody>
-                </table>
+                <div className='comparison-table-container'>
+                    <ul className='source-headings'>
+                        <li className={alibaba} onClick={() => this.updateSelected('alibaba')}>Alibaba</li>
+                        <li className={amazon} onClick={() => this.updateSelected('amazon')}>Amazon</li>
+                        <li className={ebay} onClick={() => this.updateSelected('ebay')}>Ebay</li>
+                        <li className={gumtree} onClick={() => this.updateSelected('gumtree')}>Gumtree</li>
+                    </ul>                
+                    <table className="comparison-table">
+                        <tbody>
+                            <tr>
+                                <th>{''}</th>
+                                <th>Amazon</th>
+                                <th>Ebay</th>
+                                <th>Gumtree</th>
+                            </tr>     
+                            {this.searchResults()}
+                                
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }
