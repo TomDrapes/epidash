@@ -29,11 +29,11 @@ export default class Menu extends Component {
     }
 
     render(){
-        let priceCompare = this.state.menuItems[0].priceCompare && "selected"
-        let suggestions = this.state.menuItems[1].suggestions && "selected"
-        let competition = this.state.menuItems[2].competition && "selected"
-        let inventory = this.state.menuItems[3].inventory && "selected"
-        let taxRecords = this.state.menuItems[4].taxRecords && "selected"
+        let priceCompare = this.state.menuItems[0].priceCompare ? "selected" : undefined
+        let suggestions = this.state.menuItems[1].suggestions? "selected" : undefined
+        let competition = this.state.menuItems[2].competition ? "selected" : undefined
+        let inventory = this.state.menuItems[3].inventory ? "selected" : undefined
+        let taxRecords = this.state.menuItems[4].taxRecords ? "selected" : undefined
 
         return(
             <div className="menu-container">
