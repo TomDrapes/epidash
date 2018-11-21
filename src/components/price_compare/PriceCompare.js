@@ -11,13 +11,13 @@ export default class PriceCompare extends Component {
 
     emptyCells = () => (
                 <tr>
-                    <td>{" "}</td>
-                    <td>{" "}</td>
-                    <td>{" "}</td>
-                    <td>{" "}</td>
-                    <td>{" "}</td>
-                    <td>{" "}</td>
-                    <td>{" "}</td>
+                    <td><img src='' width='50' height='50' /></td>
+                    <td><button>Compare</button></td>
+                    <td><button>Compare</button></td>
+                    <td><button>Compare</button></td>
+                    <td>~200</td>
+                    <td>Moderate</td>
+                    <td className="margin">+$3.40</td>
                 </tr>
     )
 
@@ -27,10 +27,10 @@ export default class PriceCompare extends Component {
                 <input className='input-field' placeholder="type something..."/>
                 <table className="comparison-table">
                     <tr>
-                        <th>Ebay</th>
+                        <th>Alibaba</th>
                         <th>Amazon</th>
                         <th>Gumtree</th>
-                        <th>Alibaba</th>
+                        <th>Ebay</th>
                         <th>Listings</th>
                         <th>Competition</th>
                         <th>Margin</th>
