@@ -32,8 +32,20 @@ export default class PriceCompare extends Component {
 
     receiveSocketIO = (res) => {
         console.log('receiving on socket')
-        
-        console.log(res)
+        console.log(res.findItemsByKeywordsResponse[0].searchResult[0].item)
+        let ebayList = res.findItemsByKeywordsResponse[0].searchResult[0].item.map(item => {
+            return ({
+                'imageUrl': (item.galleryURL),
+                'title': (item.title),
+                'lotSize': 1,
+                'price': {
+                    'currency': item.sellingStatus[0].currentPrice[0]['@currencyId'],
+                    'value': item.sellingStatus[0].currentPrice[0]['__value__']
+                }
+            })
+
+        })
+        this.setState({ ebayList })
     }
 
     sendSocketIO = () => {
@@ -51,8 +63,8 @@ export default class PriceCompare extends Component {
         this.setState({ sourceHeadings: updatedHeadings })        
     }
 
-    searchResults = () => {
-        let results = this.state.alibabaList.map(item => {
+    searchResults = (list) => {
+        let results = list.map(item => {
             return (
                 <tr key={item.id}>
                         <td className="item-description">
@@ -137,7 +149,8 @@ export default class PriceCompare extends Component {
                                 <th>Ebay</th>
                                 <th>Gumtree</th>
                             </tr>     
-                            {this.searchResults()}
+                            {alibaba === 'heading-selected' && this.searchResults(this.state.alibabaList)}
+                            {ebay === 'heading-selected' && this.searchResults(this.state.ebayList)}
                                 
                         </tbody>
                     </table>

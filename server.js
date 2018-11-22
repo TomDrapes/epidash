@@ -13,7 +13,7 @@ let EBAY_URL = "http://svcs.ebay.com/services/search/FindingService/v1"
     EBAY_URL += "&GLOBAL-ID=EBAY-US"
     EBAY_URL += "&RESPONSE-DATA-FORMAT=JSON"
     EBAY_URL += "&REST-PAYLOAD"
-    EBAY_URL += "&paginationInput.entriesPerPage=3"
+    EBAY_URL += "&paginationInput.entriesPerPage=50"
 
 //Bodyparser Middelware
 app.use(bodyParser.urlencoded({ extended: true}));
