@@ -9,7 +9,8 @@ export default class PriceCompare extends Component {
 
         this.state = {
             searchParam: '',
-            productsList: [],
+            alibabaList: [],
+            ebayList: [],
             sourceHeadings: [
                 {alibaba: true},
                 {amazon: false},
@@ -30,7 +31,7 @@ export default class PriceCompare extends Component {
     }
 
     searchResults = () => {
-        let results = this.state.productsList.map(item => {
+        let results = this.state.alibabaList.map(item => {
             return (
                 <tr key={item.id}>
                         <td className="item-description">
@@ -70,10 +71,26 @@ export default class PriceCompare extends Component {
         }).then(res => {
             console.log(res)
             this.setState({ 
-                productsList: res.data.items,
+                alibabaList: res.data.items,
                 searchParam: ''
             })
         })
+
+        let url = "http://svcs.ebay.com/services/search/FindingService/v1";
+        url += "?OPERATION-NAME=findItemsByKeywords";
+        url += "&SERVICE-VERSION=1.0.0";
+        url += "&SECURITY-APPNAME=TomDrape-epidash-PRD-3c22b8256-c1a615b5";
+        url += "&GLOBAL-ID=EBAY-US";
+        url += "&RESPONSE-DATA-FORMAT=JSON";
+        url += "&callback=_cb_findItemsByKeywords";
+        url += "&REST-PAYLOAD";
+        url += "&keywords=mp3";
+        url += "&paginationInput.entriesPerPage=3";
+
+        axios.get(url)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+
     }
     
 
