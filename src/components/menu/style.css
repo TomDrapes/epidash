@@ -1,5 +1,5 @@
 .menu-container {
-    font-size: 18px;    
+    font-size: 18px;
     color: white;
     background: #A4D555;
     height: auto;
@@ -27,14 +27,12 @@
     background: rgb(155, 196, 0);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: -2px 1px 10px 0 rgb(77, 97, 16);
-    box-shadow: -2px 2px 2px 1px rgba(0,0,0,0.4);
+    box-shadow: -2px 2px 2px 0px rgba(0,0,0,0.4);
 }
 
 .logo {
-    width: 30px;
-    height: 30px;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-right: 5px;
+    width: 50px;
+    height: 43px;
+    padding: 10px;
+
 }

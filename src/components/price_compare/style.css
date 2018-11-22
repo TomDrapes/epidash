@@ -3,6 +3,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .heading-selected {
@@ -93,6 +94,7 @@
 .input-container {
     width: 40%;
     margin-bottom: 10px;
+    align-self: center;
 }
 
 .item-description {

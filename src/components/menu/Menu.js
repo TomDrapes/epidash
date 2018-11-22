@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './menu.css'
+import './style.css'
 
 export default class Menu extends Component {
 
@@ -25,7 +25,7 @@ export default class Menu extends Component {
             }
             return { [Object.keys(item)[0]]: false}
         })
-        this.setState({ menuItems: updatedMenu })        
+        this.setState({ menuItems: updatedMenu })
     }
 
     render(){
