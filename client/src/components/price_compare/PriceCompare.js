@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import openSocket from 'socket.io-client'
+
 import './style.css'
+
+const socket = openSocket('http://localhost:9000')
 
 export default class PriceCompare extends Component {
 
@@ -16,8 +20,25 @@ export default class PriceCompare extends Component {
                 {amazon: false},
                 {ebay: false},
                 {gumtree: false}
-            ]
+            ],
+            socket: socket
         }
+
+        this.state.socket.on('response_received', (res) => {
+            console.log('here')
+            this.receiveSocketIO(res)
+        })
+    }
+
+    receiveSocketIO = (res) => {
+        console.log('receiving on socket')
+        
+        console.log(res)
+    }
+
+    sendSocketIO = () => {
+        console.log('sending on socket')
+        this.state.socket.emit('request_to_ebay_api', this.state.searchParam)
     }
 
     updateSelected(source){
@@ -71,26 +92,11 @@ export default class PriceCompare extends Component {
         }).then(res => {
             console.log(res)
             this.setState({ 
-                alibabaList: res.data.items,
-                searchParam: ''
+                alibabaList: res.data.items
             })
         })
 
-        let url = "http://svcs.ebay.com/services/search/FindingService/v1";
-        url += "?OPERATION-NAME=findItemsByKeywords";
-        url += "&SERVICE-VERSION=1.0.0";
-        url += "&SECURITY-APPNAME=TomDrape-epidash-PRD-3c22b8256-c1a615b5";
-        url += "&GLOBAL-ID=EBAY-US";
-        url += "&RESPONSE-DATA-FORMAT=JSON";
-        url += "&callback=_cb_findItemsByKeywords";
-        url += "&REST-PAYLOAD";
-        url += "&keywords=mp3";
-        url += "&paginationInput.entriesPerPage=3";
-
-        axios.get(url)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-
+        this.sendSocketIO()
     }
     
 
