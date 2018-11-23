@@ -23,7 +23,7 @@
     color: white;
     font-weight: bold;
     text-align: center;
-    background: rgb(245, 207, 125);
+    background: rgb(252, 218, 144);
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -54,6 +54,9 @@
     padding: 5px;
 }
 
+.comparison-table th:last-of-type {
+  border-top-right-radius: 10px;
+}
 
 
 .comparison-table tr {

@@ -18,6 +18,7 @@ export default class Menu extends Component {
               <i className="fas fa-bars hamburger-menu"></i>
               <div className='title'>EpiDash</div>
               <i className="fas fa-cog settings-menu"></i>
+              <i class="far fa-bell notifications"></i>
               <div className='clear' />
             </div>
         )
