@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import Menu from './components/menu/Menu';
-import PriceCompare from './components/price_compare/PriceCompare'
-import SideBar from './components/side_bar/SideBar'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import LandingPage from './routes/LandingPage'
+import LoginPage from './routes/LoginPage'
+import DashBoard from './routes/Dashboard'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Menu />
-        <SideBar />
-        <PriceCompare />
-      </div>
+      <BrowserRouter basename="/">
+        <Switch>
+          <Route exact path={'/'} render={props => <LandingPage {...props} />} />
+          <Route path={`/login`} render={props => <LoginPage {...props} />} />
+          <Route path={`/dashboard`} render={props => <DashBoard {...props} />} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
