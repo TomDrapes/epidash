@@ -106,7 +106,7 @@ export default class PriceCompare extends Component {
             this.setState({ 
                 alibabaList: res.data.items
             })
-        })
+        }).catch(err => console.log(err))
 
         this.sendSocketIO()
     }
