@@ -66,19 +66,19 @@ export default class PriceCompare extends Component {
     searchResults = (list) => {
         let results = list.map(item => {
             return (
-                <tr key={item.id}>
-                        <td className="item-description">
+                <div className='item-listing' key={item.id}>
+                        <div className="item-description">
                             <img className='item-img' src={item.imageUrl} alt={item.title}/>
                             <div className='item-details'>
                                 <p className='item-title'>{item.title}</p>
                                 <p className='item-lot-size'>lot size: {item.lotSize}</p>
                                 <p className='item-price'>{item.price.currency} ${parseFloat(item.price.value).toFixed(2)}</p>
                             </div>    
-                        </td>                        
-                        <td className="compare-btn-cell"><button className='compare-btn'>Compare</button></td>
-                        <td className="compare-btn-cell"><button className='compare-btn'>Compare</button></td>
-                        <td className="compare-btn-cell"><button className='compare-btn'>Compare</button></td>
-                </tr>
+                        </div>                        
+                        <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                        <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                        <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                </div>
 
             )
         })
@@ -122,38 +122,40 @@ export default class PriceCompare extends Component {
         return (
             <div className="price-compare-container">
 
-                <div className='input-container'>
-                    <form id='message_form' onSubmit={this.submit} className='input-group'>
-                        <input className='form-control'
-                            onChange={event => this.onInputChange(event.target.value)}
-                            value={this.state.searchParam}
-                            placeholder="Search for products" />
-                        <span className='input-group-btn'>
-                            <button type='submit' className= 'btn btn-secondary' >Search</button>
-                        </span>
-                    </form>
-                </div>
+                
                 
                 <div className='comparison-table-container'>
-                    <ul className='source-headings'>
-                        <li className={alibaba} onClick={() => this.updateSelected('alibaba')}>Alibaba</li>
-                        <li className={amazon} onClick={() => this.updateSelected('amazon')}>Amazon</li>
-                        <li className={ebay} onClick={() => this.updateSelected('ebay')}>Ebay</li>
-                        <li className={gumtree} onClick={() => this.updateSelected('gumtree')}>Gumtree</li>
-                    </ul>                
-                    <table className="comparison-table">
-                        <tbody>
-                            <tr>
-                                <th>{''}</th>
-                                <th>Amazon</th>
-                                <th>Ebay</th>
-                                <th>Gumtree</th>
-                            </tr>     
-                            {alibaba === 'heading-selected' && this.searchResults(this.state.alibabaList)}
-                            {ebay === 'heading-selected' && this.searchResults(this.state.ebayList)}
+                    <div className='source-headings'>
+                        <ul>
+                            <li className={alibaba} onClick={() => this.updateSelected('alibaba')}>Alibaba</li>
+                            <li className={amazon} onClick={() => this.updateSelected('amazon')}>Amazon</li>
+                            <li className={ebay} onClick={() => this.updateSelected('ebay')}>Ebay</li>
+                            <li className={gumtree} onClick={() => this.updateSelected('gumtree')}>Gumtree</li>
+                        </ul>
+                        <div className='input-container'>
+                            <form id='message_form' onSubmit={this.submit} className='input-group'>
+                                <input className='form-control'
+                                    onChange={event => this.onInputChange(event.target.value)}
+                                    value={this.state.searchParam}
+                                    placeholder="Search for products" />
+                                <span className='input-group-btn'>
+                                    <button type='submit' className= 'btn btn-secondary' >Search</button>
+                                </span>
+                            </form>
+                        </div>
+                    </div>              
+                    <div className="comparison-table">
+                            <div className='column-headings'>
+                                <p>Amazon</p>
+                                <p>Ebay</p>
+                                <p>Gumtree</p>
                                 
-                        </tbody>
-                    </table>
+                            </div>
+                            <div className='item-listings-container'>
+                                {alibaba === 'heading-selected' && this.searchResults(this.state.alibabaList)}
+                                {ebay === 'heading-selected' && this.searchResults(this.state.ebayList)}                            
+                            </div>
+                    </div>
                 </div>
             </div>
         )

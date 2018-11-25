@@ -10,8 +10,10 @@ export default class DashBoard extends Component{
         return(
             <div className='dashboard'>
                 <Menu />
-                <SideBar />
-                <PriceCompare />
+                <div className='dashboard-content'>
+                    <SideBar />
+                    <PriceCompare />                
+                </div>
             </div>
         )
     }

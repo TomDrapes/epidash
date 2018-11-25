@@ -6,8 +6,9 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+    flex: 1;
 }
 
 .heading-selected {
@@ -19,6 +20,11 @@
 }
 
 .source-headings {
+    display: flex;
+    flex-direction: row;
+}
+
+.source-headings ul {
     width: 50%;
     display: flex;
     color: white;
@@ -30,8 +36,10 @@
 }
 
 .source-headings li {
-    padding: 10px;
-    flex-grow: 1
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .source-headings li:hover {
@@ -39,41 +47,62 @@
     cursor: pointer;
 }
 
-.comparison-table {
-    width: 100%;
-    height: 500px;
+.comparison-table-container {    
+    flex: 1;
     overflow: hidden;
-
+    background: rgb(252, 218, 144);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 5px 2px rgba( 0, 0, 0, 0.4);
+}
+.comparison-table {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
-.comparison-table th {
+.column-headings {
     text-align: center;
     font-size: 16px;
     font-weight: bold;
     background: rgb(243, 195, 92);
     color: white;
     padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
-.comparison-table th:last-of-type {
+.column-headings p {
+    padding: 0px 10px 0px 10px;
+}
+
+.column-headings:last-child {
   border-top-right-radius: 10px;
 }
 
-
-.comparison-table tr {
-    background: white;
+.item-listings-container {
+    flex: 1;
+    overflow-y: scroll;
 }
-
-.comparison-table td {
-    vertical-align: middle;
+.item-listing {
+    background: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     border-bottom: 1px solid #efefef;
     font-size: 16px;
-    padding: 5px;
 }
 
-.comparison-table tr:nth-child(even) {
-    background: white;
+.item-description {
+    flex: 9;
 }
+
+.compare-btn-cell {
+    flex: 1;
+}
+
 
 .compare-btn-cell {
     text-align: center;
@@ -101,10 +130,14 @@
   font-weight: bold;
 }
 
-.input-container {
-    width: 40%;
-    margin-bottom: 10px;
-    align-self: center;
+.input-container {    
+    padding: 10px;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.form-control, .btn-secondary {
+    font-size: 16px;
 }
 
 .item-description {

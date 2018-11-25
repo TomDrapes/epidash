@@ -1,11 +1,10 @@
 .menu-container {
     font-size: 32px;
     font-family: 'Khand', sans-serif;
-
     color: white;
     background: rgb(26, 26, 26);
     height: auto;
-    width: 100vw;
+    width: 100%;;
     padding: 15px 20px 15px 20px;
 }
 
