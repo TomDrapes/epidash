@@ -46,6 +46,10 @@
 }
 
 h2 {
+    text-align: center;
+}
+
+h4 {
     text-align: left;
 }
 
@@ -70,4 +74,8 @@ h2 {
     margin-right: 3px;
     padding: 0px;
     width: auto;    
+}
+
+.signInOrUp a {
+    cursor: pointer;
 }

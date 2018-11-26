@@ -141,7 +141,7 @@ export default class LoginPage extends Component{
         if(this.state.title === 'SIGN IN'){
             return (
                 <div>
-                    <h2>USERNAME</h2>
+                    <h4>USERNAME</h4>
                     <i className="fas fa-user"></i>
                     <input 
                         type='email' 
@@ -149,7 +149,7 @@ export default class LoginPage extends Component{
                         value={signInEmail}
                         onChange={this.onTextboxChangeSignInEmail}
                     /><br/>
-                    <h2>PASSWORD</h2>
+                    <h4>PASSWORD</h4>
                     <i className="fas fa-lock"></i>
                     <input 
                         type='password' 
@@ -158,13 +158,13 @@ export default class LoginPage extends Component{
                         onChange={this.onTextboxChangeSignInPassword} 
                     /><br/>
                     <p style={{color: 'red'}}>{this.state.signInError}</p>
-                    <button type='button' onClick={() => this.onSignIn()}>SIGN IN</button>
+                    <button onClick={() => this.onSignIn()}>SIGN IN</button>
                 </div>
             )
         }
         return (
             <div>
-                <h2>USERNAME</h2>
+                <h4>USERNAME</h4>
                 <i className="fas fa-user"></i>
                 <input 
                     type='email' 
@@ -172,7 +172,7 @@ export default class LoginPage extends Component{
                     value={signUpEmail}
                     onChange={this.onTextboxChangeSignUpEmail}
                 /><br/>
-                <h2>PASSWORD</h2>
+                <h4>PASSWORD</h4>
                 <i className="fas fa-lock"></i>
                 <input 
                     type='password' 
@@ -181,7 +181,7 @@ export default class LoginPage extends Component{
                     onChange={this.onTextboxChangeSignUpPassword} 
                 /><br/>
                 <p style={{color: 'red'}}>{this.state.signUpError}</p>
-                <button type="button" onClick={() => this.onSignUp()}>SIGN UP</button>
+                <button onClick={() => this.onSignUp()}>SIGN UP</button>
             </div>
         )
     }
@@ -223,9 +223,9 @@ export default class LoginPage extends Component{
                     <div className='login-container'>
                         <h1>EpiDash</h1>
                         <h2>{this.state.title}</h2>
-                        
-                            {this.inputFields()}
-                            
+                            <form>
+                                {this.inputFields()}
+                            </form>
                             <div className='remember-forgot-container'>
                                 <div className='remember-me'>
                                     <input type='checkbox' />Remember me
@@ -239,9 +239,9 @@ export default class LoginPage extends Component{
 
                             <hr />
                             {this.state.title === "SIGN IN" ? 
-                                <a onClick={() => this.setState({ title: "SIGN UP"})}>Not a member yet? JOIN</a>
+                                <div className="signInOrUp" onClick={() => this.setState({ title: "SIGN UP"})}>Not a member yet? <a>JOIN</a></div>
                                 :
-                                <a onClick={() => this.setState({ title: "SIGN IN"})}>SIGN IN</a>
+                                <div className="signInOrUp" onClick={() => this.setState({ title: "SIGN IN"})}><a>SIGN IN</a></div>
                             }
                         </div>
                     </div>
