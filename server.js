@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios')
-
+const mongoose = require('mongoose');
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -15,7 +15,7 @@ let EBAY_URL = "http://svcs.ebay.com/services/search/FindingService/v1"
     EBAY_URL += "&REST-PAYLOAD"
     EBAY_URL += "&paginationInput.entriesPerPage=50"
 
-//Bodyparser Middelware
+//Bodyparser Middelware - tells express to accept both JSON and urlencoded values
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
@@ -39,5 +39,18 @@ io.on('connection', function(socket){
 });
 
 http.listen(9000);
+
+// DB Config
+const db = require('./config/keys').devDB
+
+// Connect to Mongo
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log("MongoDB connected..."))
+  .catch(err => console.log(err));
+
+//connect api routes
+//NB: you can add multiple routes here later by copying the line below and replacing  the path
+require('./server/routes/api/signin')(app)
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
