@@ -14,7 +14,7 @@ class App extends Component {
           <Route exact path={'/'} render={props => <LandingPage {...props} />} />
           <Route path={`/login`} render={props => <LoginPage {...props} />} />
           <Route path ={`/signup`} render={props => <SignUpPage {...props} />} />
-          <Route path={`/dashboard`} render={props => <DashBoard {...props} />} />
+          <Route path={`/dashboard/:id`} render={props => <DashBoard {...props} />} />
         </Switch>
       </BrowserRouter>
     );

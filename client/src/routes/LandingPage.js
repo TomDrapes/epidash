@@ -10,7 +10,6 @@ export default class LandingPage extends Component{
                 <p>Work in progress</p>
                 <ul>
                     <li><Link to={`/login`}>Login</Link></li>
-                    <li><Link to={`/dashboard`}>dashboard</Link></li>
                 </ul>
             </div>
         )

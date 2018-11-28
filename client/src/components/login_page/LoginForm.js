@@ -15,7 +15,8 @@ export default class LoginForm extends Component{
             status: '',
             email: '',
             password: '',
-            redirect: ''
+            redirect: '',
+            userId: ''
         }
     }
 
@@ -51,7 +52,8 @@ export default class LoginForm extends Component{
                      password: '',
                      email: '',
                      token: res.data.token,
-                     redirect: 'DASHBOARD'
+                     redirect: 'DASHBOARD',
+                     userId: res.data.userId
                  })
              } else {
                  this.setState({
@@ -112,11 +114,11 @@ export default class LoginForm extends Component{
     }
 
     render(){
-        const { loading, token, redirect, status, email, password } = this.state;
+        const { loading, token, redirect, status, email, password, userId } = this.state;
 
         switch(redirect){
             case "SIGN_UP": return ( <Redirect push to={'/signup'} />);
-            case "DASHBOARD": return ( <Redirect push to={'/dashboard'} />)
+            case "DASHBOARD": return ( <Redirect push to={`/dashboard/${userId}`} />)
             default: break;
         }
         

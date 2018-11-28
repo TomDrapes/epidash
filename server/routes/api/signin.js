@@ -43,7 +43,7 @@ module.exports = (app) => {
         message: 'Error: You must select a country.'
       })
     }
-    
+
     email = email.toLowerCase();
     email = email.trim();
     firstName = firstName.toLowerCase().trim();
@@ -142,7 +142,8 @@ module.exports = (app) => {
         return res.send({
           success: true,
           message: 'Valid sign in',
-          token: doc._id
+          token: doc._id,
+          userId: user._id
         });
       });
     });
