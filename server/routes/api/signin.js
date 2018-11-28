@@ -10,19 +10,6 @@ module.exports = (app) => {
     const { password, country } = body;
     let { email, firstName, lastName } = body;
     
-    if (!email) {
-      return res.send({
-        success: false,
-        message: 'Error: Email cannot be blank.'
-      });
-    }
-    if (!password) {
-      return res.send({
-        success: false,
-        message: 'Error: Password cannot be blank.'
-      });
-    }
-
     if (!firstName) {
       return res.send({
         success: false,
@@ -36,13 +23,27 @@ module.exports = (app) => {
         message: 'Error: Last name cannot be blank.'
       })
     }
-
+    
     if (!country) {
       return res.send({
         success: false,
         message: 'Error: You must select a country.'
       })
     }
+
+    if (!email) {
+      return res.send({
+        success: false,
+        message: 'Error: Email cannot be blank.'
+      });
+    }
+    if (!password) {
+      return res.send({
+        success: false,
+        message: 'Error: Password cannot be blank.'
+      });
+    }
+
 
     email = email.toLowerCase();
     email = email.trim();

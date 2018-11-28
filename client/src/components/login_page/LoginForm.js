@@ -130,27 +130,32 @@ export default class LoginForm extends Component{
             return (
                 <div className='login-container'>
                     <h1>EpiDash</h1>
+                    <hr />
                     <h2>SIGN IN</h2>
                     <form onSubmit={(e) => this.onSignIn(e)}>
                         <div>
                             <h4>USERNAME</h4>
-                            <i className="fas fa-user"></i>
-                            <input 
-                                type='email' 
-                                placeholder='Email'
-                                value={email}
-                                onChange={this.onTextboxChangeEmail}
-                            /><br/>
+                            <div className='input-field'>
+                                <i className="fas fa-user"></i>
+                                <input 
+                                    type='email' 
+                                    placeholder='Email'
+                                    value={email}
+                                    onChange={this.onTextboxChangeEmail}
+                                /><br/>
+                            </div>
                             <h4>PASSWORD</h4>
-                            <i className="fas fa-lock"></i>
-                            <input 
-                                type='password' 
-                                placeholder='Password'
-                                value={password}
-                                onChange={this.onTextboxChangePassword} 
-                            /><br/>
-                            <p style={{color: 'red'}}>{status}</p>
-                            <button>SIGN IN</button>
+                            <div className='input-field'>
+                                <i className="fas fa-lock"></i>
+                                <input 
+                                    type='password' 
+                                    placeholder='Password'
+                                    value={password}
+                                    onChange={this.onTextboxChangePassword} 
+                                /><br/>
+                            </div>
+                            <p className='login-status'>{status}</p>
+                            <button className='login-btn'>SIGN IN</button>
                         </div>
                     </form>
                     

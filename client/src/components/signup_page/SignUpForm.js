@@ -97,14 +97,13 @@ export default class SignUpForm extends Component {
                 <h2>SIGN UP</h2>
                 <form onSubmit={(e) => this.onSignUp(e)}>
                     <div>
-                        <h4>FIRST NAME</h4>
+                        <h4>NAME</h4>
                         <input
                             type='text'
                             placeholder='First name'
                             value={firstName}
                             onChange={this.onTextboxChangeFirstName}
-                        /><br/>
-                        <h4>LAST NAME</h4>
+                        />
                         <input
                             type='text'
                             placeholder='Last name'
@@ -132,8 +131,8 @@ export default class SignUpForm extends Component {
                             value={password}
                             onChange={this.onTextboxChangePassword} 
                         /><br/>
-                        <p style={{color: 'red'}}>{this.state.status}</p>
-                        <button type='submit'>SIGN UP</button>
+                        <p className='signup-status'>{this.state.status}</p>
+                        <button className='signup-btn' type='submit'>SIGN UP</button>
                     </div>
                 </form>
                 <hr />        
