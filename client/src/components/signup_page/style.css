@@ -1,6 +1,6 @@
 .signup-form-container {
     width: auto;
-    height: 50%;
+    height: auto;
     background: #fff;
     border-radius: 10px;
     text-align: center;
@@ -33,3 +33,13 @@ h4 {
     cursor: pointer;
     color: rgb(33, 182, 245);
 }
+
+.country-list {
+    height: auto;
+    width: 200px;
+    padding: 5px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+

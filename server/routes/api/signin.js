@@ -7,8 +7,8 @@ module.exports = (app) => {
    */
   app.post('/api/account/signup', (req, res, next) => {
     const { body } = req;
-    const { password } = body;
-    let { email } = body;
+    const { password, country } = body;
+    let { email, firstName, lastName } = body;
     
     if (!email) {
       return res.send({
@@ -22,8 +22,32 @@ module.exports = (app) => {
         message: 'Error: Password cannot be blank.'
       });
     }
+
+    if (!firstName) {
+      return res.send({
+        success: false,
+        message: 'Error: First name cannot be blank.'
+      })
+    }
+
+    if (!lastName) {
+      return res.send({
+        success: false,
+        message: 'Error: Last name cannot be blank.'
+      })
+    }
+
+    if (!country) {
+      return res.send({
+        success: false,
+        message: 'Error: You must select a country.'
+      })
+    }
+    
     email = email.toLowerCase();
     email = email.trim();
+    firstName = firstName.toLowerCase().trim();
+    lastName = lastName.toLowerCase().trim();
     // Steps:
     // 1. Verify email doesn't exist
     // 2. Save
@@ -43,6 +67,9 @@ module.exports = (app) => {
       }
       // Save the new user
       const newUser = new User();
+      newUser.firstName = firstName;
+      newUser.lastName = lastName;
+      newUser.country = country;
       newUser.email = email;
       newUser.password = newUser.generateHash(password);
       newUser.save((err, user) => {
