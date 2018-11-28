@@ -85,6 +85,7 @@
 .item-listings-container {
     flex: 1;
     overflow-y: scroll;
+    background: white;
 }
 .item-listing {
     background: white;

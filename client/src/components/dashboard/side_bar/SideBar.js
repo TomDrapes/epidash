@@ -38,10 +38,10 @@ export default class SideBar extends Component {
       <div className='sidebar-container'>
         <ul>
           <li className={priceCompare} onClick={() => this.updateSelected('priceCompare')}><i className="fas fa-search-dollar"></i>PRICE COMPARE</li>
-          <li className={suggestions} onClick={() => this.updateSelected('suggestions')}><i class="far fa-lightbulb"></i>SUGGESTIONS</li>
-          <li className={competition} onClick={() => this.updateSelected('competition')}><i class="fas fa-users"></i>COMPETITION</li>
-          <li className={inventory} onClick={() => this.updateSelected('inventory')}><i class="fas fa-warehouse"></i>INVENTORY</li>
-          <li className={accountDetails} onClick={() => this.updateSelected('accountDetails')}><i class="fas fa-chart-bar"></i>ACCOUNT DETAILS</li>
+          <li className={suggestions} onClick={() => this.updateSelected('suggestions')}><i className="far fa-lightbulb"></i>SUGGESTIONS</li>
+          <li className={competition} onClick={() => this.updateSelected('competition')}><i className="fas fa-users"></i>COMPETITION</li>
+          <li className={inventory} onClick={() => this.updateSelected('inventory')}><i className="fas fa-warehouse"></i>INVENTORY</li>
+          <li className={accountDetails} onClick={() => this.updateSelected('accountDetails')}><i className="fas fa-chart-bar"></i>ACCOUNT DETAILS</li>
         </ul>
 
       </div>

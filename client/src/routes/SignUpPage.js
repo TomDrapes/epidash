@@ -1,18 +1,14 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import SignUpForm from '../components/signup_page/SignUpForm'
 
-export default class SignUpPage extends Component {
-  constructor(props){
-    super(props)
 
-    this.state = {}
-  }
+export default class SignUpPage extends Component{
 
-  render(){
-    return (
-      <div className="signup-page-container">
-
-      </div>
-    )
-  }
+    render(){
+        return (
+            <div className='signup-page'>
+               <SignUpForm />
+            </div>
+        )
+    }
 }
