@@ -29,11 +29,48 @@ io.on('connection', function(socket){
     console.log('User disconnected');
   });
 
-  socket.on('request_to_ebay_api', function(keyword){
-        EBAY_URL += `&keywords=${keyword}`
-        axios.get(EBAY_URL).then(res => {
-            socket.emit('response_received', res.data)
-        }).catch(err => console.log(err))
+  socket.on('request_to_ebay_api', function(keywords){
+
+    let response = { ebay: [], ali: [] }
+
+    EBAY_URL += `&keywords=${keywords}`
+
+    let promise1 = axios.get(EBAY_URL).then(res => {
+      let ebayList = []
+      if(res.data.findItemsByKeywordsResponse[0].searchResult[0].item.length > 0){
+        ebayList = res.data.findItemsByKeywordsResponse[0].searchResult[0].item.map(item => {
+          return ({
+              'imageUrl': (item.galleryURL),
+              'title': (item.title),
+              'lotSize': 1,
+              'price': {
+                  'currency': item.sellingStatus[0].currentPrice[0]['@currencyId'],
+                  'value': item.sellingStatus[0].currentPrice[0]['__value__']
+              }
+          })
+  
+      })
+      response.ebay = ebayList
+      }
+    }).catch(err => console.log(err))
+
+    let promise2 = axios({
+      method: 'post',
+      url: 'https://api.aliseeks.com/v1/search',
+      data: {
+          text: keywords
+      },
+      headers: {
+          'X-Api-Client-Id': 'FPVNMCTQKJOSZPCL'
+      }
+    }).then(res => {
+      response.ali = res.data.items
+    }).catch(err => console.log(err))
+
+    Promise.all([promise1, promise2]).then(() => { 
+      console.log("Socket sending search results")
+      socket.emit('response_received', response)
+    }).catch(err => console.log(err))
   });
 
 });

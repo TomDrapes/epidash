@@ -21,7 +21,10 @@ export default class PriceCompare extends Component {
                 {ebay: false},
                 {gumtree: false}
             ],
-            socket: socket
+            socket: socket,
+            searchStatus: '',
+            aliSearchSuccess: false,
+            ebaySearchSuccess: false,
         }
 
         this.state.socket.on('response_received', (res) => {
@@ -32,20 +35,19 @@ export default class PriceCompare extends Component {
 
     receiveSocketIO = (res) => {
         console.log('receiving on socket')
-        console.log(res.findItemsByKeywordsResponse[0].searchResult[0].item)
-        let ebayList = res.findItemsByKeywordsResponse[0].searchResult[0].item.map(item => {
-            return ({
-                'imageUrl': (item.galleryURL),
-                'title': (item.title),
-                'lotSize': 1,
-                'price': {
-                    'currency': item.sellingStatus[0].currentPrice[0]['@currencyId'],
-                    'value': item.sellingStatus[0].currentPrice[0]['__value__']
-                }
-            })
 
-        })
-        this.setState({ ebayList })
+        if (res.ali.length > 0 ) {
+            this.setState({ alibabaList: res.ali, aliSearchSuccess: true })
+        }else{
+            this.setState({ aliSearchSuccess: false })
+        }
+
+        if (res.ebay.length > 0) {
+            this.setState({ ebayList: res.ebay, ebaySearchSuccess: true })
+        } else {
+            this.setState({ ebaySearchSuccess: false })
+        }
+        
     }
 
     sendSocketIO = () => {
@@ -91,23 +93,6 @@ export default class PriceCompare extends Component {
 
     submit = (e) => {
         e.preventDefault()
-        
-        axios({
-            method: 'post',
-            url: 'https://api.aliseeks.com/v1/search',
-            data: {
-                text: this.state.searchParam
-            },
-            headers: {
-                'X-Api-Client-Id': 'FPVNMCTQKJOSZPCL'
-            }
-        }).then(res => {
-            console.log(res)
-            this.setState({ 
-                alibabaList: res.data.items
-            })
-        }).catch(err => console.log(err))
-
         this.sendSocketIO()
     }
     
