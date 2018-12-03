@@ -30,6 +30,7 @@ export default class ComparisonOverlay extends Component {
     render() {
         return(
             <div className='comparison-overlay-container'>
+                <div><h1>SELECT ALL MATCHING PRODUCTS</h1></div>
                 {this.items()}
             </div>
         )

@@ -37,7 +37,10 @@ export default class PriceCompare extends Component {
 
     receiveSocketIO = (res) => {
         console.log('receiving on socket')
-        this.setState({ waitingForSearchResults: false })
+        this.setState({ 
+            waitingForSearchResults: false,
+            showComparisonOverlay: false
+        })
         if (res.ali.length > 0 ) {
             this.setState({ alibabaList: res.ali, aliSearchSuccess: true })
         }else{
