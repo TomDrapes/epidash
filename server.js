@@ -11,7 +11,7 @@ let EBAY_URL = "http://svcs.ebay.com/services/search/FindingService/v1"
     EBAY_URL += "?OPERATION-NAME=findItemsByKeywords"
     EBAY_URL += "&SERVICE-VERSION=1.0.0"
     EBAY_URL += "&SECURITY-APPNAME=TomDrape-epidash-PRD-3c22b8256-c1a615b5"
-    EBAY_URL += "&GLOBAL-ID=EBAY-US"
+    EBAY_URL += "&GLOBAL-ID=EBAY-AU"
     EBAY_URL += "&RESPONSE-DATA-FORMAT=JSON"
     EBAY_URL += "&REST-PAYLOAD"
     EBAY_URL += "&paginationInput.entriesPerPage=50"
@@ -38,7 +38,6 @@ io.on('connection', function(socket){
 
     let promise1 = axios.get(EBAY_URL).then(res => {
       let ebayList = []
-      console.log(res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0])
       if(res.data.findItemsByKeywordsResponse[0].searchResult[0].item){
         ebayList = res.data.findItemsByKeywordsResponse[0].searchResult[0].item.map(item => {
           return ({
@@ -49,7 +48,7 @@ io.on('connection', function(socket){
                   'currency': item.sellingStatus[0].currentPrice[0]['@currencyId'],
                   'value': item.sellingStatus[0].currentPrice[0]['__value__']
               },
-              'id': item.itemId            
+              'id': item.itemId          
           })
   
       })

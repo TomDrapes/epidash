@@ -22,7 +22,7 @@ export default class PriceCompare extends Component {
                 {gumtree: false}
             ],
             socket: socket,
-            searchStatus: '',
+            waitingForSearchResults: false,
             aliSearchSuccess: true,
             ebaySearchSuccess: true,
         }
@@ -35,7 +35,7 @@ export default class PriceCompare extends Component {
 
     receiveSocketIO = (res) => {
         console.log('receiving on socket')
-
+        this.setState({ waitingForSearchResults: false })
         if (res.ali.length > 0 ) {
             this.setState({ alibabaList: res.ali, aliSearchSuccess: true })
         }else{
@@ -52,6 +52,7 @@ export default class PriceCompare extends Component {
 
     sendSocketIO = () => {
         console.log('sending on socket')
+        this.setState({ waitingForSearchResults: true })
         this.state.socket.emit('request_to_ebay_api', this.state.searchParam)
     }
 
@@ -104,6 +105,15 @@ export default class PriceCompare extends Component {
         this.sendSocketIO()
     }
     
+    spinner = () => {
+        if (this.state.waitingForSearchResults){
+            return(
+                <div className='search-spinner'>
+                    <i className='fas fa-spinner fa-spin'></i>                
+                </div>
+            )
+        }
+    }
 
     render() {
 
@@ -126,6 +136,7 @@ export default class PriceCompare extends Component {
                             <li className={gumtree} onClick={() => this.updateSelected('gumtree')}>Gumtree</li>
                         </ul>
                         <div className='input-container'>
+                            {this.spinner()}
                             <form id='message_form' onSubmit={this.submit} className='input-group'>
                                 <input className='form-control'
                                     onChange={event => this.onInputChange(event.target.value)}
