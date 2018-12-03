@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ComparisonOverlay from './ComparisonOverlay'
 import openSocket from 'socket.io-client'
 import uuid from 'uuid'
 
@@ -25,6 +26,7 @@ export default class PriceCompare extends Component {
             waitingForSearchResults: false,
             aliSearchSuccess: true,
             ebaySearchSuccess: true,
+            showComparisonOverlay: false
         }
 
         this.state.socket.on('response_received', (res) => {
@@ -80,9 +82,9 @@ export default class PriceCompare extends Component {
                                     <p className='item-price'>{item.price.currency} ${parseFloat(item.price.value).toFixed(2)}</p>
                                 </div>    
                             </div>                        
-                            <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
-                            <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
-                            <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => this.setState({showComparisonOverlay: true})}>Compare</button></div>
+                            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => this.setState({showComparisonOverlay: true})}>Compare</button></div>
+                            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => this.setState({showComparisonOverlay: true})}>Compare</button></div>
                     </div>
     
                 )
@@ -125,7 +127,9 @@ export default class PriceCompare extends Component {
         return (
             <div className="price-compare-container">
 
-                
+                {this.state.showComparisonOverlay &&
+                    <ComparisonOverlay items={this.state.ebayList}/>
+                }
                 
                 <div className='comparison-table-container'>
                     <div className='source-headings'>
