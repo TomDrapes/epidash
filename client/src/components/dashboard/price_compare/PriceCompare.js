@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import openSocket from 'socket.io-client'
+import uuid from 'uuid'
 
 import './style.css'
 
@@ -23,8 +23,8 @@ export default class PriceCompare extends Component {
             ],
             socket: socket,
             searchStatus: '',
-            aliSearchSuccess: false,
-            ebaySearchSuccess: false,
+            aliSearchSuccess: true,
+            ebaySearchSuccess: true,
         }
 
         this.state.socket.on('response_received', (res) => {
@@ -65,26 +65,34 @@ export default class PriceCompare extends Component {
         this.setState({ sourceHeadings: updatedHeadings })        
     }
 
-    searchResults = (list) => {
-        let results = list.map(item => {
-            return (
-                <div className='item-listing' key={item.id}>
-                        <div className="item-description">
-                            <img className='item-img' src={item.imageUrl} alt={item.title}/>
-                            <div className='item-details'>
-                                <p className='item-title'>{item.title}</p>
-                                <p className='item-lot-size'>lot size: {item.lotSize}</p>
-                                <p className='item-price'>{item.price.currency} ${parseFloat(item.price.value).toFixed(2)}</p>
-                            </div>    
-                        </div>                        
-                        <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
-                        <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
-                        <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
-                </div>
-
-            )
-        })
-        return results
+    searchResults = (list, searchSuccess) => {
+        if(searchSuccess){
+            let results = list.map(item => {
+                return (
+                    <div className='item-listing' key={uuid()}>
+                            <div className="item-description">
+                                <img className='item-img' src={item.imageUrl} alt={item.title}/>
+                                <div className='item-details'>
+                                    <p className='item-title'>{item.title}</p>
+                                    <p className='item-lot-size'>lot size: {item.lotSize}</p>
+                                    <p className='item-lot-size'>id: {item.id}</p>
+                                    <p className='item-price'>{item.price.currency} ${parseFloat(item.price.value).toFixed(2)}</p>
+                                </div>    
+                            </div>                        
+                            <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                            <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                            <div className="compare-btn-cell"><button className='compare-btn'>Compare</button></div>
+                    </div>
+    
+                )
+            })
+            return results
+        }
+        return(
+            <div className='no-matches-msg'>
+                <p>Search returned 0 results. Refine search and try again.</p>
+            </div>
+        )
     }
 
     onInputChange(searchParam){
@@ -137,8 +145,10 @@ export default class PriceCompare extends Component {
                                 
                             </div>
                             <div className='item-listings-container'>
-                                {alibaba === 'heading-selected' && this.searchResults(this.state.alibabaList)}
-                                {ebay === 'heading-selected' && this.searchResults(this.state.ebayList)}                            
+                                {alibaba === 'heading-selected' 
+                                     && this.searchResults(this.state.alibabaList, this.state.aliSearchSuccess)}
+                                {ebay === 'heading-selected' 
+                                    && this.searchResults(this.state.ebayList, this.state.ebaySearchSuccess)}                            
                             </div>
                     </div>
                 </div>

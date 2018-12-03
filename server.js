@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios')
 const mongoose = require('mongoose');
+const uuid = require('uuid')
 const app = express();
 
 const port = process.env.PORT || 5000;
@@ -37,7 +38,8 @@ io.on('connection', function(socket){
 
     let promise1 = axios.get(EBAY_URL).then(res => {
       let ebayList = []
-      if(res.data.findItemsByKeywordsResponse[0].searchResult[0].item.length > 0){
+      console.log(res.data.findItemsByKeywordsResponse[0].searchResult[0].item[0])
+      if(res.data.findItemsByKeywordsResponse[0].searchResult[0].item){
         ebayList = res.data.findItemsByKeywordsResponse[0].searchResult[0].item.map(item => {
           return ({
               'imageUrl': (item.galleryURL),
@@ -46,7 +48,8 @@ io.on('connection', function(socket){
               'price': {
                   'currency': item.sellingStatus[0].currentPrice[0]['@currencyId'],
                   'value': item.sellingStatus[0].currentPrice[0]['__value__']
-              }
+              },
+              'id': item.itemId            
           })
   
       })
