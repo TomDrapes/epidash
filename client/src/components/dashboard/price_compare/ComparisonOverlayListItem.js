@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './comparisonOverlayStyle.css'
+import './style.css'
 
 export default class ComparisonOverlayListItem extends Component {
     constructor(props){

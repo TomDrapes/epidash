@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ComparisonOverlayListItem from './ComparisonOverlayListItem'
-import './comparisonOverlayStyle.css'
+import './style.css'
 
 export default class ComparisonOverlay extends Component {
     constructor(props){
@@ -8,20 +8,13 @@ export default class ComparisonOverlay extends Component {
 
         this.state = {
             items: this.props.items,
-            matchedItems: []
         }
-    }
-
-    addMatch = (item) => {
-        let items = this.state.matchedItems
-        items.push(item)
-        this.setState({ matchedItems: items })
     }
 
     items = () => {
         let items = this.state.items.map(item => {
             return (
-                <ComparisonOverlayListItem item={item} addMatch={() => this.addMatch(item)}/>
+                <ComparisonOverlayListItem item={item} addMatch={() => this.props.addMatch(item)}/>
             )
         })
         return items
@@ -29,9 +22,13 @@ export default class ComparisonOverlay extends Component {
         
     render() {
         return(
-            <div className='comparison-overlay-container'>
-                <div><h1>SELECT ALL MATCHING PRODUCTS</h1></div>
-                {this.items()}
+            <div className='comparison-selection-container'>
+                <div className='comparison-selection-component-heading-tab'>
+                    <h1>SELECT ALL MATCHING PRODUCTS</h1>
+                </div>
+                <div className='comparison-selection-list'>
+                    {this.items()}                
+                </div>
             </div>
         )
     }

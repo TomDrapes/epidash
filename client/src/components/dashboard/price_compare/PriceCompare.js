@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import ComparisonOverlay from './ComparisonOverlay'
+import ComparisonTable from './ComparisonTable'
 import openSocket from 'socket.io-client'
-import uuid from 'uuid'
-
 import './style.css'
+import ItemInFocus from './ItemInFocus';
+import LiveAnalysis from './LiveAnalysis';
 
 const socket = openSocket('http://localhost:9000')
 
@@ -12,23 +13,19 @@ export default class PriceCompare extends Component {
     constructor(props){
         super(props)
 
-        this.state = {
-            searchParam: '',
-            alibabaList: [],
-            ebayList: [],
-            sourceHeadings: [
-                {alibaba: true},
-                {amazon: false},
-                {ebay: false},
-                {gumtree: false}
-            ],
+        this.state = {            
             socket: socket,
-            waitingForSearchResults: false,
+            showComparisonOverlay: false,
+            alibabaList: [],
             aliSearchSuccess: true,
+            ebayList: [],           
             ebaySearchSuccess: true,
-            showComparisonOverlay: false
-        }
-
+            searchParam: '',
+            waitingForSearchResults: false,
+            selectedItem: {},
+            matchedItems: []
+        }      
+        
         this.state.socket.on('response_received', (res) => {
             console.log('here')
             this.receiveSocketIO(res)
@@ -61,116 +58,56 @@ export default class PriceCompare extends Component {
         this.state.socket.emit('request_to_ebay_api', this.state.searchParam)
     }
 
-    updateSelected(source){
-        let updatedHeadings = this.state.sourceHeadings.map(sourceHeading => {
-            if (source in sourceHeading){
-                return { [Object.keys(sourceHeading)[0]] : true }
-            }
-            return { [Object.keys(sourceHeading)[0]]: false}
+    toggleComparisonOverlay = (selectedItem) => {
+        this.setState({ 
+            showComparisonOverlay: !this.state.showComparisonOverlay, 
+            selectedItem: selectedItem
         })
-        this.setState({ sourceHeadings: updatedHeadings })        
     }
 
-    searchResults = (list, searchSuccess) => {
-        if(searchSuccess){
-            let results = list.map(item => {
-                return (
-                    <div className='item-listing' key={uuid()}>
-                            <div className="item-description">
-                                <img className='item-img' src={item.imageUrl} alt={item.title}/>
-                                <div className='item-details'>
-                                    <p className='item-title'>{item.title}</p>
-                                    <p className='item-lot-size'>lot size: {item.lotSize}</p>
-                                    <p className='item-lot-size'>id: {item.id}</p>
-                                    <p className='item-price'>{item.price.currency} ${parseFloat(item.price.value).toFixed(2)}</p>
-                                </div>    
-                            </div>                        
-                            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => this.setState({showComparisonOverlay: true})}>Compare</button></div>
-                            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => this.setState({showComparisonOverlay: true})}>Compare</button></div>
-                            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => this.setState({showComparisonOverlay: true})}>Compare</button></div>
-                    </div>
-    
-                )
-            })
-            return results
-        }
-        return(
-            <div className='no-matches-msg'>
-                <p>Search returned 0 results. Refine search and try again.</p>
-            </div>
-        )
-    }
-
-    onInputChange(searchParam){
+    onInputChange = (searchParam) => {
         this.setState({ searchParam })
     }
 
-    submit = (e) => {
-        e.preventDefault()
-        this.sendSocketIO()
-    }
-    
-    spinner = () => {
-        if (this.state.waitingForSearchResults){
-            return(
-                <div className='search-spinner'>
-                    <i className='fas fa-spinner fa-spin'></i>                
-                </div>
-            )
-        }
+    addMatch = (item) => {
+        let items = this.state.matchedItems
+        items.push(item)
+        this.setState({ matchedItems: items })
     }
 
     render() {
-
-        let alibaba = this.state.sourceHeadings[0].alibaba ? "heading-selected" : undefined
-        let amazon = this.state.sourceHeadings[1].amazon ? "heading-selected" : undefined
-        let ebay = this.state.sourceHeadings[2].ebay ? "heading-selected" : undefined
-        let gumtree = this.state.sourceHeadings[3].gumtree ? "heading-selected" : undefined
-        
-        return (
-            <div className="price-compare-container">
-
-                {this.state.showComparisonOverlay &&
-                    <ComparisonOverlay items={this.state.ebayList}/>
-                }
-                
-                <div className='comparison-table-container'>
-                    <div className='source-headings'>
-                        <ul>
-                            <li className={alibaba} onClick={() => this.updateSelected('alibaba')}>Alibaba</li>
-                            <li className={amazon} onClick={() => this.updateSelected('amazon')}>Amazon</li>
-                            <li className={ebay} onClick={() => this.updateSelected('ebay')}>Ebay</li>
-                            <li className={gumtree} onClick={() => this.updateSelected('gumtree')}>Gumtree</li>
-                        </ul>
-                        <div className='input-container'>
-                            {this.spinner()}
-                            <form id='message_form' onSubmit={this.submit} className='input-group'>
-                                <input className='form-control'
-                                    onChange={event => this.onInputChange(event.target.value)}
-                                    value={this.state.searchParam}
-                                    placeholder="Search for products" />
-                                <span className='input-group-btn'>
-                                    <button type='submit' className= 'btn btn-secondary' >Search</button>
-                                </span>
-                            </form>
-                        </div>
-                    </div>              
-                    <div className="comparison-table">
-                            <div className='column-headings'>
-                                <p>Amazon</p>
-                                <p>Ebay</p>
-                                <p>Gumtree</p>
-                                
-                            </div>
-                            <div className='item-listings-container'>
-                                {alibaba === 'heading-selected' 
-                                     && this.searchResults(this.state.alibabaList, this.state.aliSearchSuccess)}
-                                {ebay === 'heading-selected' 
-                                    && this.searchResults(this.state.ebayList, this.state.ebaySearchSuccess)}                            
-                            </div>
+        let { showComparisonOverlay } = this.state
+        if(showComparisonOverlay){
+            return (
+                <div className="item-analysis-container">
+                    <div className="item-analysis-left-column">
+                        <ItemInFocus item={this.state.selectedItem} />
+                        <LiveAnalysis 
+                            selectedItem={this.state.selectedItem}
+                            matchedItems={this.state.matchedItems} 
+                        />
                     </div>
+                    <ComparisonOverlay 
+                        items={this.state.ebayList}
+                        addMatch={this.addMatch}
+                    />                                        
                 </div>
-            </div>
-        )
+            )
+        }else{
+            return (
+                <div className='price-compare-container'>
+                    <ComparisonTable
+                        waitingForSearchResults={this.state.waitingForSearchResults}
+                        onInputChange={this.onInputChange}
+                        ebayList={this.state.ebayList}
+                        alibabaList={this.state.alibabaList}
+                        aliSearchSuccess={this.state.aliSearchSuccess}
+                        ebaySearchSuccess={this.state.ebaySearchSuccess}
+                        sendSocketIO={() => this.sendSocketIO()}
+                        toggleComparisonOverlay={this.toggleComparisonOverlay}
+                    />
+                </div>
+            )
+        }
     }
 }
