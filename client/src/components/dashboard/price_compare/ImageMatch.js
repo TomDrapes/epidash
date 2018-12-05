@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ImageMatchListItem from './ImageMatchListItem'
+import uuid from 'uuid'
 import './style.css'
 
 export default class ImageMatch extends Component {
@@ -11,10 +12,21 @@ export default class ImageMatch extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps){
+        return nextProps.items != this.props.items
+    }
+
     items = () => {
         let items = this.state.items.map(item => {
+            let id = uuid()
             return (
-                <ImageMatchListItem item={item} addMatch={() => this.props.addMatch(item)}/>
+                <ImageMatchListItem 
+                    key={id} 
+                    id={id}
+                    item={item} 
+                    addMatch={this.props.addMatch} 
+                    removeMatch={this.props.removeMatch}
+                />
             )
         })
         return items

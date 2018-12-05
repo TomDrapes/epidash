@@ -1,19 +1,32 @@
 import React, { Component } from 'react'
 import './style.css'
 
-export default class ComparisonOverlayListItem extends Component {
+export default class ImageMatchListItem extends Component {
     constructor(props){
         super(props)
 
         this.state = {
-            selected : false
+            selected: false
+        }
+        console.log('boom')
+    }
+
+    componentDidUpdate(){
+        console.log(this.state.selected)
+        if(this.state.selected){
+            this.props.addMatch(this.props.item, this.props.id)
+        }else{
+            this.props.removeMatch(this.props.id)
         }
     }
 
-    handleClick = (item) => {
-        this.props.addMatch(item)
-        this.setState({ selected: !this.state.selected })
-    } 
+    handleClick = () => {
+        console.log(this.state.selected)
+        this.setState((prevState) => { 
+            return { selected: !prevState.selected }
+        })
+    }
+
 
     render() {
         let imageStyle = 'image-match-item-img'
@@ -25,7 +38,7 @@ export default class ComparisonOverlayListItem extends Component {
             <div>
                 <img 
                     className={imageStyle}
-                    onClick={() => this.handleClick(this.props.item)}
+                    onClick={this.handleClick}
                     src={this.props.item.imageUrl}
                 />
             </div>

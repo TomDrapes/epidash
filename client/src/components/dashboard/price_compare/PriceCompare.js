@@ -69,9 +69,16 @@ export default class PriceCompare extends Component {
         this.setState({ searchParam })
     }
 
-    addMatch = (item) => {
+    addMatch = (item, key) => {
         let items = this.state.matchedItems
-        items.push(item)
+        items.push({[key]: [item]})
+        this.setState({ matchedItems: items })
+    }
+
+    removeMatch = (key) => {
+        let items = this.state.matchedItems.filter(item => 
+            Object.keys(item)[0] !== key
+        )
         this.setState({ matchedItems: items })
     }
 
@@ -90,6 +97,7 @@ export default class PriceCompare extends Component {
                     <ImageMatch 
                         items={this.state.ebayList}
                         addMatch={this.addMatch}
+                        removeMatch={this.removeMatch}
                     />                                        
                 </div>
             )

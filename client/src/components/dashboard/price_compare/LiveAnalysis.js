@@ -13,7 +13,8 @@ export default class LiveAnalysis extends Component {
     averageSalePrice() {
         let { matchedItems } = this.props
         return parseFloat(matchedItems.reduce((accumulator, current) => {
-            return accumulator + parseFloat(current.price.value)
+            let x = Object.values(current)[0]
+            return accumulator + parseFloat(x[0].price.value)
         }, 0)/matchedItems.length).toFixed(2)
     }
 
@@ -21,12 +22,16 @@ export default class LiveAnalysis extends Component {
         let { matchedItems } = this.props
         if(matchedItems.length > 0){
             matchedItems.sort((a, b) => {
-                return parseFloat(a.price.value) - parseFloat(b.price.value)
+                a = Object.values(a)[0]
+                b = Object.values(b)[0]
+                return (
+                    parseFloat(a[0].price.value) - parseFloat(b[0].price.value)
+                )
             })
             if(choice === 0) {
-                return matchedItems[matchedItems.length-1].price.value
+                return Object.values(matchedItems[matchedItems.length-1])[0][0]['price']['value']
             }
-            return matchedItems[0].price.value
+            return Object.values(matchedItems[0])[0][0]['price']['value']
         }
     }
 
