@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import ComparisonOverlayListItem from './ComparisonOverlayListItem'
+import ImageMatchListItem from './ImageMatchListItem'
 import './style.css'
 
-export default class ComparisonOverlay extends Component {
+export default class ImageMatch extends Component {
     constructor(props){
         super(props)
 
@@ -14,7 +14,7 @@ export default class ComparisonOverlay extends Component {
     items = () => {
         let items = this.state.items.map(item => {
             return (
-                <ComparisonOverlayListItem item={item} addMatch={() => this.props.addMatch(item)}/>
+                <ImageMatchListItem item={item} addMatch={() => this.props.addMatch(item)}/>
             )
         })
         return items
@@ -22,11 +22,11 @@ export default class ComparisonOverlay extends Component {
         
     render() {
         return(
-            <div className='comparison-selection-container'>
-                <div className='comparison-selection-component-heading-tab'>
+            <div className='image-match-container'>
+                <div className='image-match-heading-tab'>
                     <h1>SELECT ALL MATCHING PRODUCTS</h1>
                 </div>
-                <div className='comparison-selection-list'>
+                <div className='image-match-list'>
                     {this.items()}                
                 </div>
             </div>

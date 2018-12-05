@@ -16,9 +16,9 @@ export default class ComparisonOverlayListItem extends Component {
     } 
 
     render() {
-        let imageStyle = 'comparison-overlay-item-img'
+        let imageStyle = 'image-match-item-img'
         if(this.state.selected){
-            imageStyle = 'comparison-overlay-item-img comparison-overlay-item-img-selected'
+            imageStyle = 'image-match-item-img image-match-item-img-selected'
         }
 
         return (

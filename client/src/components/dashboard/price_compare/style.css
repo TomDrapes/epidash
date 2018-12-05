@@ -186,7 +186,7 @@
     padding: 20px;
 }
 
-.comparison-selection-container {
+.image-match-container {
     width: 80%;
     height: 100%;
     background: #fff;
@@ -196,7 +196,7 @@
     flex-direction: column;
     align-items: stretch;
 }
-.comparison-selection-list {
+.image-match-list {
     width: 100%;
     height: auto;
     display: flex;
@@ -206,30 +206,31 @@
     overflow-y: scroll;
 }
 
-.comparison-selection-component-heading-tab {
+.image-match-heading-tab {
     width: 100%;
     padding: 10px;
     height: auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background: #2c2c2c;
+    background: rgb(243, 195, 92);
     color: white;
     font-family: 'Khand', Arial, Helvetica, sans-serif;
 }
 
-.comparison-overlay-item-img {
+.image-match-item-img {
     width: 120px;
     height: 120px;
     margin: 5px;
     flex-grow: 1;
 }
 
-.comparison-overlay-item-img:hover {
+.image-match-item-img:hover {
     opacity: 0.7;
     cursor: pointer;
 }
 
-.comparison-overlay-item-img-selected {
+.image-match-item-img-selected {
     border: 10px solid rgb(97, 202, 97);
     border-radius: 5px;
 }
@@ -253,6 +254,7 @@
 
 .item-in-focus-heading-tab {
     background: #2c2c2c;
+    background: rgb(243, 195, 92);
     color: white;
     padding: 10px;
     height: 10%;
@@ -277,6 +279,7 @@
 
 .live-analysis-heading-tab {
     background: #2c2c2c;
+    background: rgb(243, 195, 92);
     color: white;
     padding: 10px;
     height: 10%;

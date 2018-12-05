@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ComparisonOverlay from './ComparisonOverlay'
+import ImageMatch from './ImageMatch'
 import ComparisonTable from './ComparisonTable'
 import openSocket from 'socket.io-client'
 import './style.css'
@@ -87,7 +87,7 @@ export default class PriceCompare extends Component {
                             matchedItems={this.state.matchedItems} 
                         />
                     </div>
-                    <ComparisonOverlay 
+                    <ImageMatch 
                         items={this.state.ebayList}
                         addMatch={this.addMatch}
                     />                                        
