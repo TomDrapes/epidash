@@ -13,7 +13,7 @@ export default function SearchResult(props) {
                     <p className='item-price'>{props.item.price.currency} ${parseFloat(props.item.price.value).toFixed(2)}</p>
                 </div>    
             </div>                        
-            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => props.toggleComparisonOverlay(props.item)}>Compare</button></div>    
+            <div className="compare-btn-cell"><button className='compare-btn' onClick={() => props.toggleImageMatchState(props.item)}>Compare</button></div>    
         </div>
     )
 }

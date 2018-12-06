@@ -15,7 +15,7 @@ export default class PriceCompare extends Component {
 
         this.state = {            
             socket: socket,
-            showComparisonOverlay: false,
+            showImageMatch: false,
             alibabaList: [],
             aliSearchSuccess: true,
             ebayList: [],           
@@ -23,7 +23,8 @@ export default class PriceCompare extends Component {
             searchParam: '',
             waitingForSearchResults: false,
             selectedItem: {},
-            matchedItems: []
+            matchedItems: [],
+            totalEbayEntries: 0
         }      
         
         this.state.socket.on('response_received', (res) => {
@@ -34,9 +35,12 @@ export default class PriceCompare extends Component {
 
     receiveSocketIO = (res) => {
         console.log('receiving on socket')
+
+        console.log(res.ebayRes)
+        console.log(res.aliRes)
+        
         this.setState({ 
             waitingForSearchResults: false,
-            showComparisonOverlay: false
         })
         if (res.ali.length > 0 ) {
             this.setState({ alibabaList: res.ali, aliSearchSuccess: true })
@@ -49,6 +53,7 @@ export default class PriceCompare extends Component {
         } else {
             this.setState({ ebaySearchSuccess: false })
         }
+        this.setState({ totalEbayEntries: res.totalEbayEntries })
         
     }
 
@@ -58,10 +63,11 @@ export default class PriceCompare extends Component {
         this.state.socket.emit('request_to_ebay_api', this.state.searchParam)
     }
 
-    toggleComparisonOverlay = (selectedItem) => {
+    toggleImageMatchState = (selectedItem) => {
         this.setState({ 
-            showComparisonOverlay: !this.state.showComparisonOverlay, 
-            selectedItem: selectedItem
+            showImageMatch: !this.state.showImageMatch, 
+            selectedItem: selectedItem,
+            matchedItems: []
         })
     }
 
@@ -83,15 +89,19 @@ export default class PriceCompare extends Component {
     }
 
     render() {
-        let { showComparisonOverlay } = this.state
-        if(showComparisonOverlay){
+        let { showImageMatch } = this.state
+        if(showImageMatch){
             return (
                 <div className="item-analysis-container">
                     <div className="item-analysis-left-column">
-                        <ItemInFocus item={this.state.selectedItem} />
+                        <ItemInFocus 
+                            item={this.state.selectedItem}
+                            toggleImageMatchState={this.toggleImageMatchState}
+                        />
                         <LiveAnalysis 
                             selectedItem={this.state.selectedItem}
-                            matchedItems={this.state.matchedItems} 
+                            matchedItems={this.state.matchedItems}
+                            totalEbayEntries={this.state.totalEbayEntries} 
                         />
                     </div>
                     <ImageMatch 
@@ -112,7 +122,7 @@ export default class PriceCompare extends Component {
                         aliSearchSuccess={this.state.aliSearchSuccess}
                         ebaySearchSuccess={this.state.ebaySearchSuccess}
                         sendSocketIO={() => this.sendSocketIO()}
-                        toggleComparisonOverlay={this.toggleComparisonOverlay}
+                        toggleImageMatchState={this.toggleImageMatchState}
                     />
                 </div>
             )

@@ -43,7 +43,7 @@ export default class ComparisonTable extends Component {
                     <SearchResult 
                         key={uuid()}
                         item={item}
-                        toggleComparisonOverlay={this.props.toggleComparisonOverlay}
+                        toggleImageMatchState={this.props.toggleImageMatchState}
                     />
                 )
             })

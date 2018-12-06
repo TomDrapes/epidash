@@ -8,11 +8,9 @@ export default class ImageMatchListItem extends Component {
         this.state = {
             selected: false
         }
-        console.log('boom')
     }
 
     componentDidUpdate(){
-        console.log(this.state.selected)
         if(this.state.selected){
             this.props.addMatch(this.props.item, this.props.id)
         }else{
@@ -21,7 +19,6 @@ export default class ImageMatchListItem extends Component {
     }
 
     handleClick = () => {
-        console.log(this.state.selected)
         this.setState((prevState) => { 
             return { selected: !prevState.selected }
         })
@@ -40,6 +37,7 @@ export default class ImageMatchListItem extends Component {
                     className={imageStyle}
                     onClick={this.handleClick}
                     src={this.props.item.imageUrl}
+                    alt={this.props.item.title}
                 />
             </div>
         )

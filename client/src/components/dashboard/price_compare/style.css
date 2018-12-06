@@ -126,11 +126,6 @@
   cursor: pointer;
 }
 
-.margin {
-  color: rgb(155, 196, 0);
-  font-weight: bold;
-}
-
 .input-container {    
     padding: 10px;
     align-self: flex-end;
@@ -264,11 +259,35 @@
 }
 
 .item-in-focus-img {
-    height: 90%;
+    height: 80%;
     width: 100%;
     opacity: 0.9;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+}
+
+.item-in-focus-return-btn {
+    height: 10%;
+    width: auto;
+    font-family: 'Khand', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background: #2c2c2c;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.item-in-focus-return-btn i {
+    margin-right: 5px;
+    padding-bottom: 2px;
+}
+
+.item-in-focus-return-btn p:hover {
+    cursor: pointer;
+    color: rgb(33, 182, 245);
 }
 
 .live-analysis-container {
@@ -288,4 +307,29 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     font-family: 'Khand', Arial, Helvetica, sans-serif;
+}
+
+.live-analysis-stats-list {
+    font-family: 'Khand', Arial, Helvetica, sans-serif;
+    font-size: 22px;
+}
+
+.live-analysis-stats-list li {
+    padding: 4px;
+    border-bottom: 1px solid #efefef;
+    font-weight: bold;
+}
+
+.live-analysis-stats-list p {
+    float: right;
+    padding-right: 5px;
+    font-weight: normal;
+}
+
+.positive {
+    color: rgb(97, 202, 97);
+}
+
+.negative {
+    color: red;
 }

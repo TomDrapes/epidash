@@ -1,5 +1,4 @@
 import React from 'react'
-import { PromiseProvider } from 'mongoose';
 
 export default function ItemInFocus(props) {
     return (        
@@ -7,7 +6,12 @@ export default function ItemInFocus(props) {
             <div className='item-in-focus-heading-tab'>
                 <p>SELECTED ITEM</p>
             </div>
-            <img className='item-in-focus-img' src={props.item.imageUrl} />
+            <img className='item-in-focus-img' src={props.item.imageUrl} alt={props.item.title}/>
+            <div className='item-in-focus-return-btn'>
+                <p onClick={() => props.toggleImageMatchState()}>
+                    <i className='fas fa-arrow-circle-left' />RETURN TO SEARCH
+                </p>
+            </div>
         </div>
     )
 }

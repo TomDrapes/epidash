@@ -13,7 +13,7 @@ export default class ImageMatch extends Component {
     }
 
     shouldComponentUpdate(nextProps){
-        return nextProps.items != this.props.items
+        return nextProps.items !== this.props.items
     }
 
     items = () => {
