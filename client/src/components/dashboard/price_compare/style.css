@@ -211,6 +211,7 @@
     background: rgb(243, 195, 92);
     color: white;
     font-family: 'Khand', Arial, Helvetica, sans-serif;
+    font-size: 24px;
 }
 
 .image-match-item-img {
@@ -256,6 +257,7 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     font-family: 'Khand', Arial, Helvetica, sans-serif;
+    font-size: 24px;
 }
 
 .item-in-focus-img {
