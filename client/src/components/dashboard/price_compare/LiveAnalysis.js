@@ -66,7 +66,15 @@ export default class LiveAnalysis extends Component {
                     <li>Avg. Margin: <p className={margin}>${this.margin()}</p></li>
                     <li>Local Listings: <p>{this.props.totalEbayEntries}</p></li>
                 </ul>
-                <PieChart data={data} />
+                <div className='pie-chart-container'>
+                    <PieChart data={data} />
+                    <ul className='live-analysis-pie-chart-side-data'>
+                        <li className='live-analysis-wholesale-bullet'>Wholesale</li>
+                        <li className='live-analysis-average-bullet'>Average</li>
+                        <li className='live-analysis-max-bullet'>Maximum</li>
+                        <li className='live-analysis-min-bullet'>Minimum</li>
+                    </ul>                
+                </div>
             </div>            
         )
     }

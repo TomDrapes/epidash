@@ -331,10 +331,39 @@
 }
 
 .negative {
-    color: red;
+    color: rgb(231, 69, 69);
 }
 
 .pie-chart-container {
-    text-align: center;
-    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 8px;
+}
+
+.live-analysis-pie-chart-side-data {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Khand', Arial, Helvetica, sans-serif;
+    list-style-type: circle;
+    margin: auto;
+}
+
+.live-analysis-pie-chart-side-data li {
+    padding: 3px;
+}
+.live-analysis-wholesale-bullet {
+    color: rgb(243, 195, 92);
+}
+
+.live-analysis-average-bullet {
+    color: rgb(33, 182, 245);
+}
+
+.live-analysis-max-bullet {
+    color: rgb(231, 69, 69);
+}
+
+.live-analysis-min-bullet {
+    color: rgb(97, 202, 97);
 }
