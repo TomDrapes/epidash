@@ -38,7 +38,8 @@ io.on('connection', function(socket){
     let response = { 
       ebay: [], 
       ali: [], 
-      totalEbayEntries: 0, 
+      totalEbayEntries: 0,
+      totalAliEntries: 0,
       ebayRes: {},
       aliRes: {}
     }
@@ -83,6 +84,7 @@ io.on('connection', function(socket){
           'X-Api-Client-Id': 'FPVNMCTQKJOSZPCL'
       }
     }).then(res => {
+      response.totalAliEntries = res.data.aggregation.totalCount
       response.aliRes = res.data
       response.ali = res.data.items
     }).catch(err => console.log(err))

@@ -24,7 +24,8 @@ export default class PriceCompare extends Component {
             waitingForSearchResults: false,
             selectedItem: {},
             matchedItems: [],
-            totalEbayEntries: 0
+            totalEbayEntries: 0,
+            totalAliEntries: 0
         }      
         
         this.state.socket.on('response_received', (res) => {
@@ -53,7 +54,11 @@ export default class PriceCompare extends Component {
         } else {
             this.setState({ ebaySearchSuccess: false })
         }
-        this.setState({ totalEbayEntries: res.totalEbayEntries })
+        this.setState({ 
+            totalEbayEntries: res.totalEbayEntries,
+            totalAliEntries: res.totalAliEntries
+        })
+        
         
     }
 
@@ -123,6 +128,8 @@ export default class PriceCompare extends Component {
                         ebaySearchSuccess={this.state.ebaySearchSuccess}
                         sendSocketIO={() => this.sendSocketIO()}
                         toggleImageMatchState={this.toggleImageMatchState}
+                        totalEbayEntries={this.state.totalEbayEntries}
+                        totalAliEntries={this.state.totalAliEntries}
                     />
                 </div>
             )

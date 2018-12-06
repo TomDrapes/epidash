@@ -61,6 +61,12 @@ export default class ComparisonTable extends Component {
         this.props.sendSocketIO()
     }
 
+    searchResultsTotal = () => {
+        if(this.state.sourceHeadings.alibaba && this.props.alibabaList.length > 0) return this.props.totalAliEntries
+        if(this.state.sourceHeadings.ebay && this.props.ebayList.length > 0) return this.props.totalEbayEntries
+        return 0
+    }
+
     render () {
         let alibaba = this.state.sourceHeadings.alibaba ? "heading-selected" : undefined
         let amazon = this.state.sourceHeadings.amazon ? "heading-selected" : undefined
@@ -90,11 +96,8 @@ export default class ComparisonTable extends Component {
                         </div>
                     </div>              
                     <div className="comparison-table">
-                            <div className='column-headings'>
-                                <p>Amazon</p>
-                                <p>Ebay</p>
-                                <p>Gumtree</p>
-                                
+                            <div className='comparison-table-search-results-count'>
+                                <p>Results: {this.searchResultsTotal()}</p>                            
                             </div>
                             <div className='item-listings-container'>
                                 {alibaba === 'heading-selected' 
