@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PieChart from './PieChart'
 
 export default class LiveAnalysis extends Component {
     constructor(props) {
@@ -45,6 +46,12 @@ export default class LiveAnalysis extends Component {
 
     render(){
         let margin = parseFloat(this.margin()) > 0 ? 'live-analysis-stats-margin positive' : 'live-analysis-stats-margin negative'
+        let data = [
+            parseFloat(this.props.selectedItem.price.value), 
+            parseFloat(this.averageSalePrice()),
+            parseFloat(this.minMaxSalePrice(0)),
+            parseFloat(this.minMaxSalePrice(1))
+        ]
         return (
             <div className='live-analysis-container'>
                 <div className='live-analysis-heading-tab'>
@@ -59,6 +66,7 @@ export default class LiveAnalysis extends Component {
                     <li>Avg. Margin: <p className={margin}>${this.margin()}</p></li>
                     <li>Local Listings: <p>{this.props.totalEbayEntries}</p></li>
                 </ul>
+                <PieChart data={data} />
             </div>            
         )
     }

@@ -311,7 +311,7 @@
 
 .live-analysis-stats-list {
     font-family: 'Khand', Arial, Helvetica, sans-serif;
-    font-size: 22px;
+    font-size: 16px;
 }
 
 .live-analysis-stats-list li {
@@ -332,4 +332,9 @@
 
 .negative {
     color: red;
+}
+
+.pie-chart-container {
+    text-align: center;
+    padding: 5px;
 }
