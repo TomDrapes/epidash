@@ -5,7 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "country-list": "^2.1.0",
-    "d3": "3.3.13",
+    "d3": "^5.7.0",
+    "node-gyp": "^3.8.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",

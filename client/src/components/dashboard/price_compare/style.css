@@ -47,7 +47,7 @@
     cursor: pointer;
 }
 
-.comparison-table-container {    
+.comparison-table-container {
     flex: 1;
     overflow: hidden;
     background: rgb(252, 218, 144);
@@ -126,7 +126,7 @@
   cursor: pointer;
 }
 
-.input-container {    
+.input-container {
     padding: 10px;
     align-self: flex-end;
     margin-left: auto;
@@ -344,7 +344,7 @@
 }
 
 .live-analysis-pie-chart-side-data {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     font-family: 'Khand', Arial, Helvetica, sans-serif;
     list-style-type: circle;
@@ -352,7 +352,7 @@
 }
 
 .live-analysis-pie-chart-side-data li {
-    padding: 3px;
+    margin: 3px;
 }
 .live-analysis-wholesale-bullet {
     color: rgb(243, 195, 92);
@@ -368,4 +368,10 @@
 
 .live-analysis-min-bullet {
     color: rgb(97, 202, 97);
+}
+
+.pie-container {
+  border: 1px solid red;
+  width: 50%;
+  height: 50%;
 }
