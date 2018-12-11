@@ -31,7 +31,7 @@ export default class PieChart extends Component {
       let pie = d3.pie()(this.props.data)
 
       return (
-        <div className='pie-container'>
+        <div className='pie-chart'>
             <svg viewBox={`0 0 ${this.state.width} ${this.state.height}`} preserveAspectRatio="xMidYMid meet" >
                 <g transform={`translate(${this.state.width/2}, ${this.state.height/2})`}>
                     {this.slice(pie)}

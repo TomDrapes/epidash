@@ -35,9 +35,9 @@ io.on('connection', function(socket){
 
   socket.on('request_to_ebay_api', function(keywords){
 
-    let response = { 
-      ebay: [], 
-      ali: [], 
+    let response = {
+      ebay: [],
+      ali: [],
       totalEbayEntries: 0,
       totalAliEntries: 0,
       ebayRes: {},
@@ -66,9 +66,9 @@ io.on('connection', function(socket){
                   'currency': item.sellingStatus[0].currentPrice[0]['@currencyId'],
                   'value': item.sellingStatus[0].currentPrice[0]['__value__']
               },
-              'id': item.itemId          
+              'id': item.itemId
           })
-  
+
       })
       response.ebay = ebayList
       }
@@ -78,7 +78,8 @@ io.on('connection', function(socket){
       method: 'post',
       url: 'https://api.aliseeks.com/v1/search',
       data: {
-          text: keywords
+          text: keywords,
+          currency: 'AUD'
       },
       headers: {
           'X-Api-Client-Id': 'FPVNMCTQKJOSZPCL'
@@ -89,7 +90,7 @@ io.on('connection', function(socket){
       response.ali = res.data.items
     }).catch(err => console.log(err))
 
-    Promise.all([promise1, promise2]).then(() => { 
+    Promise.all([promise1, promise2]).then(() => {
       console.log("Socket sending search results")
       socket.emit('response_received', response)
     }).catch(err => console.log(err))

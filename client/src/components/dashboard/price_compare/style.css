@@ -370,8 +370,7 @@
     color: rgb(97, 202, 97);
 }
 
-.pie-container {
-  border: 1px solid red;
+.pie-chart  {
   width: 50%;
   height: 50%;
 }
