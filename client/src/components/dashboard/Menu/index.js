@@ -15,7 +15,7 @@ export default class Menu extends Component {
     render(){
         return(
             <div className="menu-container">
-              <i className="fas fa-bars hamburger-menu"></i>
+              <i className="fas fa-bars hamburger-menu" onClick={() => this.props.toggleSideBar()}></i>
               <div className='title'>EpiDash</div>
               <i className="fas fa-cog settings-menu"></i>
               <i className="far fa-bell notifications"></i>
