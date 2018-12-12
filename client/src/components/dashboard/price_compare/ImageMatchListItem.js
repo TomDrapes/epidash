@@ -24,21 +24,25 @@ export default class ImageMatchListItem extends Component {
         })
     }
 
-
     render() {
-        let imageStyle = 'image-match-item-img'
+        let imageStyle = 'image-match-item-img-container'
         if(this.state.selected){
-            imageStyle = 'image-match-item-img image-match-item-img-selected'
+            imageStyle = 'image-match-item-img-container image-match-item-img-selected'
         }
 
         return (
-            <div>
-                <img 
-                    className={imageStyle}
+            <div className={imageStyle}>
+                <img
+                    className='image-match-item-img'                    
                     onClick={this.handleClick}
                     src={this.props.item.imageUrl}
                     alt={this.props.item.title}
                 />
+                <div className='image-match-item-img-description-overlay'
+                    onClick={this.handleClick}
+                >
+                    <p>{this.props.item.title}</p>
+                </div>
             </div>
         )
     }
