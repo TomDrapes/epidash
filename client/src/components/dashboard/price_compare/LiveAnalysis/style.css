@@ -1,0 +1,77 @@
+.live-analysis-container {
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px 2px rgba( 0, 0, 0, 0.4 );
+}
+
+.live-analysis-heading-tab {
+    background: #2c2c2c;
+    background: rgb(243, 195, 92);
+    color: white;
+    padding: 10px;
+    height: 10%;
+    text-align: center;
+    font-size: 24px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    
+}
+
+.live-analysis-stats-list {
+    font-size: 16px;
+}
+
+.live-analysis-stats-list li {
+    padding: 4px;
+    border-bottom: 1px solid #efefef;
+    font-weight: bold;
+}
+
+.live-analysis-stats-list p {
+    float: right;
+    padding-right: 5px;
+    font-weight: normal;
+}
+
+.live-analysis-positive-font-color {
+    color: rgb(97, 202, 97);
+}
+
+.live-analysis-negative-font-color {
+    color: rgb(231, 69, 69);
+}
+
+
+.live-analysis-pie-chart-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.live-analysis-pie-chart-side-data {
+    font-size: 14px;
+    font-weight: bold;
+    list-style-type: circle;
+    margin: auto;
+}
+
+.live-analysis-pie-chart-side-data li {
+    margin: 3px;
+}
+.live-analysis-wholesale-bullet {
+    color: rgb(243, 195, 92);
+}
+
+.live-analysis-average-bullet {
+    color: rgb(33, 182, 245);
+}
+
+.live-analysis-max-bullet {
+    color: rgb(231, 69, 69);
+}
+
+.live-analysis-min-bullet {
+    color: rgb(97, 202, 97);
+}

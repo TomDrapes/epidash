@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ImageMatchListItem from './ImageMatchListItem'
+import ImageMatchListItem from '../ImageMatchListItem'
 import uuid from 'uuid'
 import './style.css'
 

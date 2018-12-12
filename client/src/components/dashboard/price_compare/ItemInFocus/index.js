@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.css'
 
 export default function ItemInFocus(props) {
     return (        
@@ -7,6 +8,9 @@ export default function ItemInFocus(props) {
                 <p>SELECTED ITEM</p>
             </div>
             <img className='item-in-focus-img' src={props.item.imageUrl} alt={props.item.title}/>
+            <div className='item-in-focus-description'>
+                <p>{props.item.title}</p>
+            </div>
             <div className='item-in-focus-return-btn'>
                 <p onClick={() => props.toggleImageMatchState()}>
                     <i className='fas fa-arrow-circle-left' />RETURN TO SEARCH

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SearchResult from './SearchResult'
+import SearchResult from '../SearchResult'
 import uuid from 'uuid'
 import './style.css'
 
@@ -29,7 +29,7 @@ export default class ComparisonTable extends Component {
     spinner = () => {
         if (this.props.waitingForSearchResults){
             return(
-                <div className='search-spinner'>
+                <div className='comparison-table-search-spinner'>
                     <i className='fas fa-spinner fa-spin'></i>                
                 </div>
             )
@@ -50,7 +50,7 @@ export default class ComparisonTable extends Component {
             return results
         }
         return(
-            <div className='no-matches-msg'>
+            <div>
                 <p>Search returned 0 results. Refine search and try again.</p>
             </div>
         )
@@ -68,21 +68,21 @@ export default class ComparisonTable extends Component {
     }
 
     render () {
-        let alibaba = this.state.sourceHeadings.alibaba ? "heading-selected" : undefined
-        let amazon = this.state.sourceHeadings.amazon ? "heading-selected" : undefined
-        let ebay = this.state.sourceHeadings.ebay ? "heading-selected" : undefined
-        let gumtree = this.state.sourceHeadings.gumtree ? "heading-selected" : undefined
+        let alibaba = this.state.sourceHeadings.alibaba ? "comparison-table-heading-selected" : undefined
+        let amazon = this.state.sourceHeadings.amazon ? "comparison-table-heading-selected" : undefined
+        let ebay = this.state.sourceHeadings.ebay ? "comparison-table-heading-selected" : undefined
+        let gumtree = this.state.sourceHeadings.gumtree ? "comparison-table-heading-selected" : undefined
         
         return (
             <div className='comparison-table-container'>
-                    <div className='source-headings'>
+                    <div className='comparison-table-source-headings'>
                         <ul>
                             <li className={alibaba} onClick={() => this.updateSelected('alibaba')}>Alibaba</li>
                             <li className={amazon} onClick={() => this.updateSelected('amazon')}>Amazon</li>
                             <li className={ebay} onClick={() => this.updateSelected('ebay')}>Ebay</li>
                             <li className={gumtree} onClick={() => this.updateSelected('gumtree')}>Gumtree</li>
                         </ul>
-                        <div className='input-container'>
+                        <div className='comparison-table-input-container'>
                             {this.spinner()}
                             <form id='message_form' onSubmit={this.submit} className='input-group'>
                                 <input className='form-control'
@@ -99,10 +99,10 @@ export default class ComparisonTable extends Component {
                             <div className='comparison-table-search-results-count'>
                                 <p>Results: {this.searchResultsTotal()}</p>                            
                             </div>
-                            <div className='item-listings-container'>
-                                {alibaba === 'heading-selected' 
+                            <div className='comparison-table-item-listings-container'>
+                                {alibaba === 'comparison-table-heading-selected' 
                                      && this.searchResults(this.props.alibabaList, this.props.aliSearchSuccess)}
-                                {ebay === 'heading-selected' 
+                                {ebay === 'comparison-table-heading-selected' 
                                     && this.searchResults(this.props.ebayList, this.props.ebaySearchSuccess)}                            
                             </div>
                     </div>

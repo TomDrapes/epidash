@@ -97,8 +97,8 @@ export default class PriceCompare extends Component {
         let { showImageMatch } = this.state
         if(showImageMatch){
             return (
-                <div className="item-analysis-container">
-                    <div className="item-analysis-left-column">
+                <div className="price-compare-item-analysis-container">
+                    <div className="price-compare-item-analysis-left-column">
                         <ItemInFocus 
                             item={this.state.selectedItem}
                             toggleImageMatchState={this.toggleImageMatchState}
