@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import ImageMatch from './ImageMatch'
 import ComparisonTable from './ComparisonTable'
 import openSocket from 'socket.io-client'
-import './style.css'
 import ItemInFocus from './ItemInFocus';
 import LiveAnalysis from './LiveAnalysis';
+import axios from 'axios'
+import './style.css'
 
 const socket = openSocket('http://localhost:9000')
 
@@ -93,6 +94,24 @@ export default class PriceCompare extends Component {
         this.setState({ matchedItems: items })
     }
 
+    
+    updateShortList = () => {
+        /*let newShortList = {
+            user_id: 'test',
+            items: this.state.matchedItems
+        }
+        axios.put('/api/account/shortlist', newShortList)
+            .then(res => console.log(res))*/
+
+        let newShortListItem = {
+            source: this.state.selectedItem,
+            competition: this.state.matchedItems
+        }
+
+        axios.put(`/api/account/shortlist/${this.props.userId}`, newShortListItem)
+            .then(res => console.log(res))
+    }
+
     render() {
         let { showImageMatch } = this.state
         if(showImageMatch){
@@ -106,7 +125,8 @@ export default class PriceCompare extends Component {
                         <LiveAnalysis 
                             selectedItem={this.state.selectedItem}
                             matchedItems={this.state.matchedItems}
-                            totalEbayEntries={this.state.totalEbayEntries} 
+                            totalEbayEntries={this.state.totalEbayEntries}
+                            updateShortList={this.updateShortList}
                         />
                     </div>
                     <ImageMatch 

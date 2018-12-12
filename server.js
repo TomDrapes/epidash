@@ -101,7 +101,7 @@ io.on('connection', function(socket){
 http.listen(9000);
 
 // DB Config
-const db = require('./config/keys').devDB
+const db = require('./config/keys').mongoURI
 
 // Connect to Mongo
 mongoose
@@ -112,5 +112,6 @@ mongoose
 //connect api routes
 //NB: you can add multiple routes here later by copying the line below and replacing  the path
 require('./server/routes/api/signin')(app)
+require('./server/routes/api/updateShortList')(app)
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

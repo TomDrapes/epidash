@@ -76,6 +76,7 @@ export default class LiveAnalysis extends Component {
                         <li className='live-analysis-min-bullet'>Minimum</li>
                     </ul>                
                 </div>
+                <button onClick={() => this.props.updateShortList()}>Update Short List</button>
             </div>            
         )
     }

@@ -29,6 +29,10 @@ const UserSchema = new mongoose.Schema({
   signUpDate: {
     type: Date,
     default: Date.now()
+  },
+  shortList: {
+    type: Array,
+    default: []
   }
 });
 UserSchema.methods.generateHash = function(password) {

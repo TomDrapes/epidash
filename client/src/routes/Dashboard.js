@@ -23,7 +23,7 @@ export default class DashBoard extends Component{
                 <Menu toggleSideBar={this.toggleSideBar}/>
                 <div className='dashboard-content'>
                     {this.state.showSideBar && <SideBar />}
-                    <PriceCompare />                
+                    <PriceCompare userId={this.props.location.state.userId} />                
                 </div>
             </div>
         )

@@ -118,7 +118,10 @@ export default class LoginForm extends Component{
 
         switch(redirect){
             case "SIGN_UP": return ( <Redirect push to={'/signup'} />);
-            case "DASHBOARD": return ( <Redirect push to={`/dashboard/${userId}`} />)
+            case "DASHBOARD": return ( <Redirect push to={{
+                pathname:`/dashboard/${userId}`,
+                state: { userId: userId }
+            }} />)
             default: break;
         }
         
