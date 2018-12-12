@@ -5,7 +5,9 @@ export default function SearchResult(props) {
     return (
         <div className='search-result-item-listing'>
             <div className="search-result-item-description">
-                <img className='search-result-item-img' src={props.item.imageUrl} alt={props.item.title}/>
+                <div className='search-result-item-img-container'>
+                    <img className='search-result-item-img' src={props.item.imageUrl} alt={props.item.title}/>                
+                </div>
                 <div className='search-result-item-details'>
                     <p className='search-result-item-title'>{props.item.title}</p>
                     <p className='search-result-item-lot-size'>lot size: {props.item.lotSize}</p>

@@ -11,8 +11,12 @@
     flex: 9;
     text-align: left;
     display: flex;
+    align-items: center;
 }
 
+.search-result-item-img-container {
+    margin: 5px;
+}
 .search-result-item-img {
     width: 100px;
     height: 100px;

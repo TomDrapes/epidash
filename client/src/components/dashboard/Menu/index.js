@@ -14,12 +14,11 @@ export default class Menu extends Component {
 
     render(){
         return(
-            <div className="menu-container">
-              <i className="fas fa-bars hamburger-menu" onClick={() => this.props.toggleSideBar()}></i>
-              <div className='title'>EpiDash</div>
-              <i className="fas fa-cog settings-menu"></i>
-              <i className="far fa-bell notifications"></i>
-              <div className='clear' />
+            <div className='top-bar-container'>
+                <i className="fas fa-bars top-bar-hamburger-menu" onClick={() => this.props.toggleSideBar()}></i>
+                <div className='top-bar-title'>EpiDash</div>
+                <i className="far fa-bell top-bar-notifications"></i>
+                <i className="fas fa-cog top-bar-settings-menu"></i>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-.menu-container {
+.top-bar-container {
     font-size: 32px;
     font-family: 'Khand', sans-serif;
     color: white;
@@ -6,32 +6,33 @@
     height: auto;
     width: 100%;;
     padding: 15px 20px 15px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
-.hamburger-menu {
-  float: left;
+.top-bar-hamburger-menu {
   margin-right: 20px;
-  opacity: 0.7;
-}
-.title {
-  float: left;
-}
-.hamburger-menu:hover {
   opacity: 1;
+}
+
+.top-bar-hamburger-menu:hover{
+  opacity: 0.7;
   cursor: pointer;
 }
 
-.notifications, .settings-menu{
-  float: right;
+.top-bar-notifications{
+  margin-left: auto;
+  opacity: 0.7;
+}
+
+.top-bar-settings-menu {
+  opacity: 0.7;
   margin-left: 20px;
-  opacity: 0.7;
 }
 
-.notifications:hover, .settings-menu:hover {
+.top-bar-notifications:hover, .top-bar-settings-menu:hover {
   opacity: 1;
   cursor: pointer;
 }
 
-.clear {
-  clear: both;
-}
