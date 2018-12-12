@@ -96,12 +96,6 @@ export default class PriceCompare extends Component {
 
     
     updateShortList = () => {
-        /*let newShortList = {
-            user_id: 'test',
-            items: this.state.matchedItems
-        }
-        axios.put('/api/account/shortlist', newShortList)
-            .then(res => console.log(res))*/
 
         let newShortListItem = {
             source: this.state.selectedItem,

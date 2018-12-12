@@ -1,16 +1,6 @@
-const ShortList = require('../../models/ShortList')
 const User = require('../../models/User')
 
 module.exports = (app) => {
-
-    app.put('/api/account/shortlist/', (req, res) => {
-        const newShortList = new ShortList({
-            user_id: req.body.user_id,
-            items: req.body.items
-        })
-        res.send('ShortList Created')
-        newShortList.save()
-    })
 
     app.put('/api/account/shortlist/:id', (req, res) => {
         User.findByIdAndUpdate({_id: req.params.id}, {
@@ -27,5 +17,11 @@ module.exports = (app) => {
                 res.json(model)
             }
         })
+    })
+
+    app.get('/api/account/shortlist/:id', (req, res) => {
+        User.findById(req.params.id)
+            .then(user => res.json(user.shortList))
+            .catch(err => console.log(err))
     })
 }

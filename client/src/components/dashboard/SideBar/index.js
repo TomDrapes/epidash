@@ -24,6 +24,7 @@ export default class SideBar extends Component {
         }
         return { [Object.keys(item)[0]]: false}
     })
+    this.props.toggleComponent(menuItem)
     this.setState({ menuItems: updatedMenu })
   }
 
@@ -40,7 +41,7 @@ export default class SideBar extends Component {
       <div className='sidebar-container'>
         <ul>
           <li className={priceCompare} onClick={() => this.updateSelected('priceCompare')}><i className="fas fa-search-dollar"></i>PRICE COMPARE</li>
-          <li className={shortList} onClick={() => this.updateSelected('shortList')}><i class="fas fa-clipboard-list"></i>SHORT LIST</li>
+          <li className={shortList} onClick={() => this.updateSelected('shortList')}><i className="fas fa-clipboard-list"></i>SHORT LIST</li>
           <li className={suggestions} onClick={() => this.updateSelected('suggestions')}><i className="far fa-lightbulb"></i>SUGGESTIONS</li>
           <li className={competition} onClick={() => this.updateSelected('competition')}><i className="fas fa-users"></i>COMPETITION</li>
           <li className={inventory} onClick={() => this.updateSelected('inventory')}><i className="fas fa-warehouse"></i>INVENTORY</li>

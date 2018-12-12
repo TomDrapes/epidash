@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Menu from '../components/dashboard/Menu'
 import SideBar from '../components/dashboard/SideBar'
 import PriceCompare from '../components/dashboard/PriceCompare'
+import ShortList from '../components/dashboard/ShortList'
 import './style.css'
 
 export default class DashBoard extends Component{
@@ -9,7 +10,8 @@ export default class DashBoard extends Component{
         super(props)
 
         this.state = {
-            showSideBar: true
+            showSideBar: true,
+            selectedComponent: 'priceCompare'
         }
     }
 
@@ -17,13 +19,25 @@ export default class DashBoard extends Component{
         this.setState({ showSideBar: !this.state.showSideBar })
     }
 
+    toggleComponent = (selectedComponent) => {
+        this.setState({ selectedComponent })
+    }
+
+    selectedComponent(){
+        switch(this.state.selectedComponent) {
+            case 'priceCompare': return <PriceCompare userId={this.props.location.state.userId} />
+            case 'shortList': return <ShortList userId={this.props.location.state.userId} />
+            default: return <PriceCompare userId={this.props.location.state.userId} />
+        }
+    }
+
     render(){
         return(
             <div className='dashboard'>
                 <Menu toggleSideBar={this.toggleSideBar}/>
                 <div className='dashboard-content'>
-                    {this.state.showSideBar && <SideBar />}
-                    <PriceCompare userId={this.props.location.state.userId} />                
+                    {this.state.showSideBar && <SideBar toggleComponent={this.toggleComponent}/>}
+                    {this.selectedComponent()}               
                 </div>
             </div>
         )
