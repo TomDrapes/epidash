@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Menu from '../components/dashboard/menu/Menu'
-import SideBar from '../components/dashboard/side_bar/SideBar'
-import PriceCompare from '../components/dashboard/price_compare'
+import Menu from '../components/dashboard/Menu'
+import SideBar from '../components/dashboard/SideBar'
+import PriceCompare from '../components/dashboard/PriceCompare'
 import './style.css'
 
 export default class DashBoard extends Component{
