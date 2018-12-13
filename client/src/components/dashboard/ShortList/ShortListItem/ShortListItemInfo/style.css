@@ -1,0 +1,23 @@
+.short-list-item-info {
+    font-size: 16px;
+    text-align: center;
+    align-self: flex-start;
+    border-left: 1px solid #efefef;
+    padding: 5px;
+    height: 100px;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.short-list-item-info-heading {
+    height: 50%;
+}
+.short-list-item-info-dollar-amount {
+    font-size: 24px;
+    justify-content: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+}

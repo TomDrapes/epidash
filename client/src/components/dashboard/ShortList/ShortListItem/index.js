@@ -1,4 +1,5 @@
 import React from 'react'
+import ShortListItemInfo from './ShortListItemInfo'
 import './style.css'
 
 const averageSalePrice = (competition) => {
@@ -43,48 +44,13 @@ export default function ShortListItem(props){
                         </div>
                     </div>
                 </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Wholesale Price</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${price.value}</p>                    
-                    </div>
-                </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Minimum Resale Price</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${minResalePrice(competition)}</p>                    
-                    </div>
-                </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Average Resale Price</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${averageSalePrice(competition)}</p>
-                    </div>
-                </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Maximum Resale Price</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${maxResalePrice(competition)}</p>
-                    </div>
-                </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Minimum Profit</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${minResalePrice(competition)-parseFloat(price.value)}</p>
-                    </div>
-                </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Average Profit</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${averageSalePrice(competition)-parseFloat(price.value)}</p>
-                    </div>
-                </div>
-                <div className='short-list-item-info'>
-                    <div className='short-list-item-info-heading'>Maximum Profit</div>
-                    <div className='short-list-item-resale-price'>
-                        <p>${parseFloat(maxResalePrice(competition)-parseFloat(price.value)).toFixed(2)}</p>
-                    </div>
-                </div>
+                <ShortListItemInfo heading={'Wholesale Price'} amount={price.value} />
+                <ShortListItemInfo heading={'Minimum Resale Price'} amount={minResalePrice(competition)} />
+                <ShortListItemInfo heading={'Average Resale Price'} amount={averageSalePrice(competition)} />
+                <ShortListItemInfo heading={'Maximum Resale Price'} amount={maxResalePrice(competition)} />
+                <ShortListItemInfo heading={'Minimum Profit'} amount={minResalePrice(competition)-parseFloat(price.value)} />
+                <ShortListItemInfo heading={'Average Profit'} amount={averageSalePrice(competition)-parseFloat(price.value)} />
+                <ShortListItemInfo heading={'Minimum Profit'} amount={parseFloat(maxResalePrice(competition)-parseFloat(price.value)).toFixed(2)} />                                
             </div>
         </li>
     )
