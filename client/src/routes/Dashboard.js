@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import Menu from '../components/dashboard/Menu'
 import SideBar from '../components/dashboard/SideBar'
 import PriceCompare from '../components/dashboard/PriceCompare'
@@ -32,11 +33,20 @@ export default class DashBoard extends Component{
     }
 
     render(){
+        
         return(
             <div className='dashboard'>
                 <Menu toggleSideBar={this.toggleSideBar}/>
                 <div className='dashboard-content'>
-                    {this.state.showSideBar && <SideBar toggleComponent={this.toggleComponent}/>}
+                    
+                    <ReactCSSTransitionGroup
+                        transitionName='dashboard-sidebar-transition'
+                        transitionEnterTimeout={1000}
+                        transitionLeaveTimeout={700}
+                    >
+                        {this.state.showSideBar && <SideBar toggleComponent={this.toggleComponent} key={'sidebar-component'}/>}
+                    </ReactCSSTransitionGroup>
+                    
                     {this.selectedComponent()}               
                 </div>
             </div>
