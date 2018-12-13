@@ -12,6 +12,27 @@
     flex: 1;
 }
 
+.dashboard-sidebar-transition-enter {
+    max-width: 0px;
+    transition: max-width 1000ms ease;
+    overflow: hidden;
+}
+
+.dashboard-sidebar-transition-enter.dashboard-sidebar-transition-enter-active {
+    width: auto;
+    max-width: 200px;
+}
+
+.dashboard-sidebar-transition-leave {
+    max-width: 200px;
+    transition: max-width 700ms ease-in;
+}
+
+.dashboard-sidebar-transition-leave.dashboard-sidebar-transition-leave-active {
+    overflow: hidden;
+    max-width: 0px;
+}
+
 .login-page {
     font-family: 'Khand', Arial, Helvetica, sans-serif;
     background: #f4f3ef;
