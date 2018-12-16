@@ -83,13 +83,15 @@ export default class PriceCompare extends Component {
 
     addMatch = (item, key) => {
         let items = this.state.matchedItems
-        items.push({[key]: [item]})
+        let newItem = item
+        newItem.key = key
+        items.push(newItem)
         this.setState({ matchedItems: items })
     }
 
     removeMatch = (key) => {
         let items = this.state.matchedItems.filter(item => 
-            Object.keys(item)[0] !== key
+            item.key !== key
         )
         this.setState({ matchedItems: items })
     }

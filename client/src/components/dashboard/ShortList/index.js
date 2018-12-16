@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import ShortListItem from './ShortListItem'
 import './style.css'
 
 export default class ShortList extends Component {
@@ -26,7 +27,7 @@ export default class ShortList extends Component {
     shortListItems = () => {
         return this.state.items.map(item => {
             return (
-                <li>{item.source.title}</li>
+                <ShortListItem item={item} />
             )
         })
     }
@@ -37,10 +38,11 @@ export default class ShortList extends Component {
         }
         return (
             <div className='short-list-container'>
-                <ul>
-                    {this.shortListItems()}
-                </ul>
-            
+                <div className='short-list'>
+                    <ul>
+                        {this.shortListItems()}
+                    </ul>    
+                </div>
             </div>
         )
     }
