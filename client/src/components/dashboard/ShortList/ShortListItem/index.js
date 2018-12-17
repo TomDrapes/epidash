@@ -28,7 +28,7 @@ export default function ShortListItem(props){
         return a.price.value - b.price.value
     })
 
-    return(    
+    return(
         <li>
             <div className='short-list-item-container'>
                 <img src={imageUrl} alt={title} />
@@ -40,7 +40,7 @@ export default function ShortListItem(props){
                             <p className='short-list-item-id'>id: {id}</p>
                         </div>
                         <div className='short-list-item-delete'>
-                            <p><i class="fas fa-trash-alt"></i></p>
+                            <p><i class="fas fa-trash-alt" onClick={() => props.deleteShortlistItem(props.item.id)}></i></p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export default function ShortListItem(props){
                 <ShortListItemInfo heading={'Maximum Resale Price'} amount={maxResalePrice(competition)} />
                 <ShortListItemInfo heading={'Minimum Profit'} amount={minResalePrice(competition)-parseFloat(price.value)} />
                 <ShortListItemInfo heading={'Average Profit'} amount={averageSalePrice(competition)-parseFloat(price.value)} />
-                <ShortListItemInfo heading={'Minimum Profit'} amount={parseFloat(maxResalePrice(competition)-parseFloat(price.value)).toFixed(2)} />                                
+                <ShortListItemInfo heading={'Minimum Profit'} amount={parseFloat(maxResalePrice(competition)-parseFloat(price.value)).toFixed(2)} />
             </div>
         </li>
     )
