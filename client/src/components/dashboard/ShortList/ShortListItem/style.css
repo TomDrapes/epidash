@@ -31,6 +31,16 @@
     color: #a8a8a8;
 }
 
+.short-list-item-more-info {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.short-list-item-more-info:hover {
+    color: rgb(33, 182, 245);
+    cursor: pointer;
+}
+
 .short-list-item-delete {
     color: rgb(204, 37, 37);
     opacity: 0.7;

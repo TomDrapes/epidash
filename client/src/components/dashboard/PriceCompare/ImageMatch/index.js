@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ImageMatchListItem from '../ImageMatchListItem'
 import uuid from 'uuid'
 import './style.css'
-import axios from 'axios';
 
 export default class ImageMatch extends Component {
     constructor(props){

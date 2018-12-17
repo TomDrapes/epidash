@@ -27,13 +27,13 @@ export default class ShortList extends Component {
     shortListItems = () => {
         return this.state.items.map(item => {
             return (
-                <ShortListItem item={item} deleteShortlistItem={this.deleteShortlistItem} />
+                <ShortListItem item={item} deleteShortlistItem={this.deleteShortlistItem} key={item.id}/>
             )
         })
     }
 
     deleteShortlistItem = (key) => {
-      console.log(key)
+        console.log(key)
       let updatedShortlist = this.state.items.filter(item => item.id !== key)
       this.setState({   items: updatedShortlist })
       let itemKey = { id: key }
