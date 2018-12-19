@@ -3,9 +3,12 @@
     padding: 20px;
 }
 
-.shortlist-item-more-info-image:hover {
-    cursor: pointer;
-    opacity: 0.7;
+.shortlist-item-more-info-image {
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
 }
 
 .shortlist-item-more-info-image-list {
@@ -14,4 +17,3 @@
     height:400px;
     overflow-y: scroll;
 }
-

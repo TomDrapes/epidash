@@ -17,6 +17,7 @@ export default class ShortListItemMoreInfo extends Component{
         let item = { productId: this.props.productId }
         axios.post('/api/account/aliexpress/item-details', item)
             .then(res => {
+                console.log(res)
                 this.setState({ loading: false, detailedInfo: res.data })
             })
             .catch(err => console.log(err))
@@ -36,7 +37,7 @@ export default class ShortListItemMoreInfo extends Component{
         return this.state.detailedInfo.promotions.map((promo, index) => {
             return (
                 <div className='shortlist-item-more-info-promotions' key={index}>
-                    <p>Discount: {promo.discount}</p>
+                    <p>Discount: {promo.discount}% off</p>
                     <p>Max. price: ${promo.maxAmount.value}</p>
                     <p>Min. price: ${promo.minAmount.value}</p>
                     <p>Stock: {promo.stock}</p>

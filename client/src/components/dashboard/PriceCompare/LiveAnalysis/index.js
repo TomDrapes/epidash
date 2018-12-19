@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PieChart from '../PieChart'
-import './style.css'
+import './style.scss'
 
 export default class LiveAnalysis extends Component {
     constructor(props) {
@@ -73,7 +73,9 @@ export default class LiveAnalysis extends Component {
                         <li className='live-analysis-min-bullet'>Minimum</li>
                     </ul>                
                 </div>
-                <button onClick={() => this.props.updateShortList()}>Update Short List</button>
+                <div className='live-analysis-update-shortlist-btn' onClick={() => this.props.updateShortList()}>
+                    <p>UPDATE SHORTLIST</p>
+                </div>
             </div>            
         )
     }

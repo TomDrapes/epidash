@@ -33,7 +33,6 @@ export default class ShortListItem extends Component{
 
     toggleMoreInfo = () => {
         this.setState({ showMoreInfo: !this.state.showMoreInfo })
-        console.log(this.state.showMoreInfo)
     }
 
     render(){

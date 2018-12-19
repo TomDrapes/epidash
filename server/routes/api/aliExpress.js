@@ -15,9 +15,11 @@ module.exports = (app) => {
                 'X-Api-Client-Id': 'FPVNMCTQKJOSZPCL'
             }
           })
-          .then(data => {
-              res.json(data.data)
+          .then(response => {
+              res.json(response.data)
           })
-          .catch(err => res.send(err))
+          .catch(error => {
+              console.log(error)
+          })
     })
 }
