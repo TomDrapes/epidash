@@ -1,0 +1,29 @@
+.shortlist-item-more-info-container {
+    background: #2c2c2c;
+    color: white;
+    font-size: 14px;
+    padding: 5px;
+    display: flex;
+}
+
+.shortlist-item-more-info-container p {
+    padding: 5px;
+}
+
+.shortlist-item-more-info-star-checked {
+    color: rgb(247, 185, 72);
+}
+
+.shortlist-item-more-info-heading {
+    font-size: 18px;
+}
+
+.shortlist-item-more-info-subsection {
+    border-top: 1px solid rgba(255,255,255,0.7);
+    padding: 10px 0px 10px 0px;;
+}
+
+.shortlist-item-more-info-images-container {
+    display: flex;
+    align-items: center;
+}

@@ -18,19 +18,20 @@
 
 .live-analysis-stats-list {
     font-size: 16px;
+
+    li {
+        padding: 4px;
+        border-bottom: 1px solid #efefef;
+        font-weight: bold;
+    }
+
+    p {
+        float: right;
+        padding-right: 5px;
+        font-weight: normal;
+    }
 }
 
-.live-analysis-stats-list li {
-    padding: 4px;
-    border-bottom: 1px solid #efefef;
-    font-weight: bold;
-}
-
-.live-analysis-stats-list p {
-    float: right;
-    padding-right: 5px;
-    font-weight: normal;
-}
 
 .live-analysis-positive-font-color {
     color: rgb(97, 202, 97);
@@ -54,11 +55,12 @@
     font-weight: bold;
     list-style-type: circle;
     margin: auto;
+
+    li {
+        margin: 3px;
+    }
 }
 
-.live-analysis-pie-chart-side-data li {
-    margin: 3px;
-}
 .live-analysis-wholesale-bullet {
     color: rgb(243, 195, 92);
 }
@@ -73,4 +75,23 @@
 
 .live-analysis-min-bullet {
     color: rgb(97, 202, 97);
+}
+
+.live-analysis-update-shortlist-btn {
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #2c2c2c;
+    color: white;
+    border-style: none;
+    padding: 5px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: rgb(33, 182, 245);
+        cursor: pointer;
+    }
 }

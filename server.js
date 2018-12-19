@@ -113,5 +113,6 @@ mongoose
 //NB: you can add multiple routes here later by copying the line below and replacing  the path
 require('./server/routes/api/signin')(app)
 require('./server/routes/api/updateShortList')(app)
+require('./server/routes/api/aliExpress')(app)
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

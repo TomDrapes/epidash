@@ -5,6 +5,7 @@ import openSocket from 'socket.io-client'
 import ItemInFocus from './ItemInFocus';
 import LiveAnalysis from './LiveAnalysis';
 import axios from 'axios'
+import uuid from 'uuid'
 import './style.css'
 
 const socket = openSocket('http://localhost:9000')
@@ -14,12 +15,12 @@ export default class PriceCompare extends Component {
     constructor(props){
         super(props)
 
-        this.state = {            
+        this.state = {
             socket: socket,
             showImageMatch: false,
             alibabaList: [],
             aliSearchSuccess: true,
-            ebayList: [],           
+            ebayList: [],
             ebaySearchSuccess: true,
             searchParam: '',
             waitingForSearchResults: false,
@@ -27,8 +28,8 @@ export default class PriceCompare extends Component {
             matchedItems: [],
             totalEbayEntries: 0,
             totalAliEntries: 0
-        }      
-        
+        }
+
         this.state.socket.on('response_received', (res) => {
             console.log('here')
             this.receiveSocketIO(res)
@@ -40,8 +41,8 @@ export default class PriceCompare extends Component {
 
         console.log(res.ebayRes)
         console.log(res.aliRes)
-        
-        this.setState({ 
+
+        this.setState({
             waitingForSearchResults: false,
         })
         if (res.ali.length > 0 ) {
@@ -55,12 +56,12 @@ export default class PriceCompare extends Component {
         } else {
             this.setState({ ebaySearchSuccess: false })
         }
-        this.setState({ 
+        this.setState({
             totalEbayEntries: res.totalEbayEntries,
             totalAliEntries: res.totalAliEntries
         })
-        
-        
+
+
     }
 
     sendSocketIO = () => {
@@ -70,8 +71,8 @@ export default class PriceCompare extends Component {
     }
 
     toggleImageMatchState = (selectedItem) => {
-        this.setState({ 
-            showImageMatch: !this.state.showImageMatch, 
+        this.setState({
+            showImageMatch: !this.state.showImageMatch,
             selectedItem: selectedItem,
             matchedItems: []
         })
@@ -90,16 +91,17 @@ export default class PriceCompare extends Component {
     }
 
     removeMatch = (key) => {
-        let items = this.state.matchedItems.filter(item => 
+        let items = this.state.matchedItems.filter(item =>
             item.key !== key
         )
         this.setState({ matchedItems: items })
     }
 
-    
+
     updateShortList = () => {
 
         let newShortListItem = {
+            id: uuid(),
             source: this.state.selectedItem,
             competition: this.state.matchedItems
         }
@@ -114,22 +116,22 @@ export default class PriceCompare extends Component {
             return (
                 <div className="price-compare-item-analysis-container">
                     <div className="price-compare-item-analysis-left-column">
-                        <ItemInFocus 
+                        <ItemInFocus
                             item={this.state.selectedItem}
                             toggleImageMatchState={this.toggleImageMatchState}
                         />
-                        <LiveAnalysis 
+                        <LiveAnalysis
                             selectedItem={this.state.selectedItem}
                             matchedItems={this.state.matchedItems}
                             totalEbayEntries={this.state.totalEbayEntries}
                             updateShortList={this.updateShortList}
                         />
                     </div>
-                    <ImageMatch 
+                    <ImageMatch
                         items={this.state.ebayList}
                         addMatch={this.addMatch}
                         removeMatch={this.removeMatch}
-                    />                                        
+                    />
                 </div>
             )
         }else{

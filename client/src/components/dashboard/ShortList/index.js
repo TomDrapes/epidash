@@ -17,7 +17,7 @@ export default class ShortList extends Component {
         axios.get(`/api/account/shortlist/${this.props.userId}`)
             .then(res => {
                 console.log(res)
-                this.setState({ 
+                this.setState({
                     items: res.data,
                     loading: false
                  })
@@ -27,9 +27,19 @@ export default class ShortList extends Component {
     shortListItems = () => {
         return this.state.items.map(item => {
             return (
-                <ShortListItem item={item} />
+                <ShortListItem item={item} deleteShortlistItem={this.deleteShortlistItem} key={item.id}/>
             )
         })
+    }
+
+    deleteShortlistItem = (key) => {
+        console.log(key)
+      let updatedShortlist = this.state.items.filter(item => item.id !== key)
+      this.setState({   items: updatedShortlist })
+      let itemKey = { id: key }
+      axios.put(`/api/account/shortlist/remove-item/${this.props.userId}`, itemKey)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
     render() {
@@ -41,7 +51,7 @@ export default class ShortList extends Component {
                 <div className='short-list'>
                     <ul>
                         {this.shortListItems()}
-                    </ul>    
+                    </ul>
                 </div>
             </div>
         )
