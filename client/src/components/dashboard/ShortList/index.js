@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import ShortListItem from './ShortListItem'
-import './style.css'
+import './style.scss'
 
 export default class ShortList extends Component {
     constructor(props){

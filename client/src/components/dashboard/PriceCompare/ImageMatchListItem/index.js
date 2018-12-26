@@ -1,20 +1,22 @@
-import React, { Component } from 'react'
-import './style.css'
+import React, { PureComponent } from 'react'
+import uuid from 'uuid'
+import './style.scss'
 
-export default class ImageMatchListItem extends Component {
+export default class ImageMatchListItem extends PureComponent {
     constructor(props){
         super(props)
 
         this.state = {
-            selected: false
+            selected: false,
+            id: uuid()
         }
     }
 
     componentDidUpdate(){
         if(this.state.selected){
-            this.props.addMatch(this.props.item, this.props.id)
+            this.props.addMatch(this.props.item, this.state.id)
         }else{
-            this.props.removeMatch(this.props.id)
+            this.props.removeMatch(this.state.id)
         }
     }
 

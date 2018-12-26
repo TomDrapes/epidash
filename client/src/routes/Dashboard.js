@@ -4,7 +4,7 @@ import Menu from '../components/dashboard/Menu'
 import SideBar from '../components/dashboard/SideBar'
 import PriceCompare from '../components/dashboard/PriceCompare'
 import ShortList from '../components/dashboard/ShortList'
-import './style.css'
+import './style.scss'
 
 export default class DashBoard extends Component{
     constructor(props){

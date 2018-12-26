@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import { getNameList, getCode } from 'country-list'
-import './style.css'
+import './style.scss'
 
 export default class SignUpForm extends Component {
     constructor(props){

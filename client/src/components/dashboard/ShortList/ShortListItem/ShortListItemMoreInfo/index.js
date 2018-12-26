@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ImageScroll from './ImageScroll'
 import axios from 'axios'
-import './style.css'
+import './style.scss'
 
 export default class ShortListItemMoreInfo extends Component{
     constructor(props){
