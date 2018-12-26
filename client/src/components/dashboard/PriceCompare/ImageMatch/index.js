@@ -1,28 +1,33 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ImageMatchListItem from '../ImageMatchListItem'
 import uuid from 'uuid'
-import './style.css'
+import './style.scss'
 
-export default class ImageMatch extends Component {
+export default class ImageMatch extends PureComponent {
     constructor(props){
         super(props)
 
         this.state = {
-            items: this.props.items,
+            items: this.props.items
         }
     }
 
-    shouldComponentUpdate(nextProps){
-        return nextProps.items !== this.props.items
+    componentDidMount() {
+        let scrollElement = document.querySelector('#scrollElement')
+        scrollElement.addEventListener('scroll', () => {
+            if (scrollElement.scrollTop + scrollElement.clientHeight >= scrollElement.scrollHeight){
+                this.props.retrieveMoreListings(this.props.source)
+            }
+        })
     }
 
     items = () => {
-        let items = this.state.items.map(item => {
-            let id = uuid()
+        let key = 0
+        let items = this.props.items.map(item => {
+            key++
             return (
                 <ImageMatchListItem 
-                    key={id} 
-                    id={id}
+                    key={key} 
                     item={item} 
                     addMatch={this.props.addMatch} 
                     removeMatch={this.props.removeMatch}
@@ -38,7 +43,7 @@ export default class ImageMatch extends Component {
                 <div className='image-match-heading-tab'>
                     <h1>SELECT ALL MATCHING PRODUCTS</h1>
                 </div>
-                <div className='image-match-list'>
+                <div className='image-match-list' id='scrollElement'>
                     {this.items()}                
                 </div>
             </div>

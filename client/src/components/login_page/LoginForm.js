@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { setInStorage, getFromStorage } from '../../utils/storage';
 import axios from 'axios';
-import './style.css'
+import './style.scss'
 
 
 export default class LoginForm extends Component{

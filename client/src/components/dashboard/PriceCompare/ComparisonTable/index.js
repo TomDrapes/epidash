@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SearchResult from '../SearchResult'
 import uuid from 'uuid'
-import './style.css'
+import './style.scss'
 
 export default class ComparisonTable extends Component {
     constructor(props){
@@ -14,8 +14,22 @@ export default class ComparisonTable extends Component {
                 ebay: false,
                 gumtree: false
             },
-        }        
+            searchParams: ''
+        }
+        
     }    
+    
+    componentDidMount(){
+        let searchList = document.querySelector('#searchList')
+        searchList.addEventListener('scroll', () => {
+            if (searchList.scrollTop + searchList.clientHeight >= searchList.scrollHeight){
+                let { sourceHeadings } = this.state
+                for (var key in sourceHeadings){
+                    if(sourceHeadings[key] === true) this.props.retrieveMoreListings(key)
+                }
+            }
+        })
+    }
 
     updateSelected(source){
         let sourceHeadings = this.state.sourceHeadings
@@ -23,7 +37,7 @@ export default class ComparisonTable extends Component {
             sourceHeadings[key] = false
         }
         sourceHeadings[source] = true
-        this.setState({ sourceHeadings})
+        this.setState({ sourceHeadings })
     }
 
     spinner = () => {
@@ -58,7 +72,7 @@ export default class ComparisonTable extends Component {
 
     submit = (e) => {
         e.preventDefault()
-        this.props.sendSocketIO()
+        this.props.search(this.state.searchParams)
     }
 
     searchResultsTotal = () => {
@@ -86,8 +100,8 @@ export default class ComparisonTable extends Component {
                             {this.spinner()}
                             <form id='message_form' onSubmit={this.submit} className='input-group'>
                                 <input className='form-control'
-                                    onChange={event => this.props.onInputChange(event.target.value)}
-                                    value={this.state.searchParam}
+                                    onChange={event => this.setState({ searchParams: event.target.value })}
+                                    value={this.state.searchParams}
                                     placeholder="Search for products" />
                                 <span className='input-group-btn'>
                                     <button type='submit' className= 'btn btn-secondary' >Search</button>
@@ -99,7 +113,7 @@ export default class ComparisonTable extends Component {
                             <div className='comparison-table-search-results-count'>
                                 <p>Results: {this.searchResultsTotal()}</p>                            
                             </div>
-                            <div className='comparison-table-item-listings-container'>
+                            <div id='searchList' className='comparison-table-item-listings-container'>
                                 {alibaba === 'comparison-table-heading-selected' 
                                      && this.searchResults(this.props.alibabaList, this.props.aliSearchSuccess)}
                                 {ebay === 'comparison-table-heading-selected' 

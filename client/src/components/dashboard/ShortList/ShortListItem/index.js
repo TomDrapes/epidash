@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import ShortListItemInfo from './ShortListItemInfo'
 import ShortListItemMoreInfo from './ShortListItemMoreInfo'
-import './style.css'
+import './style.scss'
+import axios from 'axios';
 
 
 export default class ShortListItem extends Component{
@@ -35,6 +36,13 @@ export default class ShortListItem extends Component{
         this.setState({ showMoreInfo: !this.state.showMoreInfo })
     }
 
+    getMoreSuppliers = (image) => {
+        console.log(image)
+        axios.post('/api/account/aliexpress/image-search', { image })
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+    }
+
     render(){
         const { imageUrl, title, lotSize, id, price } = this.props.item.source
     
@@ -57,6 +65,7 @@ export default class ShortListItem extends Component{
     
                             <div className='short-list-item-delete'>
                                 <i className="fas fa-trash-alt" onClick={() => this.props.deleteShortlistItem(this.props.item.id)}></i>
+                                <button onClick={() => this.getMoreSuppliers(imageUrl)}>SUPPLIERS</button>
                             </div>
                         </div>
                     </div>

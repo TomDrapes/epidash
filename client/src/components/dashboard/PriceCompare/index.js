@@ -6,9 +6,7 @@ import ItemInFocus from './ItemInFocus';
 import LiveAnalysis from './LiveAnalysis';
 import axios from 'axios'
 import uuid from 'uuid'
-import './style.css'
-
-const socket = openSocket('http://localhost:9000')
+import './style.scss'
 
 export default class PriceCompare extends Component {
 
@@ -16,58 +14,99 @@ export default class PriceCompare extends Component {
         super(props)
 
         this.state = {
-            socket: socket,
             showImageMatch: false,
             alibabaList: [],
             aliSearchSuccess: true,
             ebayList: [],
             ebaySearchSuccess: true,
-            searchParam: '',
             waitingForSearchResults: false,
             selectedItem: {},
             matchedItems: [],
             totalEbayEntries: 0,
-            totalAliEntries: 0
+            totalAliEntries: 0,
+            ebayPageNumber: 1,
+            aliScrollIdentifier: '',
+            keyword: '',
+            selectedSource: 'alibaba'
         }
-
-        this.state.socket.on('response_received', (res) => {
-            console.log('here')
-            this.receiveSocketIO(res)
-        })
     }
 
-    receiveSocketIO = (res) => {
-        console.log('receiving on socket')
+    search = (keyword) => {
+        console.log('Searching for %s', keyword)
+        this.setState({ waitingForSearchResults: true, keyword })
+        let promise1 = axios.post('/api/account/aliexpress/search', { keyword, scrollIdentifier: '' })
+            .then(res => {
+                console.log(res)
+                if (res.data.items.length > 0){
+                    this.setState({ 
+                        alibabaList: res.data.items,
+                        aliSearchSuccess: true,
+                        aliScrollIdentifier: res.data.aliRes.aggregation.scrollIdentifier
+                    })
+                }else{
+                    this.setState({ aliSearchSuccess: false, totalAliListingsRetrieved: 0 })
+                }
+                this.setState({ totalAliEntries: res.data.itemsCount })
+            }).catch(err => console.log(err))
 
-        console.log(res.ebayRes)
-        console.log(res.aliRes)
+        let promise2 = axios.post('/api/account/ebay/search', { keyword, pageNumber: 1 })
+            .then(res => {
+                console.log(res)
+                if(res.data.items.length > 0){
+                    this.setState({ 
+                        ebayList: res.data.items, 
+                        ebaySearchSuccess: true, 
+                        totalEbayListingsRetrieved: 50
+                })
+                }else{
+                    this.setState({ ebaySearchSuccess: false, totalEbayListingsRetrieved: 0 })
+                }
+                this.setState({ totalEbayEntries: res.data.itemCount })
+            }).catch(err => console.log(err))
 
-        this.setState({
-            waitingForSearchResults: false,
-        })
-        if (res.ali.length > 0 ) {
-            this.setState({ alibabaList: res.ali, aliSearchSuccess: true })
-        }else{
-            this.setState({ aliSearchSuccess: false })
-        }
-
-        if (res.ebay.length > 0) {
-            this.setState({ ebayList: res.ebay, ebaySearchSuccess: true })
-        } else {
-            this.setState({ ebaySearchSuccess: false })
-        }
-        this.setState({
-            totalEbayEntries: res.totalEbayEntries,
-            totalAliEntries: res.totalAliEntries
-        })
-
-
+        Promise.all([promise1, promise2]).then(() => this.setState({ waitingForSearchResults: false }))
     }
 
-    sendSocketIO = () => {
-        console.log('sending on socket')
+    retrieveMoreListings = (source) => {
+        switch (source) {
+            case 'alibaba': this.loadMoreFromAli();
+                break;
+            case 'ebay': this.loadMoreFromEbay();
+                break;
+            default: console.log('something went wrong')
+        }
+    }
+
+    loadMoreFromAli = () => {
+        console.log('retrieving more from aliexpress')
         this.setState({ waitingForSearchResults: true })
-        this.state.socket.emit('request_to_ebay_api', this.state.searchParam)
+        axios.post('/api/account/aliexpress/search', { keyword: this.state.keyword, scrollIdentifier: this.state.aliScrollIdentifier})
+            .then(res => {
+               if (res.data.items.length > 0){    
+                    this.setState({ 
+                        alibabaList: this.state.alibabaList.concat(res.data.items),
+                        aliScrollIdentifier: res.data.aliRes.aggregation.scrollIdentifier,
+                        waitingForSearchResults: false
+                    })
+                }else{ this.setState({ waitingForSearchResults: false })}
+            }).catch(err => console.log(err))
+    }
+
+    loadMoreFromEbay = () => {
+        console.log('retrieving more from ebay')
+        this.setState({ waitingForSearchResults: true })
+        let pageNumber = this.state.ebayPageNumber + 1
+        axios.post('/api/account/ebay/search', { keyword: this.state.keyword, pageNumber })
+            .then(res => {
+                console.log(res)
+                if (res.data.items.length > 0){
+                    this.setState({
+                        ebayList: this.state.ebayList.concat(res.data.items),
+                        ebayPageNumber: pageNumber,
+                        waitingForSearchResults: false
+                    })
+                }else{ this.setState({ waitingForSearchResults: false })}
+            }).catch(err => console.log(err))
     }
 
     toggleImageMatchState = (selectedItem) => {
@@ -76,10 +115,6 @@ export default class PriceCompare extends Component {
             selectedItem: selectedItem,
             matchedItems: []
         })
-    }
-
-    onInputChange = (searchParam) => {
-        this.setState({ searchParam })
     }
 
     addMatch = (item, key) => {
@@ -110,6 +145,33 @@ export default class PriceCompare extends Component {
             .then(res => console.log(res))
     }
 
+    setSelectedSource = (source) => {
+        this.setState({ selectedSource: source })
+    }
+
+    imageMatch = () => {
+        if(this.state.selectedSource === 'ebay'){ //source of the selected item being compared
+            return (
+                <ImageMatch
+                    items={this.state.alibabaList}
+                    addMatch={this.addMatch}
+                    removeMatch={this.removeMatch}
+                    retrieveMoreListings={this.retrieveMoreListings}
+                    source='alibaba' // source of items being used to select matches
+                />
+            )
+        }else if(this.state.selectedSource === 'alibaba'){ // source of the selected item being compared
+            return (
+                <ImageMatch
+                    items={this.state.ebayList}
+                    addMatch={this.addMatch}
+                    removeMatch={this.removeMatch}
+                    retrieveMoreListings={this.retrieveMoreListings}
+                    source='ebay' // source for items being used to select matches
+                />
+            )
+        }
+    }
     render() {
         let { showImageMatch } = this.state
         if(showImageMatch){
@@ -127,11 +189,7 @@ export default class PriceCompare extends Component {
                             updateShortList={this.updateShortList}
                         />
                     </div>
-                    <ImageMatch
-                        items={this.state.ebayList}
-                        addMatch={this.addMatch}
-                        removeMatch={this.removeMatch}
-                    />
+                    { this.imageMatch() }
                 </div>
             )
         }else{
@@ -139,15 +197,15 @@ export default class PriceCompare extends Component {
                 <div className='price-compare-container'>
                     <ComparisonTable
                         waitingForSearchResults={this.state.waitingForSearchResults}
-                        onInputChange={this.onInputChange}
                         ebayList={this.state.ebayList}
                         alibabaList={this.state.alibabaList}
                         aliSearchSuccess={this.state.aliSearchSuccess}
                         ebaySearchSuccess={this.state.ebaySearchSuccess}
-                        sendSocketIO={() => this.sendSocketIO()}
                         toggleImageMatchState={this.toggleImageMatchState}
                         totalEbayEntries={this.state.totalEbayEntries}
                         totalAliEntries={this.state.totalAliEntries}
+                        search={this.search}
+                        retrieveMoreListings={this.retrieveMoreListings}
                     />
                 </div>
             )
