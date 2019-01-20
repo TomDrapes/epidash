@@ -4,6 +4,7 @@ import Menu from '../components/dashboard/Menu'
 import SideBar from '../components/dashboard/SideBar'
 import PriceCompare from '../components/dashboard/PriceCompare'
 import ShortList from '../components/dashboard/ShortList'
+import StoreEditor from '../components/dashboard/StoreEditor'
 import './style.scss'
 
 export default class DashBoard extends Component{
@@ -28,6 +29,7 @@ export default class DashBoard extends Component{
         switch(this.state.selectedComponent) {
             case 'priceCompare': return <PriceCompare userId={this.props.location.state.userId} />
             case 'shortList': return <ShortList userId={this.props.location.state.userId} />
+            case 'storeEditor': return <StoreEditor />
             default: return <PriceCompare userId={this.props.location.state.userId} />
         }
     }

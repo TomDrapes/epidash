@@ -13,6 +13,7 @@ export default class SideBar extends Component {
         {competition: false},
         {inventory: false},
         {accountDetails: false},
+        {storeEditor: false}
       ]
     }
   }
@@ -36,12 +37,14 @@ export default class SideBar extends Component {
     let competition = this.state.menuItems[3].competition ? "selected" : undefined
     let inventory = this.state.menuItems[4].inventory ? "selected" : undefined
     let accountDetails = this.state.menuItems[5].accountDetails ? "selected" : undefined
+    let storeEditor = this.state.menuItems[6].storeEditor ? "selected" : undefined
 
     return(
       <div className='sidebar-container'>
         <ul>
           <li className={priceCompare} onClick={() => this.updateSelected('priceCompare')}><i className="fas fa-search-dollar"></i>PRICE COMPARE</li>
           <li className={shortList} onClick={() => this.updateSelected('shortList')}><i className="fas fa-clipboard-list"></i>SHORT LIST</li>
+          <li className={storeEditor} onClick={() => this.updateSelected('storeEditor')}><i className="fas fa-store"></i>STORE EDITOR</li>
           <li className={suggestions} onClick={() => this.updateSelected('suggestions')}><i className="far fa-lightbulb"></i>SUGGESTIONS</li>
           <li className={competition} onClick={() => this.updateSelected('competition')}><i className="fas fa-users"></i>COMPETITION</li>
           <li className={inventory} onClick={() => this.updateSelected('inventory')}><i className="fas fa-warehouse"></i>INVENTORY</li>
