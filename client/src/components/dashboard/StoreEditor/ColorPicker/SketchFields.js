@@ -35,7 +35,7 @@ export const SketchFields = ({ onChange, rgb, hsl, hex, disableAlpha }) => {
         display: 'block',
         textAlign: 'center',
         fontSize: '11px',
-        color: '#222',
+        color: '#fff',
         paddingTop: '3px',
         paddingBottom: '4px',
         textTransform: 'capitalize',

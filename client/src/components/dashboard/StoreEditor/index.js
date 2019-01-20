@@ -17,55 +17,77 @@ export default class StoreEditor extends Component {
             logoWidth: '40px',
             logoHeight: '40px',
             socialMedia: {},
-            openHeaderMenu: false
+            openHeaderMenu: false,
+            headerColor: '#55b7c6',
+            headerHeight: '100px'
         }
     }
 
-    header = () => {
-        let {logo, logoWidth, logoHeight, socialMedia} = this.state
-        return (
-            <div className='template-header'>
-                <img src={logo} alt='store logo' width={logoWidth} height={logoHeight} />
-                {socialMedia.facebook & <a href={socialMedia.facebook}><i class="fab fa-facebook-square" /></a> }
-                {socialMedia.instagram & <a href={socialMedia.instagram}><i class="fab fa-instagram" /></a> }
-                {socialMedia.twitter & <a href={socialMedia.twitter}><i class="fab fa-twitter-square" /></a> }
-            </div>
-        )
-    }
-
     headerCarat = () => {
-        if(this.state.openHeaderMenu) return <i class='fa fa-caret-up' />
-        return <i class='fa fa-caret-down' />
+        if(this.state.openHeaderMenu) return <i className='fa fa-caret-up' />
+        return <i className='fa fa-caret-down' />
     }
 
     headerMenu = () => {
         return (            
             <div>
                 <p onClick={() => this.setState({ openHeaderMenu: !this.state.openHeaderMenu })}>HEADER {this.headerCarat()}</p>
-                <div className='color-picker'>
-                    {this.state.openHeaderMenu ? <ColorPicker /> : null}
+                <div className='header-editor-section'>
+                    {this.state.openHeaderMenu ? 
+
+                        <div>
+                            <ColorPicker color={this.state.headerColor} onChangeComplete={this.updateHeaderColor} /> 
+                            <form>
+                                <label className='header-height-select'>
+                                    HEIGHT:
+                                    <input type='text' value={this.state.headerHeight} onChange={this.updateHeaderHeight} />
+                                </label>
+                            </form>
+                        </div>
+                    
+                    : null}
                 </div>
             </div>
         )
     }
 
+    updateHeaderColor = (data) => {
+        console.log(data)
+        this.setState({ headerColor: data.hex })
+    }
+
+    updateHeaderHeight = (e) => {
+        this.setState({ headerHeight: e.target.value})
+    }
+
     render(){
         return (
             <div className='store-editor-container'>
-                <div className='store-editor'>
-                    <div className='store-editor-title-bar'>STORE EDITOR</div>
-                    <div className='store-editor-menu'>
-                        <ul>
-                            <li>LOGO</li>
-                            <li>{this.headerMenu()}</li>
-                            <li>PRODUCT</li>
-                            <li>FOOTER</li>
-                        </ul>
-                    </div>                
+
+                <div className='store-editor-window'>
+            
+                    <div className='store-editor-title-bar'>STORE EDITOR</div>                
+                    
+                    <div className='store-editor'>
+            
+                        <div className='store-editor-menu'>
+                            <ul>
+                                <li><h2>LOGO</h2></li>
+                                <li><h2>{this.headerMenu()}</h2></li>
+                                <li><h2>PRODUCT</h2></li>
+                                <li><h2>FOOTER</h2></li>
+                            </ul>
+            
+                        </div>                
+            
+                        <TemplatePage 
+                            headerColor={this.state.headerColor} 
+                            headerHeight={this.state.headerHeight}
+                        />
+                        
+                
                 </div>
-                <div className='template-page-container'>
-                    <TemplatePage header={this.state.header} body={this.state.body} footer={this.state.footer} />
-                </div>
+            </div>
                 
             </div>
         )
