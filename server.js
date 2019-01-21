@@ -4,11 +4,18 @@ const axios = require('axios')
 const mongoose = require('mongoose');
 const app = express();
 
+//Modules needed for file uploads
+const fileUpload = require('express-fileupload')
+const cors = require('cors')
+
 const port = process.env.PORT || 5000;
 
 //Bodyparser Middelware - tells express to accept both JSON and urlencoded values
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
+
+app.use(cors())
+app.use(fileUpload())
 
 //Socket.io
 const http = require('http').Server(app);
@@ -38,5 +45,6 @@ require('./server/routes/api/signin')(app)
 require('./server/routes/api/updateShortList')(app)
 require('./server/routes/api/aliExpress')(app)
 require('./server/routes/api/ebay')(app)
+require('./server/routes/api/fileUpload')(app)
 
 app.listen(port, () => console.log(`Server started on port ${port}`));

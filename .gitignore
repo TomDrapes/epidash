@@ -11,6 +11,9 @@
 # production
 /build
 
+# uploaded images folder used for testing
+/server/public
+
 # misc
 .DS_Store
 .env.local
