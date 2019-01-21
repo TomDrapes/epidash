@@ -23,12 +23,19 @@ export default class StoreEditor extends Component {
             headerColor: '#55b7c6',
             headerHeight: '100px',
             selectedFile: null,
-            loaded: 0
+            loaded: 0,
+            images: null
         }
+
+        axios.get(`/api/account/images/${this.props.userId}`, this.props.userId)
+            .then(res => {
+                console.log(res)
+                this.setState({ images: res.data })
+            })
     }
 
-    headerCarat = (menuItem) => {
-        if(this.state.selectedMenuItem === menuItem && this.state.menuItemActive) return <i className='fa fa-caret-up' />
+    headerCarat = () => {
+        if(this.state.menuItemActive) return <i className='fa fa-caret-up' />
         return <i className='fa fa-caret-down' />
     }
 
@@ -36,7 +43,7 @@ export default class StoreEditor extends Component {
         if ( menuItem !== this.state.selectedMenuItem ) {
             this.setState({ selectedMenuItem: menuItem, menuItemActive: true })
         } else {
-            this.setState({ selectedMenuItem: menuItem, menuItemActive: !this.state.menuItemActive})
+            this.setState({ selectedMenuItem: '', menuItemActive: !this.state.menuItemActive})
         }
     }
 
@@ -63,8 +70,17 @@ export default class StoreEditor extends Component {
         )
     }
 
-    logoMenu = () => {
+    images() {
+        if(this.state.images !== null){
+            let uploadedImages = this.state.images.map(img => {
+                return <img src={`data:${img.file.mimetype};base64,${img.file.data}`} alt={img.name} width='160px' height='80px' />           
+            })
+            return uploadedImages            
+        }
+    }
 
+    logoMenu = () => {
+        
         const handleSelectedFile = (event) => {
             this.setState({
                 selectedFile: event.target.files[0],
@@ -73,16 +89,19 @@ export default class StoreEditor extends Component {
         }
 
         const handleUpload = () => {
+            console.log(this.state.selectedFile)
             const data = new FormData()
             data.append('file', this.state.selectedFile, this.state.selectedFile.name)
-            axios.post('/upload', data, {
+            data.append('userId', this.props.userId)
+            axios.post(`/api/account/images/upload/${this.props.userId}`, data, {
                 onUploadProgress: ProgressEvent => {
                     this.setState({
                         loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
                     })
                 },
-            }).then(res => console.log(res.statusText))
-        }
+            }).then(res => console.log(res))
+        }        
+
         return (
             <div>
                 <p onClick={() => this.changeMenuState('logo')}>LOGO {this.headerCarat('logo')}</p>
@@ -92,6 +111,9 @@ export default class StoreEditor extends Component {
                             <input type='file' onChange={handleSelectedFile} />
                             <button onClick={handleUpload}>Upload</button>
                             <div> {Math.round(this.state.loaded,2)}%</div>
+                            <div>
+                                {this.images()}
+                            </div>
                         </div>
                     : null}
                 </div>

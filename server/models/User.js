@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
   shortList: {
     type: Array,
     default: []
+  },
+  uploadedImages: {
+    type: Array,
+    default: []
   }
 });
 UserSchema.methods.generateHash = function(password) {

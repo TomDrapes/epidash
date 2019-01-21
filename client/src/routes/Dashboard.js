@@ -29,7 +29,7 @@ export default class DashBoard extends Component{
         switch(this.state.selectedComponent) {
             case 'priceCompare': return <PriceCompare userId={this.props.location.state.userId} />
             case 'shortList': return <ShortList userId={this.props.location.state.userId} />
-            case 'storeEditor': return <StoreEditor />
+            case 'storeEditor': return <StoreEditor userId={this.props.location.state.userId} />
             default: return <PriceCompare userId={this.props.location.state.userId} />
         }
     }
