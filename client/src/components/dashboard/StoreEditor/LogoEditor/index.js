@@ -53,11 +53,7 @@ export default class LogoEditor extends PureComponent {
         }
     }
 
-    handleLogoHeightAdjust = (e) => {
-        this.props.updateLogoHeight(e.target.value)
-    }
-
-    handleLogoWidthAdjust = (e) => {
+    handleLogoSizeAdjust = (e) => {
         this.props.updateLogoWidth(e.target.value)
     }
 
@@ -66,14 +62,10 @@ export default class LogoEditor extends PureComponent {
         return (
             <div>                
                 <div className='logo-editor-section'>
-                    <input type='file' onChange={(e) => this.handleSelectedFile(e)} />
-                    <div className='height-slider'>
-                        <p>HEIGHT: {`${this.props.logoHeight}px`}</p>
-                        <input type='range' min='50' max='300' value={this.props.logoHeight} onChange={(e) => this.handleLogoHeightAdjust(e)}/>
-                    </div>
+                    <input type='file' onChange={(e) => this.handleSelectedFile(e)} />                    
                     <div className='width-slider'>
-                        <p>WIDTH: {`${this.props.logoWidth}px`}</p>
-                        <input type='range' min='50' max='300' value={this.props.logoWidth} onChange={(e) => this.handleLogoWidthAdjust(e)}/>
+                        <p>SIZE: </p>
+                        <input type='range' min='100' max='400' value={this.props.logoWidth} onChange={(e) => this.handleLogoSizeAdjust(e)}/>
                     </div>
 
                     <div className='logo-align-select-container'>

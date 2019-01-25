@@ -14,10 +14,9 @@ export default class StoreEditor extends Component {
             header: this.header,
             body: this.body,
             footer: this.footer,
-            logo: '../../../images/hawk_logo.png',
-            logoWidth: '40',
-            logoHeight: '40',
-            logoPos: 'flex-start',
+            logo: `/images/logo_placeholder.png`,
+            logoWidth: '100',
+            logoPos: 'center',
             socialMedia: {},
             selectedMenuItem: '',
             menuItemActive: false,
@@ -77,10 +76,6 @@ export default class StoreEditor extends Component {
         this.setState({ logo: selectedLogo })
     }
 
-    updateLogoHeight = (height) => {
-        this.setState({ logoHeight: height})
-    }
-
     updateLogoWidth = (width) => {
         this.setState({ logoWidth: width})
     }
@@ -108,10 +103,8 @@ export default class StoreEditor extends Component {
                                         <LogoEditor 
                                             userId={this.props.userId}
                                             updateLogo={this.updateLogo}
-                                            updateLogoHeight={this.updateLogoHeight}
                                             updateLogoWidth={this.updateLogoWidth}
                                             updateLogoPos={this.updateLogoPos}
-                                            logoHeight={this.state.logoHeight}
                                             logoWidth={this.state.logoWidth}
                                             logoPos={this.state.logoPos}
                                         /> : null}
@@ -127,10 +120,8 @@ export default class StoreEditor extends Component {
                             headerColor={this.state.headerColor} 
                             headerHeight={this.state.headerHeight}
                             logo={this.state.logo}
-                            logoHeight={this.state.logoHeight}
                             logoWidth={this.state.logoWidth}
-                            logoPos={this.state.logoPos}
-                            
+                            logoPos={this.state.logoPos}                            
                         />
                         
                 

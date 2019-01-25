@@ -12,27 +12,24 @@ export default class TemplatePage extends Component {
     render(){
         const styles = reactCSS({
             'default': {
-                logo: {
+                logo: {                    
+                    alignSelf: this.props.logoPos,               
+                },
+                header: {
+                    background: this.props.headerColor,
+                    height: this.props.headerHeight,
+                    boxShadow: '0px 2px 5px 0px rgba(0,0,0,0.7)',
                     display: 'flex',
-                    flexDirection: 'row',
-                   // alignItems: this.props.logoPos,
-                    justifyContent: this.props.logoPos
-                }
+                    flexDirection: 'column',
+                    justifyContent: 'center'
+                },
             }
         })
         return (
             <div className='template-page-container'>
                 <div className='template-page'> 
-                    <div className='template-header' style={{
-                        background: this.props.headerColor,
-                        height: this.props.headerHeight,
-                        /*display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center'*/
-                    }}>
-                        <div style={styles.logo}>
-                            <img src={this.props.logo} width={`${this.props.logoWidth}px`} height={`${this.props.logoHeight}px`} alt='page-logo' />
-                        </div>
+                    <div className='template-header' style={styles.header}>
+                        <img style={styles.logo} src={this.props.logo} width={`${this.props.logoWidth}px`} height={`auto`} alt='page-logo' />
                     </div>
         
                 </div>            
