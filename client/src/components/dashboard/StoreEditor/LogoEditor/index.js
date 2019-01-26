@@ -72,7 +72,7 @@ export default class LogoEditor extends PureComponent {
                         <p>ALIGNMENT: </p>
                         <select className='logo-align-selector' onChange={this.props.updateLogoPos} >
                             <option value='flex-start'>Left</option>
-                            <option value='center'>Center</option>
+                            <option value='center' selected='selected'>Center</option>
                             <option value='flex-end'>Right</option>
                         </select>
                     </div>

@@ -21,7 +21,8 @@ export default class StoreEditor extends Component {
             selectedMenuItem: '',
             menuItemActive: false,
             headerColor: '#55b7c6',
-            headerHeight: '100px'
+            headerHeight: '100px',
+            headerImage: '/images/header_placeholder_1920.jpg'
         }       
     }
 
@@ -119,6 +120,7 @@ export default class StoreEditor extends Component {
                         <TemplatePage 
                             headerColor={this.state.headerColor} 
                             headerHeight={this.state.headerHeight}
+                            headerImage={this.state.headerImage}
                             logo={this.state.logo}
                             logoWidth={this.state.logoWidth}
                             logoPos={this.state.logoPos}                            
