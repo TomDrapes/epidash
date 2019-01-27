@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import TemplatePage from './TemplatePage'
 import ColorPicker from './ColorPicker'
 import LogoEditor from './LogoEditor'
+import HeaderEditor from './HeaderEditor'
 import './style.scss'
 
 
@@ -21,7 +22,6 @@ export default class StoreEditor extends Component {
             selectedMenuItem: '',
             menuItemActive: false,
             headerColor: '#55b7c6',
-            headerHeight: '100px',
             headerImage: '/images/header_placeholder_1920.jpg'
         }       
     }
@@ -40,37 +40,9 @@ export default class StoreEditor extends Component {
         }
     }
 
-    headerMenu = () => {
-        return (            
-            <div>
-                <p onClick={() => this.changeMenuState('header')}>HEADER {this.headerCarat('header')}</p>
-                <div className='header-editor-section'>
-                    {this.state.selectedMenuItem === 'header' ? 
-
-                        <div>
-                            <ColorPicker color={this.state.headerColor} onChangeComplete={this.updateHeaderColor} /> 
-                            <form>
-                                <label className='header-height-select'>
-                                    HEIGHT:
-                                    <input type='text' value={this.state.headerHeight} onChange={this.updateHeaderHeight} />
-                                </label>
-                            </form>
-                        </div>
-                    
-                    : null}
-                </div>
-            </div>
-        )
-    }
-    
-
     updateHeaderColor = (data) => {
         console.log(data)
         this.setState({ headerColor: data.hex })
-    }
-
-    updateHeaderHeight = (e) => {
-        this.setState({ headerHeight: e.target.value})
     }
 
     updateLogo = (selectedLogo) => {
@@ -110,7 +82,13 @@ export default class StoreEditor extends Component {
                                             logoPos={this.state.logoPos}
                                         /> : null}
                                 </li>
-                                <li><h2>{this.headerMenu()}</h2></li>
+                                <li>
+                                    <h2 onClick={() => this.changeMenuState('header')}>HEADER {this.headerCarat('header')}</h2>
+                                    {this.state.selectedMenuItem === 'header' ?
+                                        <HeaderEditor />
+                                        : null
+                                    }
+                                </li>
                                 <li><h2>PRODUCT</h2></li>
                                 <li><h2>FOOTER</h2></li>
                             </ul>
