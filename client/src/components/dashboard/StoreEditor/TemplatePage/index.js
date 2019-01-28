@@ -29,7 +29,7 @@ export default class TemplatePage extends Component {
 
                 },
                 headerMenu: {
-                    color: 'white',
+                    color: this.props.menuFontColor,
                     padding: '10px',
                     display: 'flex',
                     flexDirection: 'row',
@@ -40,7 +40,7 @@ export default class TemplatePage extends Component {
                 headerMenuLinks: {
                     display: 'flex',
                     justifyContent: 'space-between',
-                    width: '20%'
+                    width: '20%',
                 },
 
                 buyNowOverlay: {
@@ -55,14 +55,18 @@ export default class TemplatePage extends Component {
                 },
 
                 buyNowTitle: {
-                    fontSize: '44px'
+                    fontSize: '44px',
+                    color: this.props.headingFontColor
                 },
                 buyNowSubtitle: {
-                    fontSize: '22px'
+                    fontSize: '22px',
+                    color: this.props.subHeadingFontColor
                 },
                 buyNowBtn: {
                     fontSize: '22px',
-                    background: '#2c2c2c',
+                    background: this.props.buttonBgColor,
+                    color: this.props.buttonFontColor,
+                    borderColor: this.props.buttonFontColor,
                     border: '2px solid white',
                     padding: '10px',
                     borderRadius: '3px'
@@ -161,7 +165,7 @@ export default class TemplatePage extends Component {
                         </div>
                         <div style={styles.buyNowOverlay}>
                             <div>
-                                <p style={styles.buyNowTitle}>The Modern Faux Sunglasses</p>
+                                <p style={styles.buyNowTitle}>{this.props.headingText}</p>
                                 <p style={styles.buyNowSubtitle}>SALE ON NOW | FREE SHIPPING WORLD WIDE</p>
                                 <button style={styles.buyNowBtn}>Buy Now</button>                                
                             </div>

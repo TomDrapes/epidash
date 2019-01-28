@@ -5,6 +5,7 @@ import LogoEditor from './LogoEditor'
 import HeaderEditor from './HeaderEditor'
 import './style.scss'
 
+const headingPlaceholderText = 'The Modern Faux Sunglass'
 
 export default class StoreEditor extends Component {
 
@@ -12,17 +13,17 @@ export default class StoreEditor extends Component {
         super(props)
 
         this.state = {
-            header: this.header,
-            body: this.body,
-            footer: this.footer,
             logo: `/images/logo_placeholder.png`,
             logoWidth: '100',
-            logoPos: 'center',
-            socialMedia: {},
             selectedMenuItem: '',
             menuItemActive: false,
-            headerColor: '#55b7c6',
-            headerImage: '/images/header_placeholder_1920.jpg'
+            headerImage: '/images/header_placeholder_1920.jpg',
+            menuFontColor: '#fff',
+            headingText: headingPlaceholderText,
+            headingFontColor: '#fff',
+            subHeadingFontColor: '#fff',
+            buttonFontColor: '#fff',
+            buttonBgColor: '#2c2c2c'
         }       
     }
 
@@ -40,9 +41,25 @@ export default class StoreEditor extends Component {
         }
     }
 
-    updateHeaderColor = (data) => {
-        console.log(data)
-        this.setState({ headerColor: data.hex })
+    handleColorChange = (event, elem) => {
+        console.log(event.hex)
+        switch (elem) {
+            case 'MENU_FONT': this.setState({ menuFontColor: event.hex.toString() })
+            break
+            case 'HEADING_FONT': this.setState({ headingFontColor: event.hex.toString() })
+            break
+            case 'SUBHEADING_FONT': this.setState({ subHeadingFontColor: event.hex.toString() })
+            break
+            case 'BUTTON_FONT': this.setState({ buttonFontColor: event.hex.toString()})
+            break
+            case 'BUTTON_BG': this.setState({ buttonBgColor: event.hex.toString() })
+            break
+        }
+        
+    }
+
+    handleTextChange = (e, elem) => {
+        this.setState({ headingText: e })
     }
 
     updateLogo = (selectedLogo) => {
@@ -85,7 +102,22 @@ export default class StoreEditor extends Component {
                                 <li>
                                     <h2 onClick={() => this.changeMenuState('header')}>HEADER {this.headerCarat('header')}</h2>
                                     {this.state.selectedMenuItem === 'header' ?
-                                        <HeaderEditor />
+                                        <HeaderEditor 
+                                            menuFontColor={this.state.menuFontColor}
+                                            menuFontSize={this.state.menuFontSize}
+                                            headingFontColor={this.state.headingFontColor}
+                                            headingFontSize={this.state.headingFontSize}
+                                            subHeadingFontColor={this.state.subHeadingFontColor}
+                                            subHeadingFontSize={this.state.subHeadingFontSize}
+                                            buttonFontSize={this.state.buttonFontSize}
+                                            buttonFontColor={this.state.buttonFontColor}
+                                            buttonBgColor={this.state.buttonBgColor}
+                                            handleFontSizeChange={this.handleFontSizeChange}
+                                            handleColorChange={this.handleColorChange}
+                                            handleHeroImageChange={this.handleHeroImageChange}
+                                            headingText={this.state.headingText}
+                                            handleTextChange={this.handleTextChange}                                            
+                                        />
                                         : null
                                     }
                                 </li>
@@ -96,12 +128,15 @@ export default class StoreEditor extends Component {
                         </div>                
             
                         <TemplatePage 
-                            headerColor={this.state.headerColor} 
-                            headerHeight={this.state.headerHeight}
                             headerImage={this.state.headerImage}
                             logo={this.state.logo}
                             logoWidth={this.state.logoWidth}
-                            logoPos={this.state.logoPos}                            
+                            menuFontColor={this.state.menuFontColor}
+                            headingFontColor={this.state.headingFontColor}
+                            subHeadingFontColor={this.state.subHeadingFontColor}
+                            buttonFontColor={this.state.buttonFontColor}
+                            buttonBgColor={this.state.buttonBgColor}
+                            headingText={this.state.headingText}
                         />
                         
                 
