@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ColorPicker from '../ColorPicker'
 import ReactCSS from 'reactcss'
+import axios from 'axios'
 import './style.scss'
 
 export default class HeaderEditor extends Component {
@@ -10,14 +11,43 @@ export default class HeaderEditor extends Component {
         this.state = {
             showMenuFontColorPicker: false,
             showHeadingFontColorPicker: false,
-            showSubHeadingFontColorPicker: false,
+            showSubheadingFontColorPicker: false,
             showButtonFontColorPicker: false,
             showButtonBgColorPicker: false,
             headingText: this.props.headingText,
+            subheadingText: this.props.subheadingText,
+            heroImageFile: null,
+            heroImageUrl: this.props.heroImageFile,
+            heroImageLoaded: 0
         }
     }
 
+    handleSelectedFile = (e) => {
+        let heroImageUrl = URL.createObjectURL(e.target.files[0])
+        this.setState({
+            heroImageFile: e.target.files[0],
+            heroImageUrl: heroImageUrl,
+            heroImageLoaded: 0
+        })
+        this.props.updateHeroImage(heroImageUrl)
+    }
+
+    //TODO: NOT WORKING
+    handleUpload = () => {
+        const data = new FormData()
+        data.append('file', this.state.heroImageFile, this.state.heroImageFile.name)
+        data.append('userId', this.props.userId)
+        axios.post(`/api/account/images/upload/${this.props.userId}`, data, {
+            onUploadProgress: ProgressEvent => {
+                this.setState({
+                    heroImageLoaded: (ProgressEvent.loaded / ProgressEvent.total*100),
+                })
+            },
+        }).then(res => console.log(res.statusText))
+    }
+
     render(){
+        console.log(this.props.userId)
         const styles = ReactCSS({
             'default': {
                 menuFontColorSample: {
@@ -32,8 +62,8 @@ export default class HeaderEditor extends Component {
                     height: '20px',
                     border: '1px solid #000'
                 },
-                subHeadingFontColorSample: {
-                    background: this.props.subHeadingFontColor,
+                subheadingFontColorSample: {
+                    background: this.props.subheadingFontColor,
                     width: '20px',
                     height: '20px',
                     border: '1px solid #000'
@@ -58,13 +88,12 @@ export default class HeaderEditor extends Component {
                 
                 <div className='header-editor-section'>
                         <div>
-                            <ColorPicker color={this.state.headerColor} onChangeComplete={this.updateHeaderColor} /> 
                             <form>
 
                                 <h2>MENU:</h2>
                                 <label className='menu-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='64' value={this.props.menuFontSize} onChange={(e) => this.props.handleFontSizeChange(e, 'MENU')}/>
+                                    <input type='range' min='16' max='24' onChange={(e) => this.props.handleFontSizeChange(e, 'MENU')}/>
                                 </label>
 
                                 <label className='menu-font-color-select'>
@@ -77,7 +106,7 @@ export default class HeaderEditor extends Component {
                                 <h2>HEADING:</h2>
                                 <label className='heading-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='64' value={this.props.headingFontSize} onChange={(e) => this.props.handleFontSizeChange(e, 'HEADING')}/>
+                                    <input type='range' min='16' max='64' onChange={(e) => this.props.handleFontSizeChange(e, 'HEADING')}/>
                                 </label>
 
                                 <label className='heading-font-color-select'>
@@ -88,7 +117,7 @@ export default class HeaderEditor extends Component {
                                 </label>
                                 <label>
                                     Text:
-                                    <textarea className='heading-text-area' 
+                                    <textarea className='text-area' 
                                         value={this.state.headingText} 
                                         onChange={(e) => this.setState({headingText: e.target.value})} />
                                 </label>
@@ -98,27 +127,28 @@ export default class HeaderEditor extends Component {
                                 <h2>SUBHEADING:</h2>
                                 <label className='sub-heading-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='64' 
-                                        value={this.state.subHeadingFontSize} 
-                                        onChange={(e) => this.setState({subHeadingText: e.value})} 
-                                        />                                       
+                                    <input type='range' min='16' max='44' onChange={(e) => this.props.handleFontSizeChange(e, 'SUBHEADING')} />                                       
                                 </label>
 
                                 <label className='sub-heading-font-color-select'>
                                     Font-Color:                                   
-                                    <div style={styles.subHeadingFontColorSample} onClick={() => this.setState({showSubHeadingFontColorPicker: !this.state.showSubHeadingFontColorPicker})} />
-                                    {this.state.showSubHeadingFontColorPicker ? <ColorPicker color={this.props.subHeadingFontColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'SUBHEADING_FONT')} />
+                                    <div style={styles.subheadingFontColorSample} onClick={() => this.setState({showSubheadingFontColorPicker: !this.state.showSubheadingFontColorPicker})} />
+                                    {this.state.showSubheadingFontColorPicker ? <ColorPicker color={this.props.subheadingFontColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'SUBHEADING_FONT')} />
                                     : null}                             
                                 </label>
-                                <label className='sub-heading-text-area'>
+                                <label>
                                     Text:
-                                    <textarea />
+                                    <textarea className='text-area'
+                                        value={this.state.subheadingText}
+                                        onChange={(e) => this.setState({ subheadingText: e.target.value })}
+                                    />
+                                    <div onClick={() => this.props.handleTextChange(this.state.subheadingText, 'SUBHEADING')}>Submit</div>
                                 </label>
 
                                 <h2>BUTTON:</h2>
                                 <label className='button-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='64' value={this.props.buttonFontSize} onChange={(e) => this.props.handleButtonFontSizeChange(e)}/>
+                                    <input type='range' min='16' max='24' onChange={(e) => this.props.handleFontSizeChange(e, 'BUTTON')}/>
                                 </label>
                                 <label className='button-font-color-select'>
                                     Font-Color:                                    
@@ -135,9 +165,9 @@ export default class HeaderEditor extends Component {
 
                                 BACKGROUND:
                                 <label className='bg-select'>
-                                    <input type='file' onChange={(e) => this.props.handleHeroImageChange } />
+                                    <input type='file' onChange={(e) => this.handleSelectedFile(e) } />
                                 </label>
-                                
+                                <button onClick={() => this.handleUpload()}>Upload</button>
                             </form>
                             
                         </div>

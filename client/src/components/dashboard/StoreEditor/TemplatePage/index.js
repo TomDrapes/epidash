@@ -11,7 +11,7 @@ export default class TemplatePage extends Component {
     }
 
     render(){
-        console.log(this.props.headerImage)
+        
         const styles = reactCSS({
             'default': {
                 logo: {                    
@@ -24,7 +24,7 @@ export default class TemplatePage extends Component {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-start',   
-                    backgroundImage: `url(${this.props.headerImage})`,
+                    backgroundImage: `url(${this.props.heroImage})`,
                     backgroundSize: '100% 100%'
 
                 },
@@ -34,7 +34,8 @@ export default class TemplatePage extends Component {
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'space-around'
+                    justifyContent: 'space-around',
+                    fontSize: this.props.menuFontSize
                 },
 
                 headerMenuLinks: {
@@ -43,9 +44,8 @@ export default class TemplatePage extends Component {
                     width: '20%',
                 },
 
-                buyNowOverlay: {
+                headerOverlay: {
                     color: 'white',
-                    fontSize: '44px',
                     justifySelf: 'center',
                     flex: 1,
                     display: 'flex',
@@ -54,22 +54,23 @@ export default class TemplatePage extends Component {
                     textAlign: 'center'
                 },
 
-                buyNowTitle: {
-                    fontSize: '44px',
+                headerTitle: {
+                    fontSize: this.props.headingFontSize,
                     color: this.props.headingFontColor
                 },
-                buyNowSubtitle: {
-                    fontSize: '22px',
-                    color: this.props.subHeadingFontColor
+                headerSubtitle: {
+                    fontSize: this.props.subheadingFontSize,
+                    color: this.props.subheadingFontColor
                 },
                 buyNowBtn: {
-                    fontSize: '22px',
+                    fontSize: this.props.buttonFontSize,
                     background: this.props.buttonBgColor,
                     color: this.props.buttonFontColor,
                     borderColor: this.props.buttonFontColor,
                     border: '2px solid white',
                     padding: '10px',
-                    borderRadius: '3px'
+                    borderRadius: '3px',
+                    marginTop: '10px'
                 },
                 body: {
                     padding: '0px 20px 0px 20px',
@@ -163,10 +164,10 @@ export default class TemplatePage extends Component {
                                 <div>Cart <i className="fas fa-cart-plus"></i></div>
                             </div>                            
                         </div>
-                        <div style={styles.buyNowOverlay}>
+                        <div style={styles.headerOverlay}>
                             <div>
-                                <p style={styles.buyNowTitle}>{this.props.headingText}</p>
-                                <p style={styles.buyNowSubtitle}>SALE ON NOW | FREE SHIPPING WORLD WIDE</p>
+                                <p style={styles.headerTitle}>{this.props.headingText}</p>
+                                <p style={styles.headerSubtitle}>{this.props.subheadingText}</p>
                                 <button style={styles.buyNowBtn}>Buy Now</button>                                
                             </div>
                         </div>

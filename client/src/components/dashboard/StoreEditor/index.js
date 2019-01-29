@@ -5,7 +5,9 @@ import LogoEditor from './LogoEditor'
 import HeaderEditor from './HeaderEditor'
 import './style.scss'
 
-const headingPlaceholderText = 'The Modern Faux Sunglass'
+const headingPlaceholderText = 'The Modern Faux Sunglases'
+const subheadingPlaceholderText = 'SALE ON NOW | FREE SHIPPING WORLD WIDE'
+
 
 export default class StoreEditor extends Component {
 
@@ -17,12 +19,17 @@ export default class StoreEditor extends Component {
             logoWidth: '100',
             selectedMenuItem: '',
             menuItemActive: false,
-            headerImage: '/images/header_placeholder_1920.jpg',
+            heroImage: '/images/header_placeholder_1920.jpg',
             menuFontColor: '#fff',
+            menuFontSize: '18px',            
             headingText: headingPlaceholderText,
             headingFontColor: '#fff',
-            subHeadingFontColor: '#fff',
+            headingFontSize: '44px',
+            headingFontColor: '#fff',
+            subheadingFontSize: '22px',
+            subheadingText: subheadingPlaceholderText,
             buttonFontColor: '#fff',
+            buttonFontSize: '22px',
             buttonBgColor: '#2c2c2c'
         }       
     }
@@ -48,7 +55,7 @@ export default class StoreEditor extends Component {
             break
             case 'HEADING_FONT': this.setState({ headingFontColor: event.hex.toString() })
             break
-            case 'SUBHEADING_FONT': this.setState({ subHeadingFontColor: event.hex.toString() })
+            case 'SUBHEADING_FONT': this.setState({ subheadingFontColor: event.hex.toString() })
             break
             case 'BUTTON_FONT': this.setState({ buttonFontColor: event.hex.toString()})
             break
@@ -58,8 +65,28 @@ export default class StoreEditor extends Component {
         
     }
 
+    handleFontSizeChange = (event, elem) => {
+        console.log(event.target.value)
+        console.log(elem)
+        switch(elem){
+            case 'MENU': this.setState({ menuFontSize: `${event.target.value}px` })
+            break
+            case 'HEADING': this.setState({ headingFontSize: `${event.target.value}px` })
+            break
+            case 'SUBHEADING': this.setState({ subheadingFontSize: `${event.target.value}px` })
+            break
+            case 'BUTTON': this.setState({ buttonFontSize: `${event.target.value}px` })
+            break
+        }
+    }
+
     handleTextChange = (e, elem) => {
-        this.setState({ headingText: e })
+        switch (elem) {
+            case 'HEADING': this.setState({ headingText: e })
+            break
+            case 'SUBHEADING': this.setState({ subheadingText: e })
+            break
+        }
     }
 
     updateLogo = (selectedLogo) => {
@@ -70,9 +97,8 @@ export default class StoreEditor extends Component {
         this.setState({ logoWidth: width})
     }
 
-    updateLogoPos = (event) => {
-        console.log(event.target.value)
-        this.setState({ logoPos: event.target.value })
+    updateHeroImage = (heroImage) => {
+        this.setState({ heroImage })
     }
 
     render(){
@@ -103,12 +129,14 @@ export default class StoreEditor extends Component {
                                     <h2 onClick={() => this.changeMenuState('header')}>HEADER {this.headerCarat('header')}</h2>
                                     {this.state.selectedMenuItem === 'header' ?
                                         <HeaderEditor 
+                                            userId={this.props.userId}
                                             menuFontColor={this.state.menuFontColor}
                                             menuFontSize={this.state.menuFontSize}
                                             headingFontColor={this.state.headingFontColor}
                                             headingFontSize={this.state.headingFontSize}
-                                            subHeadingFontColor={this.state.subHeadingFontColor}
-                                            subHeadingFontSize={this.state.subHeadingFontSize}
+                                            subheadingFontColor={this.state.subheadingFontColor}
+                                            subheadingFontSize={this.state.subheadingFontSize}
+                                            subheadingText={this.state.subheadingText}
                                             buttonFontSize={this.state.buttonFontSize}
                                             buttonFontColor={this.state.buttonFontColor}
                                             buttonBgColor={this.state.buttonBgColor}
@@ -117,6 +145,7 @@ export default class StoreEditor extends Component {
                                             handleHeroImageChange={this.handleHeroImageChange}
                                             headingText={this.state.headingText}
                                             handleTextChange={this.handleTextChange}                                            
+                                            updateHeroImage={this.updateHeroImage}
                                         />
                                         : null
                                     }
@@ -128,13 +157,18 @@ export default class StoreEditor extends Component {
                         </div>                
             
                         <TemplatePage 
-                            headerImage={this.state.headerImage}
+                            heroImage={this.state.heroImage}
                             logo={this.state.logo}
                             logoWidth={this.state.logoWidth}
                             menuFontColor={this.state.menuFontColor}
+                            menuFontSize={this.state.menuFontSize}
                             headingFontColor={this.state.headingFontColor}
-                            subHeadingFontColor={this.state.subHeadingFontColor}
+                            headingFontSize={this.state.headingFontSize}
+                            subheadingFontColor={this.state.subheadingFontColor}
+                            subheadingFontSize={this.state.subheadingFontSize}
+                            subheadingText={this.state.subheadingText}
                             buttonFontColor={this.state.buttonFontColor}
+                            buttonFontSize={this.state.buttonFontSize}
                             buttonBgColor={this.state.buttonBgColor}
                             headingText={this.state.headingText}
                         />
