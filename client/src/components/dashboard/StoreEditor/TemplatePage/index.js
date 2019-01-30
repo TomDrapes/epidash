@@ -11,10 +11,10 @@ export default class TemplatePage extends Component {
     }
 
     render(){
-        
+
         const styles = reactCSS({
             'default': {
-                logo: {                    
+                logo: {
                     marginRight: 'auto'
                 },
                 header: {
@@ -23,9 +23,9 @@ export default class TemplatePage extends Component {
                     boxShadow: '0px 2px 5px 0px rgba(0,0,0,0.7)',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'flex-start',   
+                    justifyContent: 'flex-start',
                     backgroundImage: `url(${this.props.heroImage})`,
-                    backgroundSize: '100% 100%'
+                    backgroundSize: 'cover'
 
                 },
                 headerMenu: {
@@ -80,7 +80,7 @@ export default class TemplatePage extends Component {
                     display: 'flex',
                     alignItems: 'center',
                     height: '400px',
-                    margin: '20px 0px 20px 0px'          
+                    margin: '20px 0px 20px 0px'
                 },
                 bodyCopy: {
                     padding: '30px',
@@ -137,7 +137,7 @@ export default class TemplatePage extends Component {
                 },
                 productQuantityContainer: {
                     display: 'flex',
-                    alignItems: 'center',                    
+                    alignItems: 'center',
                 },
                 quantityBox: {
                     width: '30px',
@@ -153,48 +153,48 @@ export default class TemplatePage extends Component {
         })
         return (
             <div className='template-page-container'>
-                <div className='template-page'> 
+                <div className='template-page'>
                     <div className='template-header' style={styles.header}>
-                        
+
                         <div style={styles.headerMenu}>
                             <img style={styles.logo} src={this.props.logo} width={`${this.props.logoWidth}px`} height={`auto`} alt='page-logo' />
                             <div style={styles.headerMenuLinks}>
                                 <div>About Us</div>
                                 <div>Contact</div>
                                 <div>Cart <i className="fas fa-cart-plus"></i></div>
-                            </div>                            
+                            </div>
                         </div>
                         <div style={styles.headerOverlay}>
                             <div>
                                 <p style={styles.headerTitle}>{this.props.headingText}</p>
                                 <p style={styles.headerSubtitle}>{this.props.subheadingText}</p>
-                                <button style={styles.buyNowBtn}>Buy Now</button>                                
+                                <button style={styles.buyNowBtn}>Buy Now</button>
                             </div>
                         </div>
                     </div>
 
                     <div style={styles.body}>
                         <div style={styles.bodySection}>
-                            <img src={'/images/glasses_yellow.jpg'} width='auto' height='400px' />
+                            <img src={this.props.bodyImageA} width='auto' height='400px' alt="product" />
                             <div style={styles.bodyCopy}>
-                                <p style={styles.boldCopy}>Maecenas ultrices, mauris quis porta molestie</p>
+                                <p style={styles.boldCopy}>{this.props.sectionAHeading}</p>
                                 <hr/>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pretium condimentum ante a aliquet. Fusce sit amet nibh vitae ex commodo malesuada. Donec aliquam est gravida nisl venenatis mattis sit amet in libero. In sit amet hendrerit tortor, et finibus lacus. Vestibulum blandit cursus lorem, pellentesque feugiat sem facilisis at. In hac habitasse platea dictumst. Nullam blandit elit ipsum, nec cursus tellus ornare in. Quisque ultricies hendrerit quam</p>  
+                                <p>{this.props.sectionAText}</p>
                             </div>
                         </div>
                         <div style={styles.bodySection}>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.boldCopy}>Maecenas ultrices, mauris quis porta molestie</p>
+                                <p style={styles.boldCopy}>{this.props.sectionBHeading}</p>
                                 <hr/>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent pretium condimentum ante a aliquet. Fusce sit amet nibh vitae ex commodo malesuada. Donec aliquam est gravida nisl venenatis mattis sit amet in libero. In sit amet hendrerit tortor, et finibus lacus. Vestibulum blandit cursus lorem, pellentesque feugiat sem facilisis at. In hac habitasse platea dictumst. Nullam blandit elit ipsum, nec cursus tellus ornare in. Quisque ultricies hendrerit quam</p>
+                                <p>{this.props.sectionBText}</p>
                             </div>
-                            <img src={'/images/sunglasses_on_record.png'} width='auto' height='400px' />
-                        </div>                    
+                            <img src={this.props.bodyImageB} width='auto' height='400px' alt="product" />
+                        </div>
                     </div>
                     <div style={styles.bannerImage}>
                         <div style={styles.bannerCopy}>
                             <p style={styles.bannerCopyH1}>"A thoughtful quote or store motto"</p>
-                            <p style={styles.bannerCopyH2}>-Would look great here</p>                        
+                            <p style={styles.bannerCopyH2}>-Would look great here</p>
                         </div>
                     </div>
                     <div style={styles.productListing}>
@@ -204,14 +204,14 @@ export default class TemplatePage extends Component {
                             <p style={styles.productDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla elementum ante, sit amet venenatis odio pulvinar quis. Pellentesque facilisis risus nec ante rhoncus, nec tincidunt magna tristique. In id pretium magna, eu dictum libero. Mauris fermentum, lectus eget placerat lacinia, arcu diam posuere erat, ut porta lectus est quis libero. Maecenas ultrices, mauris quis porta molestie, sem felis rhoncus felis, id pharetra purus lorem id leo.</p>
                             <p style={styles.productPrice}>$19.99</p>
                             <div style={styles.productQuantityContainer}>
-                                <p style={styles.productQuantity}>Quantity: </p><input style={styles.quantityBox} type='number' value={1} />                            
+                                <p style={styles.productQuantity}>Quantity: </p><input style={styles.quantityBox} type='number' value={1} />
                             </div>
                             <button style={styles.atcBtn}>Add To Cart</button>
                         </div>
                     </div>
-        
-                </div>            
+
+                </div>
             </div>
-        )    
+        )
     }
 }

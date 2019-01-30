@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import TemplatePage from './TemplatePage'
-import ColorPicker from './ColorPicker'
 import LogoEditor from './LogoEditor'
 import HeaderEditor from './HeaderEditor'
 import BodyEditor from './BodyEditor'
+import {
+  headingPlaceholderText,
+  subheadingPlaceholderText,
+  sectionAHeading,
+  sectionAText,
+  sectionBHeading,
+  sectionBText
+} from './placeholderText'
 import './style.scss'
-
-const headingPlaceholderText = 'The Modern Faux Sunglases'
-const subheadingPlaceholderText = 'SALE ON NOW | FREE SHIPPING WORLD WIDE'
-
 
 export default class StoreEditor extends Component {
 
@@ -22,21 +25,26 @@ export default class StoreEditor extends Component {
             menuItemActive: false,
             heroImage: '/images/header_placeholder_1920.jpg',
             menuFontColor: '#fff',
-            menuFontSize: '18px',            
+            menuFontSize: '18px',
             headingText: headingPlaceholderText,
             headingFontColor: '#fff',
             headingFontSize: '44px',
-            headingFontColor: '#fff',
             subheadingFontSize: '22px',
             subheadingText: subheadingPlaceholderText,
             buttonFontColor: '#fff',
             buttonFontSize: '22px',
-            buttonBgColor: '#2c2c2c'
-        }       
+            buttonBgColor: '#2c2c2c',
+            bodyImageA: '/images/glasses_yellow.jpg',
+            bodyImageB: '/images/sunglasses_on_record.png',
+            sectionAHeading: sectionAHeading,
+            sectionAText: sectionAText,
+            sectionBHeading: sectionBHeading,
+            sectionBText: sectionBText
+        }
     }
 
     headerCarat = (menuItem) => {
-        if(this.state.menuItemActive && menuItem === this.state.selectedMenuItem) 
+        if(this.state.menuItemActive && menuItem === this.state.selectedMenuItem)
             return <i className='fa fa-caret-up' />
         return <i className='fa fa-caret-down' />
     }
@@ -62,8 +70,9 @@ export default class StoreEditor extends Component {
             break
             case 'BUTTON_BG': this.setState({ buttonBgColor: event.hex.toString() })
             break
+            default: break
         }
-        
+
     }
 
     handleFontSizeChange = (event, elem) => {
@@ -78,6 +87,7 @@ export default class StoreEditor extends Component {
             break
             case 'BUTTON': this.setState({ buttonFontSize: `${event.target.value}px` })
             break
+            default: break
         }
     }
 
@@ -87,6 +97,15 @@ export default class StoreEditor extends Component {
             break
             case 'SUBHEADING': this.setState({ subheadingText: e })
             break
+            case 'SECTION_A_HEADING': this.setState({ sectionAHeading: e})
+            break
+            case 'SECTION_A_TEXT': this.setState({ sectionAText: e })
+            break
+            case 'SECTION_B_TEXT': this.setState({ sectionBHeading: e })
+            break
+            case 'SECTION_B_HEADING': this.setState({ sectionBText: e })
+            break
+            default: break
         }
     }
 
@@ -102,22 +121,32 @@ export default class StoreEditor extends Component {
         this.setState({ heroImage })
     }
 
+    updateBodyImages = (imageUrl, section) => {
+      switch (section) {
+        case 'A': this.setState({ bodyImageA: imageUrl })
+        break
+        case 'B': this.setState({ bodyImageB: imageUrl })
+        break
+        default: break
+      }
+    }
+
     render(){
         return (
             <div className='store-editor-container'>
 
                 <div className='store-editor-window'>
-            
-                    <div className='store-editor-title-bar'>STORE EDITOR</div>                
-                    
+
+                    <div className='store-editor-title-bar'>STORE EDITOR</div>
+
                     <div className='store-editor'>
-            
+
                         <div className='store-editor-menu'>
                             <ul>
                                 <li>
                                     <h2 onClick={() => this.changeMenuState('logo')}>LOGO {this.headerCarat('logo')}</h2>
-                                    {this.state.selectedMenuItem === 'logo' ? 
-                                        <LogoEditor 
+                                    {this.state.selectedMenuItem === 'logo' ?
+                                        <LogoEditor
                                             userId={this.props.userId}
                                             updateLogo={this.updateLogo}
                                             updateLogoWidth={this.updateLogoWidth}
@@ -129,7 +158,7 @@ export default class StoreEditor extends Component {
                                 <li>
                                     <h2 onClick={() => this.changeMenuState('header')}>HEADER {this.headerCarat('header')}</h2>
                                     {this.state.selectedMenuItem === 'header' ?
-                                        <HeaderEditor 
+                                        <HeaderEditor
                                             userId={this.props.userId}
                                             menuFontColor={this.state.menuFontColor}
                                             menuFontSize={this.state.menuFontSize}
@@ -145,7 +174,7 @@ export default class StoreEditor extends Component {
                                             handleColorChange={this.handleColorChange}
                                             handleHeroImageChange={this.handleHeroImageChange}
                                             headingText={this.state.headingText}
-                                            handleTextChange={this.handleTextChange}                                            
+                                            handleTextChange={this.handleTextChange}
                                             updateHeroImage={this.updateHeroImage}
                                         />
                                         : null
@@ -153,8 +182,14 @@ export default class StoreEditor extends Component {
                                 </li>
                                 <li>
                                     <h2 onClick={() => this.changeMenuState('body')}>BODY {this.headerCarat('body')}</h2>
-                                    {this.state.selectedMenuItem === 'body' ? 
-                                        <BodyEditor 
+                                    {this.state.selectedMenuItem === 'body' ?
+                                        <BodyEditor
+                                          updateBodyImages={this.updateBodyImages}
+                                          sectionAHeading={this.state.sectionAHeading}
+                                          sectionAText={this.state.sectionAText}
+                                          sectionBHeading={this.state.sectionBHeading}
+                                          sectionBText={this.state.sectionBText}
+                                          handleTextChange={this.handleTextChange}
                                         />
                                         : null
                                     }
@@ -162,10 +197,10 @@ export default class StoreEditor extends Component {
                                 <li><h2>PRODUCT</h2></li>
                                 <li><h2>FOOTER</h2></li>
                             </ul>
-            
-                        </div>                
-            
-                        <TemplatePage 
+
+                        </div>
+
+                        <TemplatePage
                             heroImage={this.state.heroImage}
                             logo={this.state.logo}
                             logoWidth={this.state.logoWidth}
@@ -173,19 +208,25 @@ export default class StoreEditor extends Component {
                             menuFontSize={this.state.menuFontSize}
                             headingFontColor={this.state.headingFontColor}
                             headingFontSize={this.state.headingFontSize}
+                            headingText={this.state.headingText}
                             subheadingFontColor={this.state.subheadingFontColor}
                             subheadingFontSize={this.state.subheadingFontSize}
                             subheadingText={this.state.subheadingText}
                             buttonFontColor={this.state.buttonFontColor}
                             buttonFontSize={this.state.buttonFontSize}
                             buttonBgColor={this.state.buttonBgColor}
-                            headingText={this.state.headingText}
+                            sectionAHeading={this.state.sectionAHeading}
+                            sectionAText={this.state.sectionAText}
+                            sectionBHeading={this.state.sectionBHeading}
+                            sectionBText={this.state.sectionBText}
+                            bodyImageA={this.state.bodyImageA}
+                            bodyImageB={this.state.bodyImageB}
                         />
-                        
-                
+
+
                 </div>
             </div>
-                
+
             </div>
         )
     }
