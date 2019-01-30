@@ -32,8 +32,9 @@ export default class HeaderEditor extends Component {
         this.props.updateHeroImage(heroImageUrl)
     }
 
-    //TODO: NOT WORKING
+    
     handleUpload = () => {
+        
         const data = new FormData()
         data.append('file', this.state.heroImageFile, this.state.heroImageFile.name)
         data.append('userId', this.props.userId)
@@ -121,7 +122,7 @@ export default class HeaderEditor extends Component {
                                         value={this.state.headingText} 
                                         onChange={(e) => this.setState({headingText: e.target.value})} />
                                 </label>
-                                <div onClick={() => this.props.handleTextChange(this.state.headingText, 'HEADING')}>Submit</div>                                        
+                                <button type='button' onClick={() => this.props.handleTextChange(this.state.headingText, 'HEADING')}>Submit</button>
                                     
 
                                 <h2>SUBHEADING:</h2>
@@ -142,7 +143,7 @@ export default class HeaderEditor extends Component {
                                         value={this.state.subheadingText}
                                         onChange={(e) => this.setState({ subheadingText: e.target.value })}
                                     />
-                                    <div onClick={() => this.props.handleTextChange(this.state.subheadingText, 'SUBHEADING')}>Submit</div>
+                                    <button type='button' onClick={() => this.props.handleTextChange(this.state.subheadingText, 'SUBHEADING')}>Submit</button>
                                 </label>
 
                                 <h2>BUTTON:</h2>
@@ -165,9 +166,12 @@ export default class HeaderEditor extends Component {
 
                                 BACKGROUND:
                                 <label className='bg-select'>
-                                    <input type='file' onChange={(e) => this.handleSelectedFile(e) } />
+                                    <input 
+                                        type='file'
+                                        accept='image/png, image/jpeg' 
+                                        onChange={(e) => this.handleSelectedFile(e) } />
                                 </label>
-                                <button onClick={() => this.handleUpload()}>Upload</button>
+                                <button type='button' onClick={() => this.handleUpload()}>Upload</button>
                             </form>
                             
                         </div>

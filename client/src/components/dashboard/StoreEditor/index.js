@@ -3,6 +3,7 @@ import TemplatePage from './TemplatePage'
 import ColorPicker from './ColorPicker'
 import LogoEditor from './LogoEditor'
 import HeaderEditor from './HeaderEditor'
+import BodyEditor from './BodyEditor'
 import './style.scss'
 
 const headingPlaceholderText = 'The Modern Faux Sunglases'
@@ -146,6 +147,14 @@ export default class StoreEditor extends Component {
                                             headingText={this.state.headingText}
                                             handleTextChange={this.handleTextChange}                                            
                                             updateHeroImage={this.updateHeroImage}
+                                        />
+                                        : null
+                                    }
+                                </li>
+                                <li>
+                                    <h2 onClick={() => this.changeMenuState('body')}>BODY {this.headerCarat('body')}</h2>
+                                    {this.state.selectedMenuItem === 'body' ? 
+                                        <BodyEditor 
                                         />
                                         : null
                                     }
