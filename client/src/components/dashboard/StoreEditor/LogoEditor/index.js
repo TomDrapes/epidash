@@ -1,4 +1,5 @@
 import React, { Component, PureComponent } from 'react'
+import ImageUploader from '../Components/ImageUploader'
 import axios from 'axios'
 import './style.scss'
 
@@ -18,30 +19,7 @@ export default class LogoEditor extends PureComponent {
              this.setState({ images: res.data })
              console.log(res.statusText)
         })
-    }
-        
-    handleSelectedFile = (event) => {
-        let logoUrl = URL.createObjectURL(event.target.files[0])
-        this.setState({
-            selectedFile: event.target.files[0],
-            loaded: 0,
-            logo: logoUrl
-        })
-        this.props.updateLogo(logoUrl)
-    }
-
-    handleUpload = () => {
-        const data = new FormData()
-        data.append('file', this.state.selectedFile, this.state.selectedFile.name)
-        data.append('userId', this.props.userId)
-        axios.post(`/api/account/images/upload/${this.props.userId}`, data, {
-            onUploadProgress: ProgressEvent => {
-                this.setState({
-                    loaded: (ProgressEvent.loaded / ProgressEvent.total*100),
-                })
-            },
-        }).then(res => console.log(res.statusText))
-    }        
+    }   
     
     images() {
         if(this.state.images !== null){
@@ -62,25 +40,19 @@ export default class LogoEditor extends PureComponent {
         return (
             <div>                
                 <div className='logo-editor-section'>
-                    <input type='file' onChange={(e) => this.handleSelectedFile(e)} />                    
+                    <ImageUploader 
+                        userId={this.props.userId}
+                        image='LOGO'
+                        updateImage={this.props.updateImage}
+                    />                    
                     <div className='width-slider'>
                         <p>SIZE: </p>
                         <input type='range' min='100' max='400' value={this.props.logoWidth} onChange={(e) => this.handleLogoSizeAdjust(e)}/>
                     </div>
 
-                    <div className='logo-align-select-container'>
-                        <p>ALIGNMENT: </p>
-                        <select className='logo-align-selector' onChange={this.props.updateLogoPos} >
-                            <option value='flex-start'>Left</option>
-                            <option value='center' selected='selected'>Center</option>
-                            <option value='flex-end'>Right</option>
-                        </select>
-                    </div>
                     <div>
                         {this.state.logo !== null ? <img src={this.state.logo} width='100px' height='50px' /> : null}
-                    </div>
-                    <span><button onClick={() => this.handleUpload()}>Upload</button></span>
-                    <span> {Math.round(this.state.loaded,2)}%</span>
+                    </div>                   
                 </div>
             </div>
         )

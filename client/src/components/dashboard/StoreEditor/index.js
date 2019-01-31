@@ -30,16 +30,22 @@ export default class StoreEditor extends Component {
             headingFontColor: '#fff',
             headingFontSize: '44px',
             subheadingFontSize: '22px',
+            subheadingFontColor: '#fff',
             subheadingText: subheadingPlaceholderText,
             buttonFontColor: '#fff',
             buttonFontSize: '22px',
             buttonBgColor: '#2c2c2c',
             bodyImageA: '/images/glasses_yellow.jpg',
             bodyImageB: '/images/sunglasses_on_record.png',
+            bodyHeadingColor: '#373a3c',
+            bodyTextColor: '#373a3c',
+            bodyBgColor: '#fff',
+            bodyHeadingFontSize: '18px',
+            bodyTextFontSize: '18px',
             sectionAHeading: sectionAHeading,
             sectionAText: sectionAText,
             sectionBHeading: sectionBHeading,
-            sectionBText: sectionBText
+            sectionBText: sectionBText,
         }
     }
 
@@ -70,22 +76,30 @@ export default class StoreEditor extends Component {
             break
             case 'BUTTON_BG': this.setState({ buttonBgColor: event.hex.toString() })
             break
+            case 'BODY_HEADING': this.setState({ bodyHeadingColor: event.hex.toString() })
+            break
+            case 'BODY_TEXT': this.setState({ bodyTextColor: event.hex.toString() })
+            break
+            case 'BODY_BG': this.setState({ bodyBgColor: event.hex.toString() })
+            break
             default: break
         }
 
     }
 
-    handleFontSizeChange = (event, elem) => {
-        console.log(event.target.value)
-        console.log(elem)
+    handleFontSizeChange = (fontSize, elem) => {
         switch(elem){
-            case 'MENU': this.setState({ menuFontSize: `${event.target.value}px` })
+            case 'MENU': this.setState({ menuFontSize: `${fontSize}px` })
             break
-            case 'HEADING': this.setState({ headingFontSize: `${event.target.value}px` })
+            case 'HEADING': this.setState({ headingFontSize: `${fontSize}px` })
             break
-            case 'SUBHEADING': this.setState({ subheadingFontSize: `${event.target.value}px` })
+            case 'SUBHEADING': this.setState({ subheadingFontSize: `${fontSize}px` })
             break
-            case 'BUTTON': this.setState({ buttonFontSize: `${event.target.value}px` })
+            case 'HEADING_BUY_NOW_BUTTON': this.setState({ buttonFontSize: `${fontSize}px` })
+            break
+            case 'BODY_HEADING': this.setState({ bodyHeadingFontSize: `${fontSize}px`})
+            break
+            case 'BODY_TEXT': this.setState({ bodyTextFontSize: `${fontSize}px`})
             break
             default: break
         }
@@ -93,7 +107,7 @@ export default class StoreEditor extends Component {
 
     handleTextChange = (e, elem) => {
         switch (elem) {
-            case 'HEADING': this.setState({ headingText: e })
+            case 'MAIN_HEADING': this.setState({ headingText: e })
             break
             case 'SUBHEADING': this.setState({ subheadingText: e })
             break
@@ -101,34 +115,30 @@ export default class StoreEditor extends Component {
             break
             case 'SECTION_A_TEXT': this.setState({ sectionAText: e })
             break
-            case 'SECTION_B_TEXT': this.setState({ sectionBHeading: e })
+            case 'SECTION_B_HEADING': this.setState({ sectionBHeading: e })
             break
-            case 'SECTION_B_HEADING': this.setState({ sectionBText: e })
+            case 'SECTION_B_TEXT': this.setState({ sectionBText: e })
             break
             default: break
         }
-    }
-
-    updateLogo = (selectedLogo) => {
-        this.setState({ logo: selectedLogo })
     }
 
     updateLogoWidth = (width) => {
         this.setState({ logoWidth: width})
     }
 
-    updateHeroImage = (heroImage) => {
-        this.setState({ heroImage })
-    }
-
-    updateBodyImages = (imageUrl, section) => {
-      switch (section) {
-        case 'A': this.setState({ bodyImageA: imageUrl })
-        break
-        case 'B': this.setState({ bodyImageB: imageUrl })
-        break
-        default: break
-      }
+    updateImage = (imageURL, image) => {
+        switch (image) {
+            case 'HERO_IMAGE': this.setState({ heroImage: imageURL })
+            break
+            case 'LOGO': this.setState({ logo: imageURL })
+            break
+            case 'BODY_IMAGE_A': this.setState({ bodyImageA: imageURL})
+            break
+            case 'BODY_IMAGE_B': this.setState({ bodyImageB: imageURL })
+            break
+            default: break
+        }
     }
 
     render(){
@@ -148,11 +158,10 @@ export default class StoreEditor extends Component {
                                     {this.state.selectedMenuItem === 'logo' ?
                                         <LogoEditor
                                             userId={this.props.userId}
-                                            updateLogo={this.updateLogo}
+                                            updateImage={this.updateImage}
                                             updateLogoWidth={this.updateLogoWidth}
-                                            updateLogoPos={this.updateLogoPos}
                                             logoWidth={this.state.logoWidth}
-                                            logoPos={this.state.logoPos}
+                                            logo={this.state.logo}
                                         /> : null}
                                 </li>
                                 <li>
@@ -175,7 +184,7 @@ export default class StoreEditor extends Component {
                                             handleHeroImageChange={this.handleHeroImageChange}
                                             headingText={this.state.headingText}
                                             handleTextChange={this.handleTextChange}
-                                            updateHeroImage={this.updateHeroImage}
+                                            updateImage={this.updateImage}
                                         />
                                         : null
                                     }
@@ -184,12 +193,17 @@ export default class StoreEditor extends Component {
                                     <h2 onClick={() => this.changeMenuState('body')}>BODY {this.headerCarat('body')}</h2>
                                     {this.state.selectedMenuItem === 'body' ?
                                         <BodyEditor
-                                          updateBodyImages={this.updateBodyImages}
+                                          updateImage={this.updateImage}
                                           sectionAHeading={this.state.sectionAHeading}
                                           sectionAText={this.state.sectionAText}
                                           sectionBHeading={this.state.sectionBHeading}
                                           sectionBText={this.state.sectionBText}
                                           handleTextChange={this.handleTextChange}
+                                          handleColorChange={this.handleColorChange}
+                                          bodyHeadingColor={this.state.bodyHeadingColor}
+                                          bodyTextColor={this.state.bodyTextColor}
+                                          bodyBgColor={this.state.bodyBgColor}
+                                          handleFontSizeChange={this.handleFontSizeChange}
                                         />
                                         : null
                                     }
@@ -221,6 +235,11 @@ export default class StoreEditor extends Component {
                             sectionBText={this.state.sectionBText}
                             bodyImageA={this.state.bodyImageA}
                             bodyImageB={this.state.bodyImageB}
+                            bodyHeadingColor={this.state.bodyHeadingColor}
+                            bodyTextColor={this.state.bodyTextColor}
+                            bodyBgColor={this.state.bodyBgColor}
+                            bodyHeadingFontSize={this.state.bodyHeadingFontSize}
+                            bodyTextFontSize={this.state.bodyTextFontSize}
                         />
 
 

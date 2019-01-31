@@ -1,89 +1,17 @@
 import React, { Component } from 'react'
-import ColorPicker from '../ColorPicker'
-import ReactCSS from 'reactcss'
-import axios from 'axios'
+import ColorSample from '../Components/ColorSample'
+import TextEditor from '../Components/TextEditor'
+import ImageUploader from '../Components/ImageUploader'
 import './style.scss'
 
 export default class HeaderEditor extends Component {
     constructor(props){
         super(props)
 
-        this.state = {
-            showMenuFontColorPicker: false,
-            showHeadingFontColorPicker: false,
-            showSubheadingFontColorPicker: false,
-            showButtonFontColorPicker: false,
-            showButtonBgColorPicker: false,
-            headingText: this.props.headingText,
-            subheadingText: this.props.subheadingText,
-            heroImageFile: null,
-            heroImageUrl: this.props.heroImageFile,
-            heroImageLoaded: 0
-        }
-    }
-
-    handleSelectedFile = (e) => {
-        let heroImageUrl = URL.createObjectURL(e.target.files[0])
-        this.setState({
-            heroImageFile: e.target.files[0],
-            heroImageUrl: heroImageUrl,
-            heroImageLoaded: 0
-        })
-        this.props.updateHeroImage(heroImageUrl)
-    }
-
-    
-    handleUpload = () => {
-        
-        const data = new FormData()
-        data.append('file', this.state.heroImageFile, this.state.heroImageFile.name)
-        data.append('userId', this.props.userId)
-        axios.post(`/api/account/images/upload/${this.props.userId}`, data, {
-            onUploadProgress: ProgressEvent => {
-                this.setState({
-                    heroImageLoaded: (ProgressEvent.loaded / ProgressEvent.total*100),
-                })
-            },
-        }).then(res => console.log(res.statusText))
-    }
+        this.state = {}
+    }    
 
     render(){
-        console.log(this.props.userId)
-        const styles = ReactCSS({
-            'default': {
-                menuFontColorSample: {
-                    background: this.props.menuFontColor,
-                    width: '20px',
-                    height: '20px',
-                    border: '1px solid #000'
-                },
-                headingFontColorSample: {
-                    background: this.props.headingFontColor,
-                    width: '20px',
-                    height: '20px',
-                    border: '1px solid #000'
-                },
-                subheadingFontColorSample: {
-                    background: this.props.subheadingFontColor,
-                    width: '20px',
-                    height: '20px',
-                    border: '1px solid #000'
-                },
-                buttonFontColorSample: {
-                    background: this.props.buttonFontColor,
-                    width: '20px',
-                    height: '20px',
-                    border: '1px solid #000'
-                },
-                buttonBgColorSample: {
-                    background: this.props.buttonBgColor,
-                    width: '20px',
-                    height: '20px',
-                    border: '1px solid #000'
-                }
-            }
-        })
-
         return (
             <div>
                 
@@ -94,84 +22,94 @@ export default class HeaderEditor extends Component {
                                 <h2>MENU:</h2>
                                 <label className='menu-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='24' onChange={(e) => this.props.handleFontSizeChange(e, 'MENU')}/>
+                                    <input type='range' min='16' max='24' onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'MENU')}/>
                                 </label>
 
                                 <label className='menu-font-color-select'>
                                     Font-Color:
-                                    <div className='menu-font-color-sample' style={styles.menuFontColorSample} onClick={() => this.setState({showMenuFontColorPicker: !this.state.showMenuFontColorPicker})} />
-                                    {this.state.showMenuFontColorPicker ? <ColorPicker color={this.props.menuFontColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'MENU_FONT')} />
-                                    : null}                             
+                                    <ColorSample 
+                                        color={this.props.menuFontColor}
+                                        elem={'MENU_FONT'}
+                                        handleColorChange={this.props.handleColorChange}
+                                    />                                                              
                                 </label>
 
                                 <h2>HEADING:</h2>
                                 <label className='heading-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='64' onChange={(e) => this.props.handleFontSizeChange(e, 'HEADING')}/>
+                                    <input type='range' min='16' max='64' onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'HEADING')}/>
                                 </label>
 
                                 <label className='heading-font-color-select'>
-                                    Font-Color:                                    
-                                    <div style={styles.headingFontColorSample} onClick={() => this.setState({showHeadingFontColorPicker: !this.state.showHeadingFontColorPicker})} />
-                                    {this.state.showHeadingFontColorPicker ? <ColorPicker color={this.props.headingFontColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'HEADING_FONT')} />
-                                    : null}                             
+                                    Font-Color:
+                                    <ColorSample 
+                                        color={this.props.headingFontColor}
+                                        elem={'HEADING_FONT'}
+                                        handleColorChange={this.props.handleColorChange}
+                                    />                                                                                                     
                                 </label>
                                 <label>
                                     Text:
-                                    <textarea className='text-area' 
-                                        value={this.state.headingText} 
-                                        onChange={(e) => this.setState({headingText: e.target.value})} />
-                                </label>
-                                <button type='button' onClick={() => this.props.handleTextChange(this.state.headingText, 'HEADING')}>Submit</button>
-                                    
+                                    <TextEditor 
+                                        text={this.props.headingText}
+                                        section='MAIN_HEADING'
+                                        handleTextChange={this.props.handleTextChange}
+                                    />                                    
+                                </label>                                                            
 
                                 <h2>SUBHEADING:</h2>
                                 <label className='sub-heading-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='44' onChange={(e) => this.props.handleFontSizeChange(e, 'SUBHEADING')} />                                       
+                                    <input type='range' min='16' max='44' onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'SUBHEADING')} />                                       
                                 </label>
 
                                 <label className='sub-heading-font-color-select'>
-                                    Font-Color:                                   
-                                    <div style={styles.subheadingFontColorSample} onClick={() => this.setState({showSubheadingFontColorPicker: !this.state.showSubheadingFontColorPicker})} />
-                                    {this.state.showSubheadingFontColorPicker ? <ColorPicker color={this.props.subheadingFontColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'SUBHEADING_FONT')} />
-                                    : null}                             
+                                    Font-Color:
+                                    <ColorSample 
+                                        color={this.props.subheadingFontColor}
+                                        elem={'SUBHEADING_FONT'}
+                                        handleColorChange={this.props.handleColorChange}
+                                    />                                                                                                    
                                 </label>
                                 <label>
                                     Text:
-                                    <textarea className='text-area'
-                                        value={this.state.subheadingText}
-                                        onChange={(e) => this.setState({ subheadingText: e.target.value })}
-                                    />
-                                    <button type='button' onClick={() => this.props.handleTextChange(this.state.subheadingText, 'SUBHEADING')}>Submit</button>
+                                    <TextEditor 
+                                        text={this.props.subheadingText}
+                                        section='MAIN_SUBHEADING'
+                                        handleTextChange={this.props.handleTextChange}
+                                    />                                    
                                 </label>
 
                                 <h2>BUTTON:</h2>
                                 <label className='button-font-size-select'>
                                     Font-Size:
-                                    <input type='range' min='16' max='24' onChange={(e) => this.props.handleFontSizeChange(e, 'BUTTON')}/>
+                                    <input type='range' min='16' max='24' onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'HEADING_BUY_NOW_BUTTON')}/>
                                 </label>
                                 <label className='button-font-color-select'>
-                                    Font-Color:                                    
-                                    <div style={styles.buttonFontColorSample} onClick={() => this.setState({showButtonFontColorPicker: !this.state.showButtonFontColorPicker})} />
-                                    {this.state.showButtonFontColorPicker ? <ColorPicker color={this.props.buttonFontColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'BUTTON_FONT')} />
-                                    : null} 
+                                    Font-Color:
+                                    <ColorSample 
+                                        color={this.props.buttonFontColor}
+                                        elem={'BUTTON_FONT'}
+                                        handleColorChange={this.props.handleColorChange}
+                                    />                                                                        
                                 </label>
                                 <label className='button-color-select'>
                                     Background-Color:
-                                    <div style={styles.buttonBgColorSample} onClick={() => this.setState({showButtonBgColorPicker: !this.state.showButtonBgColorPicker})} />
-                                    {this.state.showButtonBgColorPicker ? <ColorPicker color={this.props.buttonBgColor} onChangeComplete={(e) => this.props.handleColorChange(e, 'BUTTON_BG')} />
-                                    : null} 
+                                    <ColorSample 
+                                        color={this.props.buttonBgColor}
+                                        elem={'BUTTON_BG'}
+                                        handleColorChange={this.props.handleColorChange}
+                                    /> 
                                 </label>
 
                                 BACKGROUND:
                                 <label className='bg-select'>
-                                    <input 
-                                        type='file'
-                                        accept='image/png, image/jpeg' 
-                                        onChange={(e) => this.handleSelectedFile(e) } />
-                                </label>
-                                <button type='button' onClick={() => this.handleUpload()}>Upload</button>
+                                    <ImageUploader 
+                                        userId={this.props.userId} 
+                                        image='HERO_IMAGE' 
+                                        updateImage={this.props.updateImage} 
+                                    />                                   
+                                </label>                                
                             </form>
                             
                         </div>

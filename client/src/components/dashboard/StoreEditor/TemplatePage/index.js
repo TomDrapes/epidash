@@ -73,22 +73,26 @@ export default class TemplatePage extends Component {
                     marginTop: '10px'
                 },
                 body: {
-                    padding: '0px 20px 0px 20px',
-                    background: 'white'
+                    background: this.props.bodyBgColor
                 },
                 bodySection: {
                     display: 'flex',
                     alignItems: 'center',
                     height: '400px',
-                    margin: '20px 0px 20px 0px'
+                    margin: '20px 20px 20px 20px',
                 },
                 bodyCopy: {
                     padding: '30px',
                     textAlign: 'center',
                 },
-                boldCopy: {
+                bodyHeading: {
                     fontWeight: 'bold',
-                    fontSize: '18px'
+                    fontSize: this.props.bodyHeadingFontSize,
+                    color: this.props.bodyHeadingColor
+                },
+                bodyText: {
+                    color: this.props.bodyTextColor,
+                    fontSize: this.props.bodyTextFontSize
                 },
                 bannerImage: {
                     backgroundImage: `url('/images/girl_sunglasses.jpg')`,
@@ -175,20 +179,24 @@ export default class TemplatePage extends Component {
 
                     <div style={styles.body}>
                         <div style={styles.bodySection}>
-                            <img src={this.props.bodyImageA} width='auto' height='400px' alt="product" />
+                            <div>
+                                <img src={this.props.bodyImageA} width='auto' height='400px' alt="product" />
+                            </div>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.boldCopy}>{this.props.sectionAHeading}</p>
+                                <p style={styles.bodyHeading}>{this.props.sectionAHeading}</p>
                                 <hr/>
-                                <p>{this.props.sectionAText}</p>
+                                <p style={styles.bodyText}>{this.props.sectionAText}</p>
                             </div>
                         </div>
                         <div style={styles.bodySection}>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.boldCopy}>{this.props.sectionBHeading}</p>
+                                <p style={styles.bodyHeading}>{this.props.sectionBHeading}</p>
                                 <hr/>
-                                <p>{this.props.sectionBText}</p>
+                                <p style={styles.bodyText}>{this.props.sectionBText}</p>
                             </div>
-                            <img src={this.props.bodyImageB} width='auto' height='400px' alt="product" />
+                            <div>
+                                <img src={this.props.bodyImageB} width='auto' height='400px' alt="product" />
+                            </div>
                         </div>
                     </div>
                     <div style={styles.bannerImage}>
