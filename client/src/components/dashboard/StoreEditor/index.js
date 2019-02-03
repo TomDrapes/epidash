@@ -3,6 +3,7 @@ import TemplatePage from './TemplatePage'
 import LogoEditor from './LogoEditor'
 import HeaderEditor from './HeaderEditor'
 import BodyEditor from './BodyEditor'
+import BannerEditor from './BannerEditor'
 import {
   headingPlaceholderText,
   subheadingPlaceholderText,
@@ -46,6 +47,7 @@ export default class StoreEditor extends Component {
             sectionAText: sectionAText,
             sectionBHeading: sectionBHeading,
             sectionBText: sectionBText,
+            bannerImage: '/images/girl_sunglasses.jpg'
         }
     }
 
@@ -137,6 +139,8 @@ export default class StoreEditor extends Component {
             break
             case 'BODY_IMAGE_B': this.setState({ bodyImageB: imageURL })
             break
+            case 'BANNER_IMAGE': this.setState({ bannerImage: imageURL })
+            break
             default: break
         }
     }
@@ -208,6 +212,23 @@ export default class StoreEditor extends Component {
                                         : null
                                     }
                                 </li>
+                                <li>
+                                    <h2 onClick={() => this.changeMenuState('banner')}>BANNER {this.headerCarat('banner')}</h2>
+                                    {this.state.selectedMenuItem === 'banner' ? 
+                                        <BannerEditor
+                                            userId={this.props.userId}
+                                            updateImage={this.updateImage}
+                                            text={this.state.bannerText}
+                                            textColor={this.state.bannerTextColor}
+                                            textBgColor={this.state.bannerTextBgColor}
+                                            handleTextChange={this.handleTextChange}
+                                            handleFontSizeChange={this.handleFontSizeChange}
+                                            handleColorChange={this.handleColorChange}
+                                        />
+                                        : null
+                                    }
+                                </li>
+
                                 <li><h2>PRODUCT</h2></li>
                                 <li><h2>FOOTER</h2></li>
                             </ul>
