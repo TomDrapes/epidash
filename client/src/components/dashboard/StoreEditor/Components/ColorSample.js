@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import ColorPicker from '../ColorPicker'
+import ColorPicker from './ColorPicker'
 import reactCSS from 'reactcss'
 
 export default class ColorSample extends Component {
