@@ -46,8 +46,8 @@ export default class LogoEditor extends PureComponent {
                         updateImage={this.props.updateImage}
                     />                    
                     <div className='width-slider'>
-                        <p>SIZE: </p>
-                        <input type='range' min='100' max='400' value={this.props.logoWidth} onChange={(e) => this.handleLogoSizeAdjust(e)}/>
+                        <p>Size:</p>
+                        <input className='slider' type='range' min='100' max='400' value={this.props.logoWidth} onChange={(e) => this.handleLogoSizeAdjust(e)}/>
                     </div>
 
                     <div>
