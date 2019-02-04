@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import reactCSS from 'reactcss'
+import ReactHtmlParser from 'react-html-parser'
 import './style.scss'
 
 
@@ -20,7 +21,6 @@ export default class TemplatePage extends Component {
                 header: {
                     width: '100%',
                     height: '100%',
-                    boxShadow: '0px 2px 5px 0px rgba(0,0,0,0.7)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-start',
@@ -35,7 +35,7 @@ export default class TemplatePage extends Component {
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'space-around',
-                    fontSize: this.props.menuFontSize
+                    fontSize: `${this.props.menuFontSize}px`
                 },
 
                 headerMenuLinks: {
@@ -55,15 +55,15 @@ export default class TemplatePage extends Component {
                 },
 
                 headerTitle: {
-                    fontSize: this.props.headingFontSize,
+                    fontSize: `${this.props.headingFontSize}px`,
                     color: this.props.headingFontColor
                 },
                 headerSubtitle: {
-                    fontSize: this.props.subheadingFontSize,
-                    color: this.props.subheadingFontColor
+                    fontSize: `${this.props.subheadingFontSize}px`,
+                    color: this.props.subheadingFontColor,
                 },
                 buyNowBtn: {
-                    fontSize: this.props.buttonFontSize,
+                    fontSize: `${this.props.buttonFontSize}px`,
                     background: this.props.buttonBgColor,
                     color: this.props.buttonFontColor,
                     borderColor: this.props.buttonFontColor,
@@ -87,12 +87,12 @@ export default class TemplatePage extends Component {
                 },
                 bodyHeading: {
                     fontWeight: 'bold',
-                    fontSize: this.props.bodyHeadingFontSize,
+                    fontSize: `${this.props.bodyHeadingFontSize}px`,
                     color: this.props.bodyHeadingColor
                 },
                 bodyText: {
                     color: this.props.bodyTextColor,
-                    fontSize: this.props.bodyTextFontSize
+                    fontSize: `${this.props.bodyTextFontSize}px`
                 },
                 bannerImage: {
                     backgroundImage: `url('/images/girl_sunglasses.jpg')`,
@@ -170,8 +170,8 @@ export default class TemplatePage extends Component {
                         </div>
                         <div style={styles.headerOverlay}>
                             <div>
-                                <p style={styles.headerTitle}>{this.props.headingText}</p>
-                                <p style={styles.headerSubtitle}>{this.props.subheadingText}</p>
+                                <div style={styles.headerTitle}>{ReactHtmlParser(this.props.headingText)}</div>
+                                <div style={styles.headerSubtitle}>{ReactHtmlParser(this.props.subheadingText)}</div>
                                 <button style={styles.buyNowBtn}>Buy Now</button>
                             </div>
                         </div>

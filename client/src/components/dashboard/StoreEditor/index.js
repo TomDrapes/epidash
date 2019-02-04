@@ -26,23 +26,23 @@ export default class StoreEditor extends Component {
             menuItemActive: false,
             heroImage: '/images/header_placeholder_1920.jpg',
             menuFontColor: '#fff',
-            menuFontSize: '18px',
+            menuFontSize: '18',
             headingText: headingPlaceholderText,
-            headingFontColor: '#fff',
-            headingFontSize: '44px',
-            subheadingFontSize: '22px',
+            headingFontColor: '#fefefe',
+            headingFontSize: '44',
+            subheadingFontSize: '22',
             subheadingFontColor: '#fff',
             subheadingText: subheadingPlaceholderText,
             buttonFontColor: '#fff',
-            buttonFontSize: '22px',
+            buttonFontSize: '22',
             buttonBgColor: '#2c2c2c',
             bodyImageA: '/images/glasses_yellow.jpg',
             bodyImageB: '/images/sunglasses_on_record.png',
             bodyHeadingColor: '#373a3c',
             bodyTextColor: '#373a3c',
             bodyBgColor: '#fff',
-            bodyHeadingFontSize: '18px',
-            bodyTextFontSize: '18px',
+            bodyHeadingFontSize: '18',
+            bodyTextFontSize: '18',
             sectionAHeading: sectionAHeading,
             sectionAText: sectionAText,
             sectionBHeading: sectionBHeading,
@@ -70,9 +70,9 @@ export default class StoreEditor extends Component {
         switch (elem) {
             case 'MENU_FONT': this.setState({ menuFontColor: event.hex.toString() })
             break
-            case 'HEADING_FONT': this.setState({ headingFontColor: event.hex.toString() })
+            case 'MAIN_HEADING': this.setState({ headingFontColor: event.hex.toString() })
             break
-            case 'SUBHEADING_FONT': this.setState({ subheadingFontColor: event.hex.toString() })
+            case 'MAIN_SUBHEADING': this.setState({ subheadingFontColor: event.hex.toString() })
             break
             case 'BUTTON_FONT': this.setState({ buttonFontColor: event.hex.toString()})
             break
@@ -91,27 +91,28 @@ export default class StoreEditor extends Component {
 
     handleFontSizeChange = (fontSize, elem) => {
         switch(elem){
-            case 'MENU': this.setState({ menuFontSize: `${fontSize}px` })
+            case 'MENU': this.setState({ menuFontSize: fontSize })
             break
-            case 'HEADING': this.setState({ headingFontSize: `${fontSize}px` })
+            case 'MAIN_HEADING': this.setState({ headingFontSize: fontSize })
             break
-            case 'SUBHEADING': this.setState({ subheadingFontSize: `${fontSize}px` })
+            case 'SUBHEADING': this.setState({ subheadingFontSize: fontSize })
             break
-            case 'HEADING_BUY_NOW_BUTTON': this.setState({ buttonFontSize: `${fontSize}px` })
+            case 'HEADING_BUY_NOW_BUTTON': this.setState({ buttonFontSize: fontSize })
             break
-            case 'BODY_HEADING': this.setState({ bodyHeadingFontSize: `${fontSize}px`})
+            case 'BODY_HEADING': this.setState({ bodyHeadingFontSize: fontSize})
             break
-            case 'BODY_TEXT': this.setState({ bodyTextFontSize: `${fontSize}px`})
+            case 'BODY_TEXT': this.setState({ bodyTextFontSize: fontSize})
             break
             default: break
         }
     }
 
     handleTextChange = (e, elem) => {
+        console.log(typeof e)
         switch (elem) {
             case 'MAIN_HEADING': this.setState({ headingText: e })
             break
-            case 'SUBHEADING': this.setState({ subheadingText: e })
+            case 'MAIN_SUBHEADING': this.setState({ subheadingText: e })
             break
             case 'SECTION_A_HEADING': this.setState({ sectionAHeading: e})
             break

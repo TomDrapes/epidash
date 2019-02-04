@@ -94,7 +94,7 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
           hsv={ hsv }
           onChange={ onChange }
         />
-  </div>
+      </div>
       <div style={ styles.controls } className="flexbox-fix">
         <div style={ styles.sliders }>
           <div style={ styles.hue }>
@@ -103,7 +103,7 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
               hsl={ hsl }
               onChange={ onChange }
             />
-</div>
+          </div>
           <div style={ styles.alpha }>
             <Alpha
               style={ styles.Alpha }
@@ -112,13 +112,13 @@ export const Sketch = ({ width, rgb, hex, hsv, hsl, onChange, onSwatchHover,
               renderers={ renderers }
               onChange={ onChange }
             />
-</div>
-</div>
+          </div>
+        </div>
         <div style={ styles.color }>
          <Checkboard />
           <div style={ styles.activeColor } />
-</div>
-  </div>
+        </div>
+      </div>
 
       <SketchFields
         rgb={ rgb }

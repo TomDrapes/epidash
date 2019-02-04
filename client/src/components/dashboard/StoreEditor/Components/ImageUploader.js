@@ -1,5 +1,15 @@
 import React, {Component} from 'react'
 import axios from 'axios';
+import reactCSS from 'reactcss'
+
+const styles = reactCSS({
+    'default': {
+        input: {
+            fontSize: '16px',
+            color: '#bdbdbd'
+        }
+    }
+})
 
 export default class ImageUploader extends Component {
     constructor(props){
@@ -31,6 +41,7 @@ export default class ImageUploader extends Component {
                 <input
                     type='file'
                     accept='image/png, image/jpeg'
+                    style={styles.input}
                     onChange={(e) => this.handleSelectedFile(e, this.props.image)}
                 />
                 <button 
