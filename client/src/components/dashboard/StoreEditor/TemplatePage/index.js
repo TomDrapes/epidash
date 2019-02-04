@@ -183,16 +183,16 @@ export default class TemplatePage extends Component {
                                 <img src={this.props.bodyImageA} width='auto' height='400px' alt="product" />
                             </div>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.bodyHeading}>{this.props.sectionAHeading}</p>
+                                <p style={styles.bodyHeading}>{ReactHtmlParser(this.props.sectionAHeading)}</p>
                                 <hr/>
-                                <p style={styles.bodyText}>{this.props.sectionAText}</p>
+                                <p style={styles.bodyText}>{ReactHtmlParser(this.props.sectionAText)}</p>
                             </div>
                         </div>
                         <div style={styles.bodySection}>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.bodyHeading}>{this.props.sectionBHeading}</p>
+                                <p style={styles.bodyHeading}>{ReactHtmlParser(this.props.sectionBHeading)}</p>
                                 <hr/>
-                                <p style={styles.bodyText}>{this.props.sectionBText}</p>
+                                <p style={styles.bodyText}>{ReactHtmlParser(this.props.sectionBText)}</p>
                             </div>
                             <div>
                                 <img src={this.props.bodyImageB} width='auto' height='400px' alt="product" />

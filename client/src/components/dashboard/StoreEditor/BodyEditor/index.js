@@ -13,98 +13,86 @@ export default class BodyEditor extends Component {
 
     render () {
         return (
-            <div className='body-editor-section'>
-                <form>
-                    <label>
-                        Heading-Color:
-                        <ColorSample 
-                            color={this.props.bodyHeadingColor}
-                            elem={'BODY_HEADING'}
-                            handleColorChange={this.props.handleColorChange}
-                        />
-                    </label>
-                    <label>
-                        Text-Color:
-                        <ColorSample 
-                            color={this.props.bodyTextColor}
-                            elem={'BODY_TEXT'}
-                            handleColorChange={this.props.handleColorChange}
-                        />
-                    </label>
-                    <label>
-                        BG-Color:
+            <div className='body-editor-section'>                    
+                    <div className='color-select'>
+                        <h4>Background-Color:</h4>
                         <ColorSample 
                             color={this.props.bodyBgColor}
                             elem={'BODY_BG'}
                             handleColorChange={this.props.handleColorChange}
                         />
-                    </label>
-                    <label>
-                        Heading Font-Size:
-                        <input type='range' min='16' max='32' onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'BODY_HEADING')} />
-                    </label>
+                    </div>
 
-                    <label>
-                        Paragraph Font-Size:
-                        <input type='range' min='16' max='32' onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'BODY_TEXT')} />
-                    </label>
-
-                    <h2>Section-A</h2>
-                    <label className='sectionA-image-select'>
-                        Image A:
+                    <h3>Section-A</h3>
+                    <div className='image-select'>
+                        <h4>Image A:</h4>
                         <ImageUploader 
                             userId={this.props.userId} 
                             image='BODY_IMAGE_A' 
                             updateImage={this.props.updateImage} 
                         />
-                    </label>
+                    </div>
 
-                    <label className='text-area-a'>
-                        Text:
+                    <div className='text-area'>
+                        <h3>Text:</h3>
                         <TextEditor 
                             text={this.props.sectionAHeading}
+                            color={this.props.sectionAHeadingColor}
                             section='SECTION_A_HEADING'
                             handleTextChange={this.props.handleTextChange}
+                            handleColorChange={this.props.handleColorChange}
+                            handleFontSizeChange={this.props.handleFontSizeChange}
+                            fontSize={this.props.sectionAHeadingFontSize}
                         />
-                    </label>
+                    </div>
                     
-                    <label>
+                    <div className='text-area'>
                         <TextEditor 
                             text={this.props.sectionAText}
+                            color={this.props.sectionATextColor}
                             section='SECTION_A_TEXT'
                             handleTextChange={this.props.handleTextChange}
+                            handleColorChange={this.props.handleColorChange}
+                            handleFontSizeChange={this.props.handleFontSizeChange}
+                            fontSize={this.props.sectionATextFontSize}
                         />
-                    </label>
+                    </div>
                     
 
-                    <h2>Section-B</h2>
-                    <label className='sectionB-image-select'>
+                    <h3>Section-B</h3>
+                    <div className='image-select'>
                         Image B:
                         <ImageUploader 
                             userId={this.props.userId} 
                             image='BODY_IMAGE_B' 
                             updateImage={this.props.updateImage} 
                         />
-                    </label>
+                    </div>
 
-                    <label className='text-area-b'>
-                        Text:
+                    <div className='text-area'>
+                        <h3>Text:</h3>
                         <TextEditor 
                             text={this.props.sectionBHeading}
+                            color={this.props.sectionBHeadingFontSize}
                             section='SECTION_B_HEADING'
                             handleTextChange={this.props.handleTextChange}
+                            handleColorChange={this.props.handleColorChange}
+                            handleFontSizeChange={this.props.handleFontSizeChange}
+                            fontSize={this.props.sectionBHeadingFontSize}
                         />
-                    </label>
+                    </div>
  
-                    <label>
+                    <div className='text-area'>
                         <TextEditor 
                             text={this.props.sectionBText}
+                            color={this.props.sectionBTextColor}
                             section='SECTION_B_TEXT'
                             handleTextChange={this.props.handleTextChange}
+                            handleColorChange={this.props.handleColorChange}
+                            handleFontSizeChange={this.props.handleFontSizeChange}
+                            fontSize={this.props.sectionBTextFontSize}
                         />
-                    </label>
-
-                </form>
+                    </div>
             </div>
         )
     }

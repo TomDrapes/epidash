@@ -38,15 +38,19 @@ export default class StoreEditor extends Component {
             buttonBgColor: '#2c2c2c',
             bodyImageA: '/images/glasses_yellow.jpg',
             bodyImageB: '/images/sunglasses_on_record.png',
-            bodyHeadingColor: '#373a3c',
-            bodyTextColor: '#373a3c',
             bodyBgColor: '#fff',
-            bodyHeadingFontSize: '18',
-            bodyTextFontSize: '18',
             sectionAHeading: sectionAHeading,
+            sectionAHeadingFontSize: '18',
+            sectionAHeadingColor: '#373a3c',
             sectionAText: sectionAText,
+            sectionATextFontSize: '18',
+            sectionATextColor: '#373a3c',
             sectionBHeading: sectionBHeading,
+            sectionBHeadingFontSize: '18',
+            sectionBHeadingColor: '#373a3c',
             sectionBText: sectionBText,
+            sectionBTextFontSize: '18',
+            sectionBTextColor: '#373a3c',
             bannerImage: '/images/girl_sunglasses.jpg'
         }
     }
@@ -78,9 +82,13 @@ export default class StoreEditor extends Component {
             break
             case 'BUTTON_BG': this.setState({ buttonBgColor: event.hex.toString() })
             break
-            case 'BODY_HEADING': this.setState({ bodyHeadingColor: event.hex.toString() })
+            case 'SECTION_A_HEADING': this.setState({ sectionAHeadingColor: event.hex.toString() })
             break
-            case 'BODY_TEXT': this.setState({ bodyTextColor: event.hex.toString() })
+            case 'SECTION_A_TEXT': this.setState({ sectionATextColor: event.hex.toString() })
+            break
+            case 'SECTION_B_HEADING': this.setState({ sectionBHeadingColor: event.hex.toString() })
+            break
+            case 'SECTION_B_TEXT': this.setState({ sectionBTextColor: event.hex.toString() })
             break
             case 'BODY_BG': this.setState({ bodyBgColor: event.hex.toString() })
             break
@@ -99,9 +107,13 @@ export default class StoreEditor extends Component {
             break
             case 'HEADING_BUY_NOW_BUTTON': this.setState({ buttonFontSize: fontSize })
             break
-            case 'BODY_HEADING': this.setState({ bodyHeadingFontSize: fontSize})
+            case 'SECTION_A_HEADING': this.setState({ sectionAHeadingFontSize: fontSize })
             break
-            case 'BODY_TEXT': this.setState({ bodyTextFontSize: fontSize})
+            case 'SECTION_A_TEXT': this.setState({ sectionATextFontSize:  fontSize})
+            break
+            case 'SECTION_B_HEADING': this.setState({ sectionBHeadingFontSize:  fontSize})
+            break
+            case 'SECTION_B_TEXT': this.setState({ sectionBTextFontSize:  fontSize})
             break
             default: break
         }
@@ -200,13 +212,19 @@ export default class StoreEditor extends Component {
                                         <BodyEditor
                                           updateImage={this.updateImage}
                                           sectionAHeading={this.state.sectionAHeading}
+                                          sectionAHeadingFontSize={this.state.sectionAHeadingFontSize}
+                                          sectionAHeadingColor={this.state.sectionAHeadingColor}
                                           sectionAText={this.state.sectionAText}
+                                          sectionATextFontSize={this.state.sectionATextFontSize}
+                                          sectionATextColor={this.state.sectionATextColor}
                                           sectionBHeading={this.state.sectionBHeading}
+                                          sectionBHeadingFontSize={this.state.sectionBHeadingFontSize}
+                                          sectionBHeadingColor={this.state.sectionBHeadingColor}
                                           sectionBText={this.state.sectionBText}
+                                          sectionBTextFontSize={this.state.sectionBTextFontSize}
+                                          sectionBTextColor={this.state.sectionBTextColor}
                                           handleTextChange={this.handleTextChange}
                                           handleColorChange={this.handleColorChange}
-                                          bodyHeadingColor={this.state.bodyHeadingColor}
-                                          bodyTextColor={this.state.bodyTextColor}
                                           bodyBgColor={this.state.bodyBgColor}
                                           handleFontSizeChange={this.handleFontSizeChange}
                                         />
