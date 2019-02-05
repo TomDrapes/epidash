@@ -7,6 +7,7 @@ import BannerEditor from './BannerEditor'
 import {
   headingPlaceholderText,
   subheadingPlaceholderText,
+  bannerPlaceholderText,
   sectionAHeading,
   sectionAText,
   sectionBHeading,
@@ -51,7 +52,11 @@ export default class StoreEditor extends Component {
             sectionBText: sectionBText,
             sectionBTextFontSize: '18',
             sectionBTextColor: '#373a3c',
-            bannerImage: '/images/girl_sunglasses.jpg'
+            bannerImage: '/images/girl_sunglasses.jpg',
+            bannerText: bannerPlaceholderText,
+            bannerTextColor: '#373a3c',
+            bannerTextFontSize: '44',
+            bannerTextBgColor: 'rgba(255,255,255,0.5)'
         }
     }
 
@@ -70,7 +75,7 @@ export default class StoreEditor extends Component {
     }
 
     handleColorChange = (event, elem) => {
-        console.log(event.hex)
+        console.log(event)
         switch (elem) {
             case 'MENU_FONT': this.setState({ menuFontColor: event.hex.toString() })
             break
@@ -91,6 +96,10 @@ export default class StoreEditor extends Component {
             case 'SECTION_B_TEXT': this.setState({ sectionBTextColor: event.hex.toString() })
             break
             case 'BODY_BG': this.setState({ bodyBgColor: event.hex.toString() })
+            break
+            case 'BANNER': this.setState({ bannerTextColor: event.hex.toString() })
+            break
+            case 'BANNER_TEXT_BG': this.setState({ bannerTextBgColor: `rgba(${event.rgb.r},${event.rgb.g},${event.rgb.b},${event.rgb.a})` })
             break
             default: break
         }
@@ -115,6 +124,7 @@ export default class StoreEditor extends Component {
             break
             case 'SECTION_B_TEXT': this.setState({ sectionBTextFontSize:  fontSize})
             break
+            case 'BANNER': this.setState({ bannerTextFontSize: fontSize })
             default: break
         }
     }
@@ -133,6 +143,8 @@ export default class StoreEditor extends Component {
             case 'SECTION_B_HEADING': this.setState({ sectionBHeading: e })
             break
             case 'SECTION_B_TEXT': this.setState({ sectionBText: e })
+            break
+            case 'BANNER': this.setState({ bannerText: e })
             break
             default: break
         }
@@ -258,28 +270,42 @@ export default class StoreEditor extends Component {
                             heroImage={this.state.heroImage}
                             logo={this.state.logo}
                             logoWidth={this.state.logoWidth}
+
                             menuFontColor={this.state.menuFontColor}
                             menuFontSize={this.state.menuFontSize}
+
                             headingFontColor={this.state.headingFontColor}
                             headingFontSize={this.state.headingFontSize}
                             headingText={this.state.headingText}
+
                             subheadingFontColor={this.state.subheadingFontColor}
                             subheadingFontSize={this.state.subheadingFontSize}
                             subheadingText={this.state.subheadingText}
+
                             buttonFontColor={this.state.buttonFontColor}
                             buttonFontSize={this.state.buttonFontSize}
                             buttonBgColor={this.state.buttonBgColor}
+
                             sectionAHeading={this.state.sectionAHeading}
                             sectionAText={this.state.sectionAText}
+
                             sectionBHeading={this.state.sectionBHeading}
                             sectionBText={this.state.sectionBText}
+
                             bodyImageA={this.state.bodyImageA}
                             bodyImageB={this.state.bodyImageB}
+
                             bodyHeadingColor={this.state.bodyHeadingColor}
-                            bodyTextColor={this.state.bodyTextColor}
-                            bodyBgColor={this.state.bodyBgColor}
                             bodyHeadingFontSize={this.state.bodyHeadingFontSize}
+                            bodyTextColor={this.state.bodyTextColor}
                             bodyTextFontSize={this.state.bodyTextFontSize}
+                            bodyBgColor={this.state.bodyBgColor}
+
+                            bannerText={this.state.bannerText}
+                            bannerTextFontSize={this.state.bannerTextFontSize}
+                            bannerTextColor={this.state.bannerTextColor}
+                            bannerImage={this.state.bannerImage}
+                            bannerTextBgColor={this.state.bannerTextBgColor}
                         />
 
 

@@ -95,7 +95,7 @@ export default class TemplatePage extends Component {
                     fontSize: `${this.props.bodyTextFontSize}px`
                 },
                 bannerImage: {
-                    backgroundImage: `url('/images/girl_sunglasses.jpg')`,
+                    backgroundImage: `url(${this.props.bannerImage})`,
                     backgroundSize: '100% 100%',
                     backgroundRepeat: 'no-repeat',
                     backgroundAttachment: 'fixed',
@@ -105,18 +105,14 @@ export default class TemplatePage extends Component {
                     alignItems: 'center',
                     justifyContent: 'center',
                 },
-                bannerCopy: {
-                    background: 'rgba(255,255,255,0.5)',
+                bannerText: {
+                    background: this.props.bannerTextBgColor,
                     padding: '10px',
+                    fontSize: `${this.props.bannerTextFontSize}px`,
+                    color: this.props.bannerTextColor,
                     textAlign: 'center'
                 },
-                bannerCopyH1:{
-                    fontSize: '44px',
-                    fontWeight: 'bold'
-                },
-                bannerCopyH2: {
-                    fontSize: '38px'
-                },
+               
                 productListing: {
                     padding: '20px',
                     display: 'flex',
@@ -200,9 +196,8 @@ export default class TemplatePage extends Component {
                         </div>
                     </div>
                     <div style={styles.bannerImage}>
-                        <div style={styles.bannerCopy}>
-                            <p style={styles.bannerCopyH1}>"A thoughtful quote or store motto"</p>
-                            <p style={styles.bannerCopyH2}>-Would look great here</p>
+                        <div style={styles.bannerText}>
+                            {ReactHtmlParser(this.props.bannerText)}
                         </div>
                     </div>
                     <div style={styles.productListing}>

@@ -5,12 +5,6 @@ import ImageUploader from '../Components/ImageUploader'
 import './style.scss'
 
 export default class HeaderEditor extends Component {
-    constructor(props){
-        super(props)
-
-        this.state = {}
-    }    
-
     render(){
         return (
             <div>

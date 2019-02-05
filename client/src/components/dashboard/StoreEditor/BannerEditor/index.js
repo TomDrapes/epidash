@@ -2,59 +2,42 @@ import React, { Component } from 'react'
 import ImageUploader from '../Components/ImageUploader'
 import TextEditor from '../Components/TextEditor'
 import ColorSample from '../Components/ColorSample'
+import './style.scss'
 
 export default class BannerEditor extends Component {
     render(){
         return (
-            <div>
-                <form>
-                    <label>
-                        Background-Image:
-                        <ImageUploader
-                            userId={this.props.userId}
-                            image='BANNER_IMAGE'
-                            updateImage={this.props.updateImage}
-                        />
-                    </label>
+            <div className='banner-editor'>
+                <div>
+                    <h3>Image:</h3>
+                    <ImageUploader
+                        userId={this.props.userId}
+                        image='BANNER_IMAGE'
+                        updateImage={this.props.updateImage}
+                    />
+                </div>
 
-                    <label>
-                        Text:
-                        <TextEditor
-                            text={this.props.text}
-                            section='BANNER_TEXT'
-                            handleTextChange={this.props.handleTextChange}
-                        />
-                    </label>
+                <div>
+                    <h3>Text:</h3>
+                    <TextEditor
+                        text={this.props.text}
+                        color={this.props.textColor}
+                        section='BANNER'
+                        handleTextChange={this.props.handleTextChange}
+                        handleColorChange={this.props.handleColorChange}
+                        handleFontSizeChange={this.props.handleFontSizeChange}
+                        fontSize={this.props.textFontSize}
+                    />
+                </div>                        
 
-                    <label>
-                        Font-Size:
-                        <input 
-                            type='range' 
-                            min='16' 
-                            max='32' 
-                            onChange={(e) => this.props.handleFontSizeChange(e.target.value, 'BANNER_TEXT')} 
-                        />
-                    </label>
-
-                    <label>
-                        Text-Color:
-                        <ColorSample
-                            color={this.props.textColor}
-                            elem={'BANNER_TEXT_COLOR'}
-                            handleColorChange={this.props.handleColorChange}
-                        />
-                    </label>
-
-                    <label>
-                        Text-Background:
-                        <ColorSample
-                            color={this.props.textBgColor}
-                            elem={'BANNER_TEXT_BG'}
-                            handleColorChange={this.props.handleColorChange}
-                        />
-                    </label>
-
-                </form>
+                <div className='color-select'>
+                    <h4>Text-Background:</h4>
+                    <ColorSample
+                        color={this.props.textBgColor}
+                        elem={'BANNER_TEXT_BG'}
+                        handleColorChange={this.props.handleColorChange}
+                    />
+                </div>
             </div>
         )
     }
