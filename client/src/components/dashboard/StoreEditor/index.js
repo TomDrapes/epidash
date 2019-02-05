@@ -76,30 +76,32 @@ export default class StoreEditor extends Component {
 
     handleColorChange = (event, elem) => {
         console.log(event)
+        let {r, g, b, a} = event.rgb
+        let rgb = `rgba(${r}, ${g}, ${b}, ${a})`
         switch (elem) {
-            case 'MENU_FONT': this.setState({ menuFontColor: event.hex.toString() })
+            case 'MENU_FONT': this.setState({ menuFontColor: rgb })
             break
-            case 'MAIN_HEADING': this.setState({ headingFontColor: event.hex.toString() })
+            case 'MAIN_HEADING': this.setState({ headingFontColor: rgb })
             break
-            case 'MAIN_SUBHEADING': this.setState({ subheadingFontColor: event.hex.toString() })
+            case 'MAIN_SUBHEADING': this.setState({ subheadingFontColor: rgb })
             break
-            case 'BUTTON_FONT': this.setState({ buttonFontColor: event.hex.toString()})
+            case 'BUTTON_FONT': this.setState({ buttonFontColor: rgb})
             break
-            case 'BUTTON_BG': this.setState({ buttonBgColor: event.hex.toString() })
+            case 'BUTTON_BG': this.setState({ buttonBgColor: rgb })
             break
-            case 'SECTION_A_HEADING': this.setState({ sectionAHeadingColor: event.hex.toString() })
+            case 'SECTION_A_HEADING': this.setState({ sectionAHeadingColor: rgb })
             break
-            case 'SECTION_A_TEXT': this.setState({ sectionATextColor: event.hex.toString() })
+            case 'SECTION_A_TEXT': this.setState({ sectionATextColor: rgb })
             break
-            case 'SECTION_B_HEADING': this.setState({ sectionBHeadingColor: event.hex.toString() })
+            case 'SECTION_B_HEADING': this.setState({ sectionBHeadingColor: rgb })
             break
-            case 'SECTION_B_TEXT': this.setState({ sectionBTextColor: event.hex.toString() })
+            case 'SECTION_B_TEXT': this.setState({ sectionBTextColor: rgb })
             break
-            case 'BODY_BG': this.setState({ bodyBgColor: event.hex.toString() })
+            case 'BODY_BG': this.setState({ bodyBgColor: rgb })
             break
-            case 'BANNER': this.setState({ bannerTextColor: event.hex.toString() })
+            case 'BANNER': this.setState({ bannerTextColor: rgb })
             break
-            case 'BANNER_TEXT_BG': this.setState({ bannerTextBgColor: `rgba(${event.rgb.r},${event.rgb.g},${event.rgb.b},${event.rgb.a})` })
+            case 'BANNER_TEXT_BG': this.setState({ bannerTextBgColor: rgb })
             break
             default: break
         }
