@@ -114,7 +114,7 @@ export default class StoreEditor extends Component {
             break
             case 'MAIN_HEADING': this.setState({ headingFontSize: fontSize })
             break
-            case 'SUBHEADING': this.setState({ subheadingFontSize: fontSize })
+            case 'MAIN_SUBHEADING': this.setState({ subheadingFontSize: fontSize })
             break
             case 'HEADING_BUY_NOW_BUTTON': this.setState({ buttonFontSize: fontSize })
             break
