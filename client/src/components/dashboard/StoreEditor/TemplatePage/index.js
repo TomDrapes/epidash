@@ -85,14 +85,21 @@ export default class TemplatePage extends Component {
                     padding: '30px',
                     textAlign: 'center',
                 },
-                bodyHeading: {
-                    fontWeight: 'bold',
-                    fontSize: `${this.props.bodyHeadingFontSize}px`,
-                    color: this.props.bodyHeadingColor
+                sectionAHeading: {
+                    fontSize: `${this.props.sectionAHeadingFontSize}px`,
+                    color: this.props.sectionAHeadingColor
                 },
-                bodyText: {
-                    color: this.props.bodyTextColor,
-                    fontSize: `${this.props.bodyTextFontSize}px`
+                sectionAText: {
+                    color: this.props.sectionATextColor,
+                    fontSize: `${this.props.sectionATextFontSize}px`
+                },
+                sectionBHeading: {
+                    fontSize: `${this.props.sectionBHeadingFontSize}px`,
+                    color: this.props.sectionBHeadingColor
+                },
+                sectionBText: {
+                    color: this.props.sectionBTextColor,
+                    fontSize: `${this.props.sectionBTextFontSize}px`
                 },
                 bannerImage: {
                     backgroundImage: `url(${this.props.bannerImage})`,
@@ -179,16 +186,16 @@ export default class TemplatePage extends Component {
                                 <img src={this.props.bodyImageA} width='auto' height='400px' alt="product" />
                             </div>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.bodyHeading}>{ReactHtmlParser(this.props.sectionAHeading)}</p>
+                                <p style={styles.sectionAHeading}>{ReactHtmlParser(this.props.sectionAHeading)}</p>
                                 <hr/>
-                                <p style={styles.bodyText}>{ReactHtmlParser(this.props.sectionAText)}</p>
+                                <p style={styles.sectionAText}>{ReactHtmlParser(this.props.sectionAText)}</p>
                             </div>
                         </div>
                         <div style={styles.bodySection}>
                             <div style={styles.bodyCopy}>
-                                <p style={styles.bodyHeading}>{ReactHtmlParser(this.props.sectionBHeading)}</p>
+                                <p style={styles.sectionBHeading}>{ReactHtmlParser(this.props.sectionBHeading)}</p>
                                 <hr/>
-                                <p style={styles.bodyText}>{ReactHtmlParser(this.props.sectionBText)}</p>
+                                <p style={styles.sectionBText}>{ReactHtmlParser(this.props.sectionBText)}</p>
                             </div>
                             <div>
                                 <img src={this.props.bodyImageB} width='auto' height='400px' alt="product" />

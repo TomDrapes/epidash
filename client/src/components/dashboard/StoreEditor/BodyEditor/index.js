@@ -73,7 +73,7 @@ export default class BodyEditor extends Component {
                         <h3>Text:</h3>
                         <TextEditor 
                             text={this.props.sectionBHeading}
-                            color={this.props.sectionBHeadingFontSize}
+                            color={this.props.sectionBHeadingColor}
                             section='SECTION_B_HEADING'
                             handleTextChange={this.props.handleTextChange}
                             handleColorChange={this.props.handleColorChange}

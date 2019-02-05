@@ -287,10 +287,20 @@ export default class StoreEditor extends Component {
                             buttonBgColor={this.state.buttonBgColor}
 
                             sectionAHeading={this.state.sectionAHeading}
+                            sectionAHeadingColor={this.state.sectionAHeadingColor}
+                            sectionAHeadingFontSize={this.state.sectionAHeadingFontSize}
+
                             sectionAText={this.state.sectionAText}
+                            sectionATextColor={this.state.sectionATextColor}
+                            sectionATextFontSize={this.state.sectionATextFontSize}
 
                             sectionBHeading={this.state.sectionBHeading}
+                            sectionBHeadingColor={this.state.sectionBHeadingColor}
+                            sectionBHeadingFontSize={this.state.sectionBHeadingFontSize}
+
                             sectionBText={this.state.sectionBText}
+                            sectionBTextColor={this.state.sectionBTextColor}
+                            sectionBTextFontSize={this.state.sectionBTextFontSize}
 
                             bodyImageA={this.state.bodyImageA}
                             bodyImageB={this.state.bodyImageB}
