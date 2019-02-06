@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios')
 const mongoose = require('mongoose');
 const app = express();
 
@@ -17,6 +16,12 @@ app.use(bodyParser.json());
 app.use(cors())
 app.use(fileUpload())
 
+//Added for heroku deployment
+app.use(express.static(path.resolve(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+})
+
 //Socket.io
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -29,6 +34,13 @@ io.on('connection', function(socket){
 })
 
 http.listen(9000);
+
+//Heroku server
+const server = createServer(app)
+server.listen(port, err => {
+  if(err) throw err;
+  console.log('server started')
+})
 
 // DB Config
 const db = require('./config/keys').mongoURI
@@ -47,4 +59,4 @@ require('./server/routes/api/aliExpress')(app)
 require('./server/routes/api/ebay')(app)
 require('./server/routes/api/fileUpload')(app)
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+//app.listen(port, () => console.log(`Server started on port ${port}`));
