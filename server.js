@@ -1,7 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const app = express();
+const express = require('express')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const app = express()
+const path = require('path')
 
 //Modules needed for file uploads
 const fileUpload = require('express-fileupload')
@@ -17,9 +18,9 @@ app.use(cors())
 app.use(fileUpload())
 
 //Added for heroku deployment
-app.use(express.static(path.resolve(__dirname, '/client/build')))
+app.use(express.static(path.resolve(__dirname, 'client/build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '/client/build', 'index.html'))
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'))
 })
 
 //Socket.io
