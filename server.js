@@ -38,11 +38,11 @@ io.on('connection', function(socket){
 http.listen(9000);
 
 //Heroku server
-const server = createServer(app)
+/*const server = createServer(app)
 server.listen(port, err => {
   if(err) throw err;
   console.log('server started')
-})
+})*/
 
 // DB Config
 const db = require('./config/keys').mongoURI
@@ -61,4 +61,4 @@ require('./server/routes/api/aliExpress')(app)
 require('./server/routes/api/ebay')(app)
 require('./server/routes/api/fileUpload')(app)
 
-//app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`Server started on port ${port}`));

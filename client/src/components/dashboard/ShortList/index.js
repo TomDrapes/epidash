@@ -16,7 +16,7 @@ export default class ShortList extends Component {
     componentDidMount(){
         axios.get(`/api/account/shortlist/${this.props.userId}`)
             .then(res => {
-                console.log(res)
+                console.log(res.data)
                 this.setState({
                     items: res.data,
                     loading: false
