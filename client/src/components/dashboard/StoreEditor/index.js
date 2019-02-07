@@ -21,11 +21,11 @@ export default class StoreEditor extends Component {
         super(props)
 
         this.state = {
-            logo: `/images/logo_placeholder.png`,
+            logo: 'https://user-images.githubusercontent.com/23075302/52383078-8fbc9180-2ac3-11e9-820f-8b0c675c3f19.png',
             logoWidth: '100',
             selectedMenuItem: '',
             menuItemActive: false,
-            heroImage: '/images/header_placeholder_1920.jpg',
+            heroImage: 'https://user-images.githubusercontent.com/23075302/52383077-8d5a3780-2ac3-11e9-881e-dc4226888163.jpg',
             menuFontColor: '#fff',
             menuFontSize: '18',
             headingText: headingPlaceholderText,
@@ -37,8 +37,8 @@ export default class StoreEditor extends Component {
             buttonFontColor: '#fff',
             buttonFontSize: '22',
             buttonBgColor: '#2c2c2c',
-            bodyImageA: '/images/glasses_yellow.jpg',
-            bodyImageB: '/images/sunglasses_on_record.png',
+            bodyImageA: 'https://user-images.githubusercontent.com/23075302/52383076-8d5a3780-2ac3-11e9-8ac1-5f689bed39ef.jpg',
+            bodyImageB: 'https://user-images.githubusercontent.com/23075302/52383081-92b78200-2ac3-11e9-9bda-24bddce52570.png',
             bodyBgColor: '#fff',
             sectionAHeading: sectionAHeading,
             sectionAHeadingFontSize: '18',
@@ -52,7 +52,7 @@ export default class StoreEditor extends Component {
             sectionBText: sectionBText,
             sectionBTextFontSize: '18',
             sectionBTextColor: '#373a3c',
-            bannerImage: '/images/girl_sunglasses.jpg',
+            bannerImage: 'https://user-images.githubusercontent.com/23075302/52383075-8cc1a100-2ac3-11e9-977c-8885530552b9.jpg',
             bannerText: bannerPlaceholderText,
             bannerTextColor: '#373a3c',
             bannerTextFontSize: '44',

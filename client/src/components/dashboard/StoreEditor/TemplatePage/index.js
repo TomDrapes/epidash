@@ -208,7 +208,7 @@ export default class TemplatePage extends Component {
                         </div>
                     </div>
                     <div style={styles.productListing}>
-                        <img src={'/images/role_ban_1.jpg'} width='400px' height='auto' />
+                        <img src={'https://user-images.githubusercontent.com/23075302/52383099-a19e3480-2ac3-11e9-94af-47287f074688.jpg'} width='400px' height='auto' />
                         <div style={styles.productDescriptionContainer}>
                             <p style={styles.productName}>Faux RayBan Sunglasses</p>
                             <p style={styles.productDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut fringilla elementum ante, sit amet venenatis odio pulvinar quis. Pellentesque facilisis risus nec ante rhoncus, nec tincidunt magna tristique. In id pretium magna, eu dictum libero. Mauris fermentum, lectus eget placerat lacinia, arcu diam posuere erat, ut porta lectus est quis libero. Maecenas ultrices, mauris quis porta molestie, sem felis rhoncus felis, id pharetra purus lorem id leo.</p>
