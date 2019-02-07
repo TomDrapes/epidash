@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ImageScroll from './ImageScroll'
+import ImageScroll from '../../../ImageScroll'
 import axios from 'axios'
 import './style.scss'
 
